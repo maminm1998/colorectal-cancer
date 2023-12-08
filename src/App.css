@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  direction: rtl;
+  font-family: 'BLotus';
+  font-size: 20px;
+}
+
+@font-face {
+  font-family: 'BLotus';
+  src: local('BLutos'), url('./fonts/B\ Lotus_0.ttf') format('truetype');
+  font-weight: bold;
+}
