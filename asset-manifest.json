@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/static/css/main.c8df03f4.css",
+    "main.js": "/static/js/main.52154113.js",
+    "static/media/B Lotus Bold_0.ttf": "/static/media/B Lotus Bold_0.0779f92bda2ac86985fc.ttf",
+    "static/media/B Lotus_0.ttf": "/static/media/B Lotus_0.2b00479324888c7c1eb1.ttf",
+    "index.html": "/index.html",
+    "main.c8df03f4.css.map": "/static/css/main.c8df03f4.css.map",
+    "main.52154113.js.map": "/static/js/main.52154113.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c8df03f4.css",
+    "static/js/main.52154113.js"
+  ]
+}
