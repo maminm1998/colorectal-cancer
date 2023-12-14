@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/case-ffq/static/css/main.cb6df943.css",
-    "main.js": "/case-ffq/static/js/main.dca8132a.js",
+    "main.js": "/case-ffq/static/js/main.762756ee.js",
     "static/media/B Lotus Bold_0.ttf": "/case-ffq/static/media/B Lotus Bold_0.0779f92bda2ac86985fc.ttf",
     "static/media/B Lotus_0.ttf": "/case-ffq/static/media/B Lotus_0.2b00479324888c7c1eb1.ttf",
     "index.html": "/case-ffq/index.html",
     "main.cb6df943.css.map": "/case-ffq/static/css/main.cb6df943.css.map",
-    "main.dca8132a.js.map": "/case-ffq/static/js/main.dca8132a.js.map"
+    "main.762756ee.js.map": "/case-ffq/static/js/main.762756ee.js.map"
   },
   "entrypoints": [
     "static/css/main.cb6df943.css",
-    "static/js/main.dca8132a.js"
+    "static/js/main.762756ee.js"
   ]
 }
