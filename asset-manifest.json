@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/colorectal-cancer/static/css/main.d1fae90e.css",
-    "main.js": "/colorectal-cancer/static/js/main.02758732.js",
-    "static/media/B Lotus Bold_0.ttf": "/colorectal-cancer/static/media/B Lotus Bold_0.0779f92bda2ac86985fc.ttf",
-    "static/media/B Lotus_0.ttf": "/colorectal-cancer/static/media/B Lotus_0.2b00479324888c7c1eb1.ttf",
-    "index.html": "/colorectal-cancer/index.html",
-    "main.d1fae90e.css.map": "/colorectal-cancer/static/css/main.d1fae90e.css.map",
-    "main.02758732.js.map": "/colorectal-cancer/static/js/main.02758732.js.map"
+    "main.css": "/case-ffq/static/css/main.cb6df943.css",
+    "main.js": "/case-ffq/static/js/main.dca8132a.js",
+    "static/media/B Lotus Bold_0.ttf": "/case-ffq/static/media/B Lotus Bold_0.0779f92bda2ac86985fc.ttf",
+    "static/media/B Lotus_0.ttf": "/case-ffq/static/media/B Lotus_0.2b00479324888c7c1eb1.ttf",
+    "index.html": "/case-ffq/index.html",
+    "main.cb6df943.css.map": "/case-ffq/static/css/main.cb6df943.css.map",
+    "main.dca8132a.js.map": "/case-ffq/static/js/main.dca8132a.js.map"
   },
   "entrypoints": [
-    "static/css/main.d1fae90e.css",
-    "static/js/main.02758732.js"
+    "static/css/main.cb6df943.css",
+    "static/js/main.dca8132a.js"
   ]
 }
