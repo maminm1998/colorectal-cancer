@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./../App.css";
-
+import image from "./../Image/summer-v2__FillWzg1MCwxMTc0XQ.jpg";
 const DynamicForm = ({ questions }) => {
   const validationSchema = Yup.object().shape(
     questions.reduce((schema, question) => {
@@ -32,6 +32,7 @@ const DynamicForm = ({ questions }) => {
     <form onSubmit={formik.handleSubmit} className="flex flex-col flex-wrap">
       {questions.map((question, index) => (
         <div key={question.id} className={`w-[100%] md:mx-2 max-md:px-2 my-4`}>
+          <img src={image} className="w-full h-auto" alt="تصویر" />
           <div
             className={`flex ${
               question.label.length > 35 && question.type === "text"
