@@ -4,6 +4,7 @@ import * as Yup from "yup";
 
 const questions = [
   {
+    img: "",
     subLabel: "",
     id: "نام :",
     label: "نام :",
@@ -18,6 +19,7 @@ const questions = [
     placeholder: "نام خود را وارد نمایید",
   },
   {
+    img: "",
     subLabel: "",
     id: "نام خانوادگی :",
     label: "نام خانوادگی :",
@@ -32,6 +34,7 @@ const questions = [
     placeholder: "نام خانوادگی خود را وارد نمایید",
   },
   {
+    img: "",
     subLabel: "",
     id: "کد ملی :",
     label: "کد ملی :",
@@ -43,6 +46,7 @@ const questions = [
     placeholder: "کد ملی خود را وارد نمایید",
   },
   {
+    img: "",
     subLabel: "",
     id: "تلفن همراه (موبایل) :",
     label: "تلفن همراه (موبایل) :",
@@ -56,6 +60,7 @@ const questions = [
     placeholder: "تلفن همراه (موبایل) خود را وارد نمایید",
   },
   {
+    img: "",
     subLabel: "",
     id: "شماره تماس (منزل) :",
     label: "شماره تماس (منزل) :",
@@ -70,6 +75,7 @@ const questions = [
     placeholder: "شماره تماس (منزل) خود را وارد نمایید",
   },
   {
+    img: "./Image/الویه.jpg",
     subLabel: "",
     id: "الویه",
     label: "الویه",
@@ -103,6 +109,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/آبگوشت و کوبیده.jpg",
     subLabel: "آب گوشت و گوشت کوبیده آن را درنظر بگیرید",
     id: "ابگوشت",
     label: "ابگوشت",
@@ -136,6 +143,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/کله.jpg",
     subLabel: "",
     id: "کله پاچه",
     label: "کله پاچه",
@@ -169,6 +177,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/سوپ.jpg",
     subLabel: "انواع سوپ ها را درنظر بگیرید",
     id: "سوپ",
     label: "سوپ",
@@ -210,6 +219,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/آش رشته.jpg",
     subLabel: "",
     id: "آش رشته",
     label: "آش رشته",
@@ -247,6 +257,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/حلیم.jpg",
     subLabel: "",
     id: "حلیم",
     label: "حلیم",
@@ -284,6 +295,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/آش شله قلمکار.jpg",
     subLabel: "",
     id: "آش شله قلمکار/آش آبادانی",
     label: "آش شله قلمکار/آش آبادانی",
@@ -321,6 +333,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/حلیم بادمجون.gif",
     subLabel: "",
     id: "حلیم بادمجان",
     label: "حلیم بادمجان",
@@ -358,6 +371,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/کشک بادمجون.jpg",
     subLabel: "",
     id: "کشک بادمجان",
     label: "کشک بادمجان",
@@ -395,6 +409,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/املت.jpg",
     subLabel: "(ترکیب تخم مرغ و گوجه فرنگی)",
     id: "املت",
     label: "املت",
@@ -432,6 +447,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/تخم مرغ آبپز.jpg",
     subLabel: "",
     id: "تخم مرغ (آب پز یا نیمرو)",
     label: "تخم مرغ (آب پز یا نیمرو)",
@@ -469,6 +485,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/برنج استامبلی.jpg",
     subLabel: "در کل قاطی پلوها",
     id: "استامبولی، عدس پلو، لوبیا پلو، ماش پلو",
     label: "استامبولی، عدس پلو، لوبیا پلو، ماش پلو",
@@ -506,6 +523,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/برنج سفید.jpg",
     subLabel:
       "برنجی که همراه با خورشت ها، مرغ، ماهی، کبابیجات و … استفاده می شود. ",
     id: "پلو سفید",
@@ -548,6 +566,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/قرمه سبزی.jpg",
     subLabel: "",
     id: "خورشت قورمه سبزی",
     label: "خورشت قورمه سبزی",
@@ -585,6 +604,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/خورشت قیمه بادمجون.jpg",
     subLabel: "قیمه بادمجان (قیمه بدون بادمجان را درنظر نگیرید)",
     id: "خورشت قیمه بادمجان",
     label: "خورشت قیمه بادمجان",
@@ -622,6 +642,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/قیمه.jpg",
     subLabel: "",
     id: "خورشت قیمه (بدون بادمجان)",
     label: "خورشت قیمه (بدون بادمجان)",
@@ -659,6 +680,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/خورشت لوبیا سبز.jpg",
     subLabel: "",
     id: "خورشت لوبیا سبز",
     label: "خورشت لوبیا سبز",
@@ -696,6 +718,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/خورشت فسنجون.jpg",
     subLabel: "",
     id: "خورشت فسنجان",
     label: "خورشت فسنجان",
@@ -733,6 +756,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/خورشت گوشت چرخ کرده.jpg",
     subLabel: "",
     id: "خورشت گوشت چرخ کرده",
     label: "خورشت گوشت چرخ کرده",
@@ -770,6 +794,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/کباب تابه ای.jpg",
     subLabel: "",
     id: "کباب تابه ای",
     label: "کباب تابه ای",
@@ -807,6 +832,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/کباب کوبیده.jpg",
     subLabel: "",
     id: "کباب کوبیده",
     label: "کباب کوبیده",
@@ -844,6 +870,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/کباب برگ.jpg",
     subLabel: "",
     id: "کباب برگ",
     label: "کباب برگ",
@@ -881,6 +908,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/جوجه کباب.jpg",
     subLabel: "",
     id: "جوجه کباب",
     label: "جوجه کباب",
@@ -918,6 +946,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/زرشک پلو مرغ.jpg",
     subLabel: "یک واحد=یک ران یا نصف سینه مرغ",
     id: "مرغ (زرشک پلو با مرغ و خوراک مرغ)",
     label: "مرغ (زرشک پلو با مرغ و خوراک مرغ)",
@@ -955,6 +984,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/تن ماهی.jpg",
     subLabel: "",
     id: "تن ماهی",
     label: "تن ماهی",
@@ -992,6 +1022,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/ماهی.jpg",
     subLabel: "",
     id: "ماهی (تن ماهی را شامل نمی شود)",
     label: "ماهی (تن ماهی را شامل نمی شود)",
@@ -1029,6 +1060,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/پیتزا.jpg",
     subLabel: "یک عدد=یک مینی پیتزا کامل",
     id: "انواع پیتزا",
     label: "انواع پیتزا",
@@ -1066,6 +1098,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/ماکارونی.jpg",
     subLabel: "شامل ماکارونی ساده و شکل دار",
     id: "ماکارونی",
     label: "ماکارونی",
@@ -1103,6 +1136,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/کتلت یا شامی.jpg",
     subLabel: "یا هر نوع کوکویی که در آن از گوشت چرخ کرده استفاده شود",
     id: "کتلت یا شامی",
     label: "کتلت یا شامی",
@@ -1144,6 +1178,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/کوکو سبزی.jpg",
     subLabel: "",
     id: "کوکو سبزی",
     label: "کوکو سبزی",
@@ -1185,6 +1220,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/کوکو سیب زمینی.jpg",
     subLabel: "",
     id: "کوکو سیب زمینی",
     label: "کوکو سیب زمینی",
@@ -1226,47 +1262,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
-    subLabel: "",
-    id: "کوکو سیب زمینی",
-    label: "کوکو سیب زمینی",
-    type: "radio",
-    options: [
-      {
-        id: "تقریبا هرگز یا کمتر از یک عدد در ماه",
-        label: "تقریبا هرگز یا کمتر از یک عدد در ماه",
-      },
-      {
-        id: "1 تا 3 عدد در ماه",
-        label: "1 تا 3 عدد در ماه",
-      },
-      {
-        id: "یک عدد در هفته",
-        label: "یک عدد در هفته",
-      },
-      {
-        id: "2 تا 4 عدد در هفته",
-        label: "2 تا 4 عدد در هفته",
-      },
-      {
-        id: "5 تا 6 عدد در هفته",
-        label: "5 تا 6 عدد در هفته",
-      },
-      {
-        id: "یک عدد در روز",
-        label: "یک عدد در روز",
-      },
-      {
-        id: "2 تا 3 عدد در روز",
-        label: "2 تا 3 عدد در روز",
-      },
-      {
-        id: "4 تا 5 عدد در روز",
-        label: "4 تا 5 عدد در روز",
-      },
-    ],
-    validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
-  },
-  {
+    img: "./Image/خوراک لوبیا.jpg",
     subLabel: "",
     id: "خوراک لوبیا یا کنسرو لوبیا",
     label: "خوراک لوبیا یا کنسرو لوبیا",
@@ -1308,6 +1304,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/انواع کنسور.jpg",
     subLabel: "",
     id: "انواع کنسرو (به غیر از تن ماهی و کنسرو لوبیا)",
     label: "انواع کنسرو (به غیر از تن ماهی و کنسرو لوبیا)",
@@ -1349,6 +1346,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/خوراک عدسی.jpg",
     subLabel: "",
     id: "عدسی",
     label: "عدسی",
@@ -1386,6 +1384,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/کوفته تبریزی.jpg",
     subLabel: "",
     id: "کوفته برنجی/تبریزی",
     label: "کوفته برنجی/تبریزی",
@@ -1427,6 +1426,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/کوفته قلقلی..jpg",
     subLabel: "",
     id: "کوفته قلقلی (سرگنجشکی)",
     label: "کوفته قلقلی (سرگنجشکی)",
@@ -1464,6 +1464,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/مراب.jpg",
     subLabel: "",
     id: "انواع مربا",
     label: "انواع مربا",
@@ -1509,6 +1510,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/عسل.jpg",
     subLabel: "",
     id: "عسل",
     label: "عسل",
@@ -1554,6 +1556,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/شکر.jpg",
     subLabel: "شکر استفاده شده برای آماده کردن غذاها را درنظر نگیرید",
     id: "شکر (در چای، قهوه یا شربت)",
     label: "شکر (در چای، قهوه یا شربت)",
@@ -1599,6 +1602,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/حلوا شکری.jpg",
     subLabel: "یک قوطی کبریت=یک قاشق غذاخوری",
     id: "حلوا شکری",
     label: "حلوا شکری",
@@ -1644,6 +1648,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/حلوا خانگی.jpg",
     subLabel: "",
     id: "حلوای خانگی",
     label: "حلوای خانگی",
@@ -1685,6 +1690,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/گز.jpg",
     subLabel: "",
     id: "گز",
     label: "گز",
@@ -1726,6 +1732,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/شله زرد.jpg",
     subLabel: "",
     id: "شله زرد",
     label: "شله زرد",
@@ -1763,6 +1770,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/فرنی.jpg",
     subLabel: "",
     id: "فرنی (کاسه ماست خوری)",
     label: "فرنی (کاسه ماست خوری)",
@@ -1800,6 +1808,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/اسنک.jpg",
     subLabel: "",
     id: "اسنک",
     label: "اسنک",
@@ -1845,6 +1854,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/شکلات.jpg",
     subLabel: "",
     id: "انواع شکلات",
     label: "انواع شکلات",
@@ -1890,6 +1900,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/گوشفیل.jpg",
     subLabel: "",
     id: "گوشفیل",
     label: "گوشفیل",
@@ -1939,6 +1950,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/خورشت ماست.jpg",
     subLabel: "کاسه ماست خوری",
     id: "خورشت ماست",
     label: "خورشت ماست",
@@ -1976,6 +1988,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/بریونی.jpg",
     subLabel: "",
     id: "بریانی",
     label: "بریانی",
@@ -2013,6 +2026,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/جگر و دل.jpg",
     subLabel: "یک سیخ=4 تکه جگر",
     id: "جگر و دل و قلوه ",
     label: "جگر و دل و قلوه ",
@@ -2058,6 +2072,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/ساندویچ..jpg",
     subLabel: "منظور ساندویچ با نان باگت می باشد",
     id: "انواع ساندویچ (همبرگر، بندری، هات داگ، ژامبون و …)",
     label: "انواع ساندویچ (همبرگر، بندری، هات داگ، ژامبون و …)",
@@ -2095,6 +2110,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/سوسیس.jpg",
     subLabel: "",
     id: "سوسیس (به غیر از ساندویچ)",
     label: "سوسیس (به غیر از ساندویچ)",
@@ -2136,6 +2152,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/کالباس.jpg",
     subLabel: "",
     id: "کالباس (به غیر از ساندویچ)",
     label: "کالباس (به غیر از ساندویچ)",
@@ -2177,6 +2194,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/همبرگر.jpg",
     subLabel: "",
     id: "همبرگر ( به غیر از ساندویچ)",
     label: "همبرگر ( به غیر از ساندویچ)",
@@ -2214,6 +2232,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/سس گوجه.jpg",
     subLabel: "رب گوجه را درنظر نگیرید",
     id: "سس قرمز",
     label: "سس قرمز",
@@ -2259,6 +2278,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/خیار شور.jpg",
     subLabel: "در ساندویچ و مصرفی در کنار غذاهای دیگر",
     id: "خیارشور",
     label: "خیارشور",
@@ -2304,6 +2324,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/آبلیمو.jpg",
     subLabel: "آبلیمو اضافه شده به شربت ها، سالاد و … را درنظر بگیرید",
     id: "آب لیمو",
     label: "آب لیمو",
@@ -2349,6 +2370,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/انواع ترشی.webp",
     subLabel: "به جز سیرترشی",
     id: "انواع ترشی",
     label: "انواع ترشی",
@@ -2394,6 +2416,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/گردو.jpg",
     subLabel: "",
     id: "گردو (به غیر از خورشت فسنجان) ",
     label: "گردو (به غیر از خورشت فسنجان) ",
@@ -2439,6 +2462,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/تخمه آفتابگردان.webp",
     subLabel: "یک مشت=دو قاشق غذاخوری",
     id: "انواع تخمه (آفتابگردان، هندوانه، کدو و …)",
     label: "انواع تخمه (آفتابگردان، هندوانه، کدو و …)",
@@ -2480,6 +2504,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/یک مشت  فندق پسته بادام …..jpg",
     subLabel: "یک مشت=10 عدد بادام، پسته یا فندق",
     id: "بادام، پسته، فندق، بادام زمینی",
     label: "بادام، پسته، فندق، بادام زمینی",
@@ -2521,6 +2546,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/نبات.jpg",
     subLabel: "",
     id: "نبات",
     label: "نبات",
@@ -2562,6 +2588,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/قهوه.jpg",
     subLabel: "",
     id: "قهوه و نسکافه",
     label: "قهوه و نسکافه",
@@ -2607,6 +2634,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/چای سبز.jpg",
     subLabel: "",
     id: "چای سبز",
     label: "چای سبز",
@@ -2652,6 +2680,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/چایی.jpg",
     subLabel: "",
     id: "چای سیاه",
     label: "چای سیاه",
@@ -2701,6 +2730,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/انواع آبمیوه.jpg",
     subLabel: "",
     id: "انواع آبمیوه (طبیعی و صنعتی)",
     label: "انواع آبمیوه (طبیعی و صنعتی)",
@@ -2742,6 +2772,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/نوشابه.webp",
     subLabel: "",
     id: "نوشابه یا دلستر",
     label: "نوشابه یا دلستر",
@@ -2783,6 +2814,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/بیسکوئیت.jpg",
     subLabel: "یک عدد معادل یک بیسکوییت ساقه طلایی می باشد",
     id: "بیسکوییت",
     label: "بیسکوییت",
@@ -2820,6 +2852,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/نان لواش.jpg",
     subLabel: "نان های مستطیلی یا گرد که بسیار نازک هستند",
     id: "نان لواش",
     label: "نان لواش",
@@ -2865,6 +2898,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/نان تافتون.jpg",
     subLabel: "نان های گردی که ضخامت بیشتری نسبت به لواش دارند",
     id: "نان تافتون",
     label: "نان تافتون",
@@ -2910,6 +2944,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/نان سنگک.jpg",
     subLabel: "",
     id: "نان سنگگ",
     label: "نان سنگگ",
@@ -2955,6 +2990,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/نان جو رژیمی .jpg",
     subLabel: "",
     id: "نان رژیمی (نان سبوس دار، نان جو و ..)",
     label: "نان رژیمی (نان سبوس دار، نان جو و ..)",
@@ -3000,6 +3036,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/نان بربری.jpg",
     subLabel: "",
     id: "نان بربری",
     label: "نان بربری",
@@ -3045,6 +3082,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/کیک خانگی.jpg",
     subLabel: "",
     id: "کیک (خانگی یا بسته بندی)",
     label: "کیک (خانگی یا بسته بندی)",
@@ -3086,6 +3124,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/کیک تر یا خشک.jpg",
     subLabel: "",
     id: "شیرینی (خشک یا تر)",
     label: "شیرینی (خشک یا تر)",
@@ -3127,6 +3166,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/چیپس یا پفک.webp",
     subLabel: "",
     id: "چیپس یا پفک",
     label: "چیپس یا پفک",
@@ -3164,6 +3204,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/سیب زمینی سرخ کرده.webp",
     subLabel: "",
     id: "سیب زمینی سرخ کرده (سیب زمینی داخل خورشت ها و غذاها را درنظر نگیرید)",
     label:
@@ -3206,6 +3247,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/سیب زمینی آبپز.jpg",
     subLabel: "سیب زمینی داخل غذاها را درنظر نگیرید",
     id: "سیب زمینی تنوری یا آب پز (پوره یا خوراک سیب زمینی)",
     label: "سیب زمینی تنوری یا آب پز (پوره یا خوراک سیب زمینی)",
@@ -3247,6 +3289,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/کره چربی.jpg",
     subLabel: "",
     id: "کره",
     label: "کره",
@@ -3284,6 +3327,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/خامه.jpg",
     subLabel: "",
     id: "خامه",
     label: "خامه",
@@ -3318,8 +3362,8 @@ const questions = [
         label: "2 تا 3 قاشق غذاخوری در روز",
       },
       {
-        id: "4 تا 5 قاشق غذاخوری",
-        label: "4 تا 5 قاشق غذاخوری",
+        id: "4 تا 5 قاشق غذا خوری در روز",
+        label: "4 تا 5 قاشق غذا خوری در روز",
       },
       {
         id: "6 قاشق غذاخوری در روز یا بیشتر",
@@ -3329,6 +3373,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/پنیر.webp",
     subLabel: "",
     id: "پنیر (معمولی یا خامه ای)",
     label: "پنیر (معمولی یا خامه ای)",
@@ -3366,6 +3411,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/شیرکاکائو.jpg",
     subLabel: "",
     id: "شیر کاکائو",
     label: "شیر کاکائو",
@@ -3407,6 +3453,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/شیر پاستوریزه.jpg",
     subLabel: "",
     id: "شیر",
     label: "شیر",
@@ -3448,6 +3495,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/کشک.jpg",
     subLabel: "کشک موجود در غذاها را درنظر نگیرید",
     id: "کشک",
     label: "کشک",
@@ -3493,6 +3541,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/ماست.webp",
     subLabel: "",
     id: "ماست",
     label: "ماست",
@@ -3534,6 +3583,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/بستنی.jpg",
     subLabel: "",
     id: "بستنی",
     label: "بستنی",
@@ -3571,6 +3621,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/دوغ.jpg",
     subLabel: "",
     id: "دوغ",
     label: "دوغ",
@@ -3612,6 +3663,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/خیار.jpg",
     subLabel: "خیار سالاد را درنظر نگیرید",
     id: "خیار",
     label: "خیار",
@@ -3657,6 +3709,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/گوجه.jpg",
     subLabel: "گوجه سالاد را درنظر نگیرید",
     id: "گوجه",
     label: "گوجه",
@@ -3702,6 +3755,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/پیاز.jpg",
     subLabel: "پیاز داخل غذا را درنظر نگیرید",
     id: "پیاز (به صورت خام)",
     label: "پیاز (به صورت خام)",
@@ -3739,6 +3793,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/سیر.jpg",
     subLabel: "سیر داخل غذاها را درنظر نگیرید",
     id: "سیر (خام یا سیرترشی)",
     label: "سیر (خام یا سیرترشی)",
@@ -3784,6 +3839,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/خرما.png",
     subLabel: "",
     id: "خرما",
     label: "خرما",
@@ -3829,6 +3885,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/کشمش.jpg",
     subLabel: "",
     id: "کشمش",
     label: "کشمش",
@@ -3866,6 +3923,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/سبزی خوردن.jpg",
     subLabel: "",
     id: "سبزی خوردن",
     label: "سبزی خوردن",
@@ -3903,6 +3961,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/سالاد شیرازی.jpg",
     subLabel: "کاسه ماست خوری منظور می باشد",
     id: "سالاد شیرازی",
     label: "سالاد شیرازی",
@@ -3944,6 +4003,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/سالاد کلم و کاهو.jpg",
     subLabel: "حاوی کاهو، کلم و …",
     id: "سالاد",
     label: "سالاد",
@@ -3989,6 +4049,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/توت خشک.jpg",
     subLabel: "",
     id: "توت خشک",
     label: "توت خشک",
@@ -4026,6 +4087,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/طالبی، خربزه، هندوانه و گرمک.jpg",
     subLabel: "میزان مصرف خود را در فصل عرضه میوه گزارش کنید",
     id: "طالبی، خربزه، هندوانه و گرمک",
     label: "طالبی، خربزه، هندوانه و گرمک",
@@ -4071,6 +4133,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/مرکبات (پرتقال، نارنگی، لیموشیرین، نارنج).jpg",
     subLabel: "میزان مصرف خود را در فصل عرضه میوه گزارش کنید",
     id: "مرکبات (پرتقال، نارنگی، لیموشیرین، نارنج)",
     label: "مرکبات (پرتقال، نارنگی، لیموشیرین، نارنج)",
@@ -4108,6 +4171,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/کیوی.jpg",
     subLabel: "میزان مصرف خود را در فصل عرضه میوه گزارش کنید",
     id: "کیوی",
     label: "کیوی",
@@ -4149,6 +4213,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/سیب یا گلابی.png",
     subLabel: "میزان مصرف خود را در فصل عرضه میوه گزارش کنید",
     id: "سیب یا گلابی ",
     label: "سیب یا گلابی ",
@@ -4190,6 +4255,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/گیلاس.jpg",
     subLabel: "میزان مصرف خود را در فصل عرضه میوه گزارش کنید (1 مشت = 10 عدد)",
     id: "گیلاس یا البالو",
     label: "گیلاس یا البالو",
@@ -4231,6 +4297,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/زردآلو.jpg",
     subLabel: "میزان مصرف خود را در فصل عرضه میوه گزارش کنید",
     id: "زردآلو",
     label: "زردآلو",
@@ -4276,6 +4343,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/آلو (زرد و قرمز).jpg",
     subLabel: "میزان مصرف خود را در فصل عرضه میوه گزارش کنید",
     id: "آلو (زرد و قرمز)",
     label: "آلو (زرد و قرمز)",
@@ -4317,6 +4385,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/آلوچه.jpg",
     subLabel: "میزان مصرف خود را در فصل عرضه میوه گزارش کنید (یک مشت = 5 عدد)",
     id: "آلوچه (گوجه سبز)",
     label: "آلوچه (گوجه سبز)",
@@ -4358,6 +4427,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/انجیر تازه.jpg",
     subLabel: "میزان مصرف خود را در فصل عرضه میوه گزارش کنید",
     id: "انجیر تازه",
     label: "انجیر تازه",
@@ -4403,6 +4473,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/توت فرنگی.jpg",
     subLabel: "میزان مصرف خود را در فصل عرضه میوه گزارش کنید (یک مشت=5 عدد)",
     id: "توت فرنگی ",
     label: "توت فرنگی ",
@@ -4436,6 +4507,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/انگور.jpg",
     subLabel:
       "میزان مصرف خود را در فصل عرضه میوه گزارش کنید (یک خوشه=20 عدد انگور)",
     id: "انگور",
@@ -4478,6 +4550,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/انار.jpg",
     subLabel: "میزان مصرف خود را در فصل عرضه میوه گزارش کنید",
     id: "انار",
     label: "انار",
@@ -4515,6 +4588,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/توت تازه.jpg",
     subLabel:
       "میزان مصرف خود را در فصل عرضه میوه گزارش کنید (یک مشت=10 عدد توت)",
     id: "توت تازه",
@@ -4553,6 +4627,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/موز.jpg",
     subLabel: "",
     id: "موز",
     label: "موز",
@@ -4590,6 +4665,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/زردچوبه.jpg",
     subLabel: "",
     id: "زردچوبه (استفاده در غذاها)",
     label: "زردچوبه (استفاده در غذاها)",
@@ -4623,6 +4699,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/فلفل سیاه.jpg",
     subLabel: "",
     id: "فلفل سیاه (در پخت و پز یا سر سفره)",
     label: "فلفل سیاه (در پخت و پز یا سر سفره)",
@@ -4656,6 +4733,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/آویشن.jpg",
     subLabel: "",
     id: "آویشن یا پونه کوهی (در غذاها یا سر سفره)",
     label: "آویشن یا پونه کوهی (در غذاها یا سر سفره)",
@@ -4689,6 +4767,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/زعفران.jpg",
     subLabel: "",
     id: "زعفران (در غذاها یا نوشیدنی ها)",
     label: "زعفران (در غذاها یا نوشیدنی ها)",
@@ -4722,6 +4801,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/زنجبیل.jpg",
     subLabel: "استفاده در نوشیدنی ها (چای) یا غذاها",
     id: "زنجبیل",
     label: "زنجبیل",
@@ -4755,6 +4835,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
+    img: "./Image/دارچین.jpg",
     subLabel: "در غذاها و نوشیدنی ها",
     id: "دارچین",
     label: "دارچین",

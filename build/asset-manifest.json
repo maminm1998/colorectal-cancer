@@ -1,15 +1,16 @@
 {
   "files": {
-    "main.css": "/colorectal-cancer/static/css/main.66eb5f58.css",
-    "main.js": "/colorectal-cancer/static/js/main.9c863acf.js",
+    "main.css": "/colorectal-cancer/static/css/main.889c348f.css",
+    "main.js": "/colorectal-cancer/static/js/main.4cb34c1c.js",
+    "static/media/summer-v2__FillWzg1MCwxMTc0XQ.jpg": "/colorectal-cancer/static/media/summer-v2__FillWzg1MCwxMTc0XQ.8fdec196285f361d20ee.jpg",
     "static/media/B Lotus Bold_0.ttf": "/colorectal-cancer/static/media/B Lotus Bold_0.0779f92bda2ac86985fc.ttf",
     "static/media/B Lotus_0.ttf": "/colorectal-cancer/static/media/B Lotus_0.2b00479324888c7c1eb1.ttf",
     "index.html": "/colorectal-cancer/index.html",
-    "main.66eb5f58.css.map": "/colorectal-cancer/static/css/main.66eb5f58.css.map",
-    "main.9c863acf.js.map": "/colorectal-cancer/static/js/main.9c863acf.js.map"
+    "main.889c348f.css.map": "/colorectal-cancer/static/css/main.889c348f.css.map",
+    "main.4cb34c1c.js.map": "/colorectal-cancer/static/js/main.4cb34c1c.js.map"
   },
   "entrypoints": [
-    "static/css/main.66eb5f58.css",
-    "static/js/main.9c863acf.js"
+    "static/css/main.889c348f.css",
+    "static/js/main.4cb34c1c.js"
   ]
 }

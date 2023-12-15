@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./../App.css";
-import image from "./../Image/summer-v2__FillWzg1MCwxMTc0XQ.jpg";
+
 const DynamicForm = ({ questions }) => {
   const validationSchema = Yup.object().shape(
     questions.reduce((schema, question) => {
@@ -31,55 +31,148 @@ const DynamicForm = ({ questions }) => {
   return (
     <form onSubmit={formik.handleSubmit} className="flex flex-col flex-wrap">
       {questions.map((question, index) => (
-        <div key={question.id} className={`w-[100%] md:mx-2 max-md:px-2 my-4`}>
-          <img src={image} className="w-full h-auto" alt="تصویر" />
-          <div
-            className={`flex ${
-              question.label.length > 35 && question.type === "text"
-                ? "flex-col !items-start !justify-start text-right"
-                : ""
-            } ${
-              question.type === "text"
-                ? "justify-start max-md:justify-center my-1 md:mx-1"
-                : ""
-            } md:mx-1 w-full`}
-          >
-            <p
-              className={`md:mx-1
+        <div
+          key={question.id}
+          className={`w-[100%] md:mx-2 max-md:px-2 my-4 ${
+            question.img.length > 0
+              ? "flex lg:items-center max-lg:items-start "
+              : ""
+          }`}
+        >
+          {question.img ? (
+            <img
+              src={question.img}
+              className="w-24 h-20 rounded-lg border-blue-500 border-4 ml-2"
+              alt="تصویر"
+            />
+          ) : (
+            <></>
+          )}
+          <div>
+            <div
+              className={`flex ${
+                question.label.length > 35 && question.type === "text"
+                  ? "flex-col !items-start !justify-start text-right"
+                  : ""
+              } ${
+                question.type === "text"
+                  ? "justify-start max-md:justify-center my-1 md:mx-1"
+                  : ""
+              } md:mx-1 w-full`}
+            >
+              <p
+                className={`md:mx-1
               ${
                 question.label.length > 35 && question.type === "text"
                   ? "!w-[100] mt-4"
                   : ""
               } ${
-                question.type === "text" && question.label.length < 35
-                  ? "!w-[10%] text-right max-md:text-right max-md:w-[30%]"
-                  : ""
-              }`}
-            >
-              {`${index + 1}.`} {question.label}
-              <p className="text-gray-400">{question.subLabel}</p>
-            </p>
-            {question.type === "text" && (
-              <div
-                className={`md:w-[50%]  ${
-                  question.label.length > 35 && question.type === "text"
-                    ? "max-md:w-[100%] mt-2"
-                    : "max-md:w-[60%]"
+                  question.type === "text" && question.label.length < 35
+                    ? "!w-[10%] text-right max-md:text-right max-md:w-[30%]"
+                    : ""
                 }`}
               >
-                <input
-                  type="text"
-                  name={question.id}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values[question.id] || ""}
-                  placeholder={question.placeholder}
-                  className={`w-full rounded-md p-2 max-sm:placeholder:!text-[13px] max-sm:placeholder:!font-extrabold border-gray-300 border-[1px] ${
+                {question.label}
+                <p className="text-gray-400">{question.subLabel}</p>
+              </p>
+              {question.type === "text" && (
+                <div
+                  className={`md:w-[50%]  ${
                     question.label.length > 35 && question.type === "text"
-                      ? ""
-                      : ""
+                      ? "max-md:w-[100%] mt-2"
+                      : "max-md:w-[60%]"
                   }`}
-                />
+                >
+                  <input
+                    type="text"
+                    name={question.id}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values[question.id] || ""}
+                    placeholder={question.placeholder}
+                    className={`w-full rounded-md p-2 max-sm:placeholder:!text-[13px] max-sm:placeholder:!font-extrabold border-gray-300 border-[1px] ${
+                      question.label.length > 35 && question.type === "text"
+                        ? ""
+                        : ""
+                    }`}
+                  />
+                  {formik.touched[question.id] &&
+                    formik.errors[question.id] && (
+                      <div className="text-red-500 mt-1">
+                        {formik.errors[question.id]}
+                      </div>
+                    )}
+                </div>
+              )}
+            </div>
+            {question.type === "radio" && (
+              <div
+                role="group"
+                className={`flex  ${
+                  question.options.length < 4 ? "max-lg:!flex-row" : ""
+                } max-lg:flex-col mt-2`}
+              >
+                {question.options.map((option) => (
+                  <label key={option.id} className="flex items-center">
+                    <input
+                      type="radio"
+                      name={question.id}
+                      value={option.id}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      checked={formik.values[question.id] === option.id}
+                      className="mr-2  w-4 h-4 cursor-pointer checked:border-blue-500 checked:border-2"
+                    />
+                    <span className="text-sm mr-2">{option.label}</span>
+                  </label>
+                ))}
+                {shouldShowOtherInput(question.id) && (
+                  <>
+                    <input
+                      type="text"
+                      name={`${question.id}-other`}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values[`${question.id}-other`] || ""}
+                      placeholder="Please specify..."
+                      className="input-style"
+                    />
+                    {formik.touched[`${question.id}-other`] &&
+                      formik.errors[`${question.id}-other`] && (
+                        <div className="text-red-500 mt-1">
+                          {formik.errors[`${question.id}-other`]}
+                        </div>
+                      )}
+                  </>
+                )}
+                {formik.touched[question.id] && formik.errors[question.id] && (
+                  <div className="text-red-500 mr-10 mt-1">
+                    {formik.errors[question.id]}
+                  </div>
+                )}
+              </div>
+            )}
+            {question.type === "checkbox" && (
+              <div role="group" className="flex flex-wrap flex-row">
+                {question.options.map((option) => (
+                  <label
+                    key={option.id}
+                    className="flex w-[40%] max-md:w-[100%] items-center mr-4"
+                  >
+                    <input
+                      type="checkbox"
+                      name={question.id}
+                      value={option.id}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      checked={(formik.values[question.id] || []).includes(
+                        option.id
+                      )}
+                      className="mr-3 ml-1 w-4 h-4 cursor-pointer"
+                    />
+                    <span className="text-sm">{option.label}</span>
+                  </label>
+                ))}
                 {formik.touched[question.id] && formik.errors[question.id] && (
                   <div className="text-red-500 mt-1">
                     {formik.errors[question.id]}
@@ -88,81 +181,6 @@ const DynamicForm = ({ questions }) => {
               </div>
             )}
           </div>
-          {question.type === "radio" && (
-            <div
-              role="group"
-              className={`flex  ${
-                question.options.length < 4 ? "max-lg:!flex-row" : ""
-              } max-lg:flex-col mt-2`}
-            >
-              {question.options.map((option) => (
-                <label key={option.id} className="flex items-center mr-4">
-                  <input
-                    type="radio"
-                    name={question.id}
-                    value={option.id}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    checked={formik.values[question.id] === option.id}
-                    className="mr-2  w-4 h-4 cursor-pointer checked:border-blue-500 checked:border-2"
-                  />
-                  <span className="text-sm mr-2">{option.label}</span>
-                </label>
-              ))}
-              {shouldShowOtherInput(question.id) && (
-                <>
-                  <input
-                    type="text"
-                    name={`${question.id}-other`}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values[`${question.id}-other`] || ""}
-                    placeholder="Please specify..."
-                    className="input-style"
-                  />
-                  {formik.touched[`${question.id}-other`] &&
-                    formik.errors[`${question.id}-other`] && (
-                      <div className="text-red-500 mt-1">
-                        {formik.errors[`${question.id}-other`]}
-                      </div>
-                    )}
-                </>
-              )}
-              {formik.touched[question.id] && formik.errors[question.id] && (
-                <div className="text-red-500 mr-10 mt-1">
-                  {formik.errors[question.id]}
-                </div>
-              )}
-            </div>
-          )}
-          {question.type === "checkbox" && (
-            <div role="group" className="flex flex-wrap flex-row">
-              {question.options.map((option) => (
-                <label
-                  key={option.id}
-                  className="flex w-[40%] max-md:w-[100%] items-center mr-4"
-                >
-                  <input
-                    type="checkbox"
-                    name={question.id}
-                    value={option.id}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    checked={(formik.values[question.id] || []).includes(
-                      option.id
-                    )}
-                    className="mr-3 ml-1 w-4 h-4 cursor-pointer"
-                  />
-                  <span className="text-sm">{option.label}</span>
-                </label>
-              ))}
-              {formik.touched[question.id] && formik.errors[question.id] && (
-                <div className="text-red-500 mt-1">
-                  {formik.errors[question.id]}
-                </div>
-              )}
-            </div>
-          )}
         </div>
       ))}
       {formik.errors &&
