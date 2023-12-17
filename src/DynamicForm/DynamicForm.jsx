@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./../App.css";
+import swal from "sweetalert";
 
 const DynamicForm = ({ questions }) => {
   const validationSchema = Yup.object().shape(
@@ -10,7 +11,7 @@ const DynamicForm = ({ questions }) => {
       return schema;
     }, {})
   );
-  useEffect(() => {}, []);
+
   const formik = useFormik({
     initialValues: questions.reduce((values, question) => {
       values[question.id] = "";
@@ -18,8 +19,21 @@ const DynamicForm = ({ questions }) => {
     }, {}),
     validationSchema,
     onSubmit: (values) => {
-      // localStorage.setItem('name',values.)
-      console.log("Form submitted", values);
+      fetch(`http://localhost:4000/${questions[0].questionType}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      }).then((res) => {
+        if (res.status === 201) {
+          swal({
+            title: "اطلاعات با موفقیت ثبت شد.",
+            icon: "success",
+            buttons: "متوجه شدم",
+          });
+        }
+      });
     },
   });
 
@@ -43,21 +57,26 @@ const DynamicForm = ({ questions }) => {
                 : ""
             } md:mx-1 w-full`}
           >
-            <p
-              className={`md:mx-1
+            {question.label ? (
+              <p
+                className={`md:mx-1
               ${
                 question.label.length > 35 && question.type === "text"
                   ? "!w-[100] mt-4"
                   : ""
               } ${
-                question.type === "text" && question.label.length < 35
-                  ? "!w-[10%] text-right max-md:text-right max-md:w-[30%]"
-                  : ""
-              }`}
-            >
-              {`${index + 1}.`} {question.label}
-              <p className="text-gray-400">{question.subLabel}</p>
-            </p>
+                  question.type === "text" && question.label.length < 35
+                    ? "!w-[10%] text-right max-md:text-right max-md:w-[30%]"
+                    : ""
+                }`}
+              >
+                {`${index}.`} {question.label}
+                <span className="text-gray-400">{question.subLabel}</span>
+              </p>
+            ) : (
+              <></>
+            )}
+
             {question.type === "text" && (
               <div
                 className={`md:w-[50%]  ${
@@ -164,10 +183,17 @@ const DynamicForm = ({ questions }) => {
           )}
         </div>
       ))}
-      {formik.errors &&
-        console.log("لطفا تمامی آیتم ها را به درستی وارد نمایید")}
+
       <button
         type="submit"
+        onClick={() => {
+          formik.errors &&
+            swal({
+              title: "لطفا تمامی آیتم ها را به درستی وارد نمایید",
+              icon: "error",
+              buttons: "متوجه شدم",
+            });
+        }}
         className="py-2 px-4 bg-blue-500 text-white font-semibold rounded shadow mt-4"
       >
         ثبت اطلاعات

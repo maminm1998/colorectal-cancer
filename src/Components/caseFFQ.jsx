@@ -3,6 +3,7 @@ import DynamicFormFFQ from "../DynamicForm/DynamicFormFFQ";
 import * as Yup from "yup";
 
 const questions = [
+  { questionType: "caseFFQ",  img: "",label:""  },
   {
     img: "",
     subLabel: "",

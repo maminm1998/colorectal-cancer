@@ -3,6 +3,7 @@ import DynamicForm from "../DynamicForm/DynamicForm";
 import * as Yup from "yup";
 
 const questions = [
+  { questionType: "caseDemographic", img: "",label:"" },
   {
     subLabel: "",
     id: "نام :",

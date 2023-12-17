@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./../App.css";
-
+import swal from "sweetalert";
 const DynamicForm = ({ questions }) => {
   const validationSchema = Yup.object().shape(
     questions.reduce((schema, question) => {
@@ -18,8 +18,21 @@ const DynamicForm = ({ questions }) => {
     }, {}),
     validationSchema,
     onSubmit: (values) => {
-      // localStorage.setItem('name',values.)
-      console.log("Form submitted", values);
+      fetch(`http://localhost:4000/${questions[0].questionType}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      }).then((res) => {
+        if (res.status === 201) {
+          swal({
+            title: "اطلاعات با موفقیت ثبت شد.",
+            icon: "success",
+            buttons: "متوجه شدم",
+          });
+        }
+      });
     },
   });
 
@@ -34,12 +47,12 @@ const DynamicForm = ({ questions }) => {
         <div
           key={question.id}
           className={`w-[100%] md:mx-2 max-md:px-2 my-4 ${
-            question.img.length > 0
+            question.img.length ?? question.img.length > 0
               ? "flex lg:items-center max-lg:items-start "
               : ""
           }`}
         >
-          {question.img ? (
+          {question.img.length & (question.img.length > 0) ? (
             <img
               src={question.img}
               className="w-24 h-20 rounded-lg border-blue-500 border-4 ml-2"
@@ -183,11 +196,18 @@ const DynamicForm = ({ questions }) => {
           </div>
         </div>
       ))}
-      {formik.errors &&
-        console.log("لطفا تمامی آیتم ها را به درستی وارد نمایید")}
+
       <button
         type="submit"
         className="py-2 px-4 bg-blue-500 text-white font-semibold rounded shadow mt-4"
+        onClick={() => {
+          formik.errors &&
+            swal({
+              title: "لطفا تمامی آیتم ها را به درستی وارد نمایید",
+              icon: "error",
+              buttons: "متوجه شدم",
+            });
+        }}
       >
         ثبت اطلاعات
       </button>
