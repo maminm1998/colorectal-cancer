@@ -3,7 +3,7 @@ import DynamicForm from "../DynamicForm/DynamicForm";
 import * as Yup from "yup";
 
 const questions = [
-  { questionType: "caseDemographic", img: "",label:"" },
+  { questionType: "caseDemographic", img: "", label: "" },
   {
     subLabel: "",
     id: "نام :",
@@ -51,8 +51,8 @@ const questions = [
     validation: Yup.string()
       .required("وارد کردن شماره تلفن همراه (موبایل) الزامی است")
       .matches(
-        /^((?!(0))9[0-9]{9})$/g,
-        "نکته: شماره 10 رقمی موبایل خود را بدون صفر ابتدایی وارد نمایید"
+        /^(09[0-9]{9})$/g,
+        "نکته: شماره 10 رقمی موبایل خود را به درستی وارد نمایید"
       ),
     placeholder: "تلفن همراه (موبایل) خود را وارد نمایید",
   },
@@ -78,8 +78,8 @@ const questions = [
     validation: Yup.string()
       .required("وارد کردن تلفن همراه جایگزین الزامی است")
       .matches(
-        /^((?!(0))[0-9]{10})$/g,
-        "نکته: شماره 10 رقمی موبایل خود را بدون صفر ابتدایی وارد نمایید"
+        /^(09[0-9]{9})$/g,
+        "نکته: شماره 10 رقمی موبایل خود را به درستی وارد نمایید"
       ),
     placeholder: "تلفن همراه جایگزین خود را وارد نمایید",
   },
