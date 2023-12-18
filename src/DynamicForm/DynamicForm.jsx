@@ -71,7 +71,17 @@ const DynamicForm = ({ questions }) => {
                 }`}
               >
                 {`${index}.`} {question.label}
-                <span className="text-gray-400">{question.subLabel}</span>
+                <span
+                  className={`text-gray-400 ${
+                    question.type === "text"
+                      ? "block"
+                      : question.type === "checkbox"
+                      ? "block"
+                      : ""
+                  }`}
+                >
+                  {question.subLabel}
+                </span>
               </p>
             ) : (
               <></>
