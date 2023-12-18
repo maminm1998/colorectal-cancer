@@ -1,9 +1,9 @@
 import React from "react";
 import DynamicForm from "../DynamicForm/DynamicForm";
 import * as Yup from "yup";
+import swal from "sweetalert";
 
 const questions = [
-  { questionType: "caseDemographic", img: "", label: "" },
   {
     subLabel: "",
     id: "نام",
@@ -1336,11 +1336,11 @@ const questions = [
     placeholder: "مثلا: 2",
   },
   {
-    //به طور روزانه، چند ساعت از زمان شما صرف فعالیت های با شدت خفیف مانند پیاده روی معمولی و انجام کارهای منزل مثل خرید، شستن ظرف ها و ... می شود؟
     subLabel:
       "(یا هر نوع ورزش دیگری که ضربان قلب و تنفس را خیلی کم افزایش دهد یا افزایش ندهد)",
-    id: "65",
-    label: "65",
+    id: "69",
+    label:
+      "به طور روزانه، چند ساعت از زمان شما صرف فعالیت های با شدت خفیف مانند پیاده روی معمولی و انجام کارهای منزل مثل خرید، شستن ظرف ها و ... می شود؟",
     type: "text",
     validation: Yup.number("لطفا ساعت ورزش خود را به درستی وارد کنید")
       .required("وارد کردن ساعت ورزش الزامی است")
@@ -1451,8 +1451,9 @@ const questions = [
     //قبل از ابتلا به بیماری، به طور روزانه، چند ساعت از زمان شما صرف فعالیت های با شدت خفیف مانند پیاده روی معمولی و انجام کارهای منزل مثل خرید، شستن ظرف ها و ... می شد؟
     subLabel:
       "(یا هر نوع ورزش دیگری که ضربان قلب و تنفس را خیلی کم افزایش دهد یا افزایش ندهد",
-    id: "66",
-    label: "66",
+    id: "75",
+    label:
+      "قبل از ابتلا به بیماری، به طور روزانه، چند ساعت از زمان شما صرف فعالیت های با شدت خفیف مانند پیاده روی معمولی و انجام کارهای منزل مثل خرید، شستن ظرف ها و ... می شد؟",
     type: "text",
     validation: Yup.number(
       "لطفا زمان فعالیت بدنی خفیف خود را به درستی وارد کنید"
@@ -1463,16 +1464,25 @@ const questions = [
     placeholder: "لطفا ساعت فعالیت بدنی خفیف خود را قبل از ابتلا وارد نمایید",
   },
 ];
-
+const questionType = "caseDemographic";
 export default function CaseDemographic() {
+  let isCompletedBefore = localStorage.getItem(questionType);
   return (
     <>
-      <div className="border-2 my-1 border-blue-500 rounded-lg w-[95%] m-auto">
-        <div className="bg-blue-500 rounded-t-lg p-2 text-white font-bold text-xl">
-          پرسشنامه
+      {isCompletedBefore ? (
+        swal({
+          title: "شما قبلا این پرسشنامه را پر کرده اید",
+          icon: "error",
+          buttons: "متوجه شدم",
+        })
+      ) : (
+        <div className="border-2 my-1 border-blue-500 rounded-lg w-[95%] m-auto">
+          <div className="bg-blue-500 rounded-t-lg p-2 text-white font-bold text-xl">
+            پرسشنامه
+          </div>
+          <DynamicForm questionType={questionType} questions={questions} />
         </div>
-        <DynamicForm questions={questions} />
-      </div>
+      )}
     </>
   );
 }

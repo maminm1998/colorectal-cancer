@@ -1,9 +1,8 @@
 import React from "react";
 import DynamicForm from "../DynamicForm/DynamicForm";
 import * as Yup from "yup";
-
+import swal from "sweetalert";
 const questions = [
-  { questionType: "controlHabit", img: "", label: "" },
   {
     subLabel: "",
     id: "نام :",
@@ -100,7 +99,7 @@ const questions = [
   },
   {
     subLabel:
-      "منظور خوردن هر چیزی خارج از وعده های غذایی است، مثلا خوردن یک سیب یا یک تکه کیک، یا یک لیوان شیر یا یک شکلات یا …",
+      " (منظور خوردن هر چیزی خارج از وعده های غذایی است، مثلا خوردن یک سیب یا یک تکه کیک، یا یک لیوان شیر یا یک شکلات یا …)",
     id: "روزانه چند میان وعده دارید؟ ",
     label: "روزانه چند میان وعده دارید؟ ",
     type: "radio",
@@ -256,7 +255,7 @@ const questions = [
     validation: Yup.string().required("لطفا به سوال جواب دهید"),
   },
   {
-    subLabel: "(مثلا خوردن یک میوه یا یک لیوان چای) ",
+    subLabel: " (مثلا خوردن یک میوه یا یک لیوان چای) ",
     id: "معمولا چه مدت بعد از خوردن آخرین میان وعده بعد از شام به رختخواب می روید؟",
     label:
       "معمولا چه مدت بعد از خوردن آخرین میان وعده بعد از شام به رختخواب می روید؟",
@@ -346,7 +345,7 @@ const questions = [
     validation: Yup.string().required("لطفا به سوال جواب دهید"),
   },
   {
-    subLabel: "شام های سبک را نیز درنظر بگیرید",
+    subLabel: " (شام های سبک را نیز درنظر بگیرید)",
     id: "معمولا چند روز در هفته شام می خورید؟",
     label: "معمولا چند روز در هفته شام می خورید؟",
     type: "radio",
@@ -593,7 +592,7 @@ const questions = [
   },
 
   {
-    subLabel: "مثل برنج دودی، ماهی دودی، بادمجان دودی و …",
+    subLabel: " (مثل برنج دودی، ماهی دودی، بادمجان دودی و …)",
     id: "آیا شما از غذای دودی استفاده می کنید؟",
     label: "آیا شما از غذای دودی استفاده می کنید؟",
     type: "radio",
@@ -624,8 +623,8 @@ const questions = [
   },
   {
     subLabel: "",
-    id: "روزانه چند لیوان اب می نوشید؟",
-    label: "روزانه چند لیوان اب می نوشید؟",
+    id: "روزانه چند لیوان آب می نوشید؟",
+    label: "روزانه چند لیوان آب می نوشید؟",
     type: "radio",
     options: [
       { id: "صفر", label: "صفر" },
@@ -668,14 +667,14 @@ const questions = [
   },
   {
     subLabel: "",
-    id: "معمولا از چه نوع اب میوه ای استفاده می کنید؟",
-    label: "معمولا از چه نوع اب میوه ای استفاده می کنید؟",
+    id: "معمولا از چه نوع آبمیوه ای استفاده می کنید؟",
+    label: "معمولا از چه نوع آبمیوه ای استفاده می کنید؟",
     type: "radio",
     options: [
       { id: "مصرف نمی کنم", label: "مصرف نمی کنم" },
       {
-        id: "ابمیوه صنعتی",
-        label: "ابمیوه صنعتی",
+        id: "آبمیوه صنعتی",
+        label: "آبمیوه صنعتی",
       },
       {
         id: "آبمیوه طبیعی",
@@ -728,7 +727,7 @@ const questions = [
     validation: Yup.string().required("لطفا به سوال جواب دهید"),
   },
   {
-    subLabel: "",
+    subLabel: " (منظور سویا اضافه شده به غذا، آجیل سویا و شیرسویا می باشد)",
     id: "معمولا چقدر از سویا در برنامه غذایی خود استفاده می کنید؟",
     label: "معمولا چقدر از سویا در برنامه غذایی خود استفاده می کنید؟",
     type: "radio",
@@ -953,7 +952,7 @@ const questions = [
     validation: Yup.string().required("لطفا به سوال جواب دهید"),
   },
   {
-    subLabel: "",
+    subLabel: " (حداکثر ۳ گزینه را می‌توانید انتخاب کنید)",
     id: "از چه ظروفی برای پخت و پز معمولا استفاده می کنید؟",
     label: "از چه ظروفی برای پخت و پز معمولا استفاده می کنید؟",
     type: "checkbox",
@@ -1005,16 +1004,26 @@ const questions = [
       .required("لطفا به سوال جواب دهید"),
   },
 ];
+const questionType = "controlHabit";
 
 export default function ControlHabit() {
+  let isCompletedBefore = localStorage.getItem(questionType);
   return (
     <>
-      <div className="border-2 my-1 border-blue-500 rounded-lg w-[95%] m-auto">
-        <div className="bg-blue-500 rounded-t-lg p-2 text-white font-bold text-xl">
-          پرسشنامه
+      {isCompletedBefore ? (
+        swal({
+          title: "شما قبلا این پرسشنامه را پر کرده اید",
+          icon: "error",
+          buttons: "متوجه شدم",
+        })
+      ) : (
+        <div className="border-2 my-1 border-blue-500 rounded-lg w-[95%] m-auto">
+          <div className="bg-blue-500 rounded-t-lg p-2 text-white font-bold text-xl">
+            پرسشنامه
+          </div>
+          <DynamicForm questionType={questionType} questions={questions} />
         </div>
-        <DynamicForm questions={questions} />
-      </div>
+      )}
     </>
   );
 }

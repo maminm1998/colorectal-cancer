@@ -1,9 +1,9 @@
 import React from "react";
 import DynamicFormFFQ from "../DynamicForm/DynamicFormFFQ";
 import * as Yup from "yup";
+import swal from "sweetalert";
 
 const questions = [
-  { questionType: "controlFFQ", img: "",label:""  },
   {
     img: "",
     subLabel: "",
@@ -105,6 +105,10 @@ const questions = [
         id: "یک پیش دستی در روز",
         label: "یک پیش دستی در روز",
       },
+      {
+        id: "2 تا 3 پیش دستی در روز",
+        label: "2 تا 3 پیش دستی در روز",
+      },
     ],
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
@@ -172,6 +176,10 @@ const questions = [
       {
         id: "1 تا 2 بار در روز",
         label: "1 تا 2 بار در روز",
+      },
+      {
+        id: "2 تا 3 پیش دستی در روز",
+        label: "2 تا 3 پیش دستی در روز",
       },
     ],
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
@@ -372,7 +380,7 @@ const questions = [
   },
   {
     img: "./Image/کشک بادمجون.jpg",
-    subLabel: "",
+    subLabel: "کاسه ماست خوری",
     id: "کشک بادمجان",
     label: "کشک بادمجان",
     type: "radio",
@@ -410,7 +418,7 @@ const questions = [
   },
   {
     img: "./Image/املت.jpg",
-    subLabel: "(ترکیب تخم مرغ و گوجه فرنگی)",
+    subLabel: "ترکیب تخم مرغ و گوجه فرنگی",
     id: "املت",
     label: "املت",
     type: "radio",
@@ -795,7 +803,7 @@ const questions = [
   },
   {
     img: "./Image/کباب تابه ای.jpg",
-    subLabel: "",
+    subLabel: "کباب کوبیده را درنظر نگیرید",
     id: "کباب تابه ای",
     label: "کباب تابه ای",
     type: "radio",
@@ -1023,9 +1031,9 @@ const questions = [
   },
   {
     img: "./Image/ماهی.jpg",
-    subLabel: "",
-    id: "ماهی (تن ماهی را شامل نمی شود)",
-    label: "ماهی (تن ماهی را شامل نمی شود)",
+    subLabel: "تن ماهی را شامل نمی شود",
+    id: "ماهی",
+    label: "ماهی",
     type: "radio",
     options: [
       {
@@ -1305,9 +1313,9 @@ const questions = [
   },
   {
     img: "./Image/انواع کنسور.jpg",
-    subLabel: "",
-    id: "انواع کنسرو (به غیر از تن ماهی و کنسرو لوبیا)",
-    label: "انواع کنسرو (به غیر از تن ماهی و کنسرو لوبیا)",
+    subLabel: "به غیر از تن ماهی و کنسرو لوبیا",
+    id: "انواع کنسرو",
+    label: "انواع کنسرو",
     type: "radio",
     options: [
       {
@@ -1771,9 +1779,9 @@ const questions = [
   },
   {
     img: "./Image/فرنی.jpg",
-    subLabel: "",
-    id: "فرنی (کاسه ماست خوری)",
-    label: "فرنی (کاسه ماست خوری)",
+    subLabel: "کاسه ماست خوری",
+    id: "فرنی",
+    label: "فرنی",
     type: "radio",
     options: [
       {
@@ -2196,8 +2204,8 @@ const questions = [
   {
     img: "./Image/همبرگر.jpg",
     subLabel: "",
-    id: "همبرگر ( به غیر از ساندویچ)",
-    label: "همبرگر ( به غیر از ساندویچ)",
+    id: "همبرگر (به غیر از ساندویچ)",
+    label: "همبرگر (به غیر از ساندویچ)",
     type: "radio",
     options: [
       {
@@ -2236,6 +2244,52 @@ const questions = [
     subLabel: "رب گوجه را درنظر نگیرید",
     id: "سس قرمز",
     label: "سس قرمز",
+    type: "radio",
+    options: [
+      {
+        id: "تقریبا هرگز یا کمتر از یک قاشق غذاخوری در ماه",
+        label: "تقریبا هرگز یا کمتر از یک قاشق غذاخوری در ماه",
+      },
+      {
+        id: "1 تا 3 قاشق غذاخوری در ماه",
+        label: "1 تا 3 قاشق غذاخوری در ماه",
+      },
+      {
+        id: "یک قاشق غذاخوری در هفته",
+        label: "یک قاشق غذاخوری در هفته",
+      },
+      {
+        id: "2 تا 4 قاشق غذاخوری در هفته",
+        label: "2 تا 4 قاشق غذاخوری در هفته",
+      },
+      {
+        id: "5 تا 6 قاشق غذاخوری در هفته",
+        label: "5 تا 6 قاشق غذاخوری در هفته",
+      },
+      {
+        id: "یک قاشق غذاخوری در روز",
+        label: "یک قاشق غذاخوری در روز",
+      },
+      {
+        id: "2 تا 3  قاشق غذاخوری در روز",
+        label: "2 تا 3  قاشق غذاخوری در روز",
+      },
+      {
+        id: "4 تا 5 قاشق غذاخوری در روز",
+        label: "4 تا 5 قاشق غذاخوری در روز",
+      },
+      {
+        id: "6 قاشق غذاخوری در روز یا بیشتر",
+        label: "6 قاشق غذاخوری در روز یا بیشتر",
+      },
+    ],
+    validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
+  },
+  {
+    img: "./Image/انواع سس سالاد.jpg",
+    subLabel: "",
+    id: "انواع سس سالاد (مایونز، فرانسوی، هزارجزیره)",
+    label: "انواع سس سالاد (مایونز، فرانسوی، هزارجزیره)",
     type: "radio",
     options: [
       {
@@ -2731,9 +2785,9 @@ const questions = [
   },
   {
     img: "./Image/انواع آبمیوه.jpg",
-    subLabel: "",
-    id: "انواع آبمیوه (طبیعی و صنعتی)",
-    label: "انواع آبمیوه (طبیعی و صنعتی)",
+    subLabel: "طبیعی و صنعتی",
+    id: "انواع آبمیوه",
+    label: "انواع آبمیوه",
     type: "radio",
     options: [
       {
@@ -3083,7 +3137,7 @@ const questions = [
   },
   {
     img: "./Image/کیک خانگی.jpg",
-    subLabel: "",
+    subLabel: "یک برش=یک بسته کیک",
     id: "کیک (خانگی یا بسته بندی)",
     label: "کیک (خانگی یا بسته بندی)",
     type: "radio",
@@ -3205,10 +3259,9 @@ const questions = [
   },
   {
     img: "./Image/سیب زمینی سرخ کرده.webp",
-    subLabel: "",
-    id: "سیب زمینی سرخ کرده (سیب زمینی داخل خورشت ها و غذاها را درنظر نگیرید)",
-    label:
-      "سیب زمینی سرخ کرده (سیب زمینی داخل خورشت ها و غذاها را درنظر نگیرید)",
+    subLabel: "سیب زمینی داخل خورشت ها و غذاها را درنظر نگیرید",
+    id: "سیب زمینی سرخ کرده",
+    label: "سیب زمینی سرخ کرده",
     type: "radio",
     options: [
       {
@@ -3374,9 +3427,9 @@ const questions = [
   },
   {
     img: "./Image/پنیر.webp",
-    subLabel: "",
-    id: "پنیر (معمولی یا خامه ای)",
-    label: "پنیر (معمولی یا خامه ای)",
+    subLabel: "معمولی یا خامه ای",
+    id: "پنیر",
+    label: "پنیر",
     type: "radio",
     options: [
       {
@@ -4004,9 +4057,9 @@ const questions = [
   },
   {
     img: "./Image/سالاد کلم و کاهو.jpg",
-    subLabel: "حاوی کاهو، کلم و …",
-    id: "سالاد",
-    label: "سالاد",
+    subLabel: "",
+    id: "سالاد (حاوی کاهو، کلم و …)",
+    label: "سالاد (حاوی کاهو، کلم و …)",
     type: "radio",
     options: [
       {
@@ -4869,16 +4922,25 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
 ];
-
+const questionType = "controlFFQ";
 export default function ControlFFQ() {
+  let isCompletedBefore = localStorage.getItem(questionType);
   return (
     <>
-      <div className="border-2 my-1 border-blue-500 rounded-lg w-[95%] m-auto">
-        <div className="bg-blue-500 rounded-t-lg p-2 text-white font-bold text-xl">
-          پرسشنامه
+      {isCompletedBefore ? (
+        swal({
+          title: "شما قبلا این پرسشنامه را پر کرده اید",
+          icon: "error",
+          buttons: "متوجه شدم",
+        })
+      ) : (
+        <div className="border-2 my-1 border-blue-500 rounded-lg w-[95%] m-auto">
+          <div className="bg-blue-500 rounded-t-lg p-2 text-white font-bold text-xl">
+            پرسشنامه
+          </div>
+          <DynamicFormFFQ questionType={questionType} questions={questions} />
         </div>
-        <DynamicFormFFQ questions={questions} />
-      </div>
+      )}
     </>
   );
 }
