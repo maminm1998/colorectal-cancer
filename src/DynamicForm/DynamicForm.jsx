@@ -19,7 +19,7 @@ const DynamicForm = ({ questions, questionType }) => {
     }, {}),
     validationSchema,
     onSubmit: (values) => {
-      fetch(`http://localhost:4000/${questionType}`, {
+      fetch(`https://ffqbackend.liara.run/${questionType}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -38,10 +38,12 @@ const DynamicForm = ({ questions, questionType }) => {
         })
         .catch((e) => {
           swal({
-            title: "لطفا با پشتیبانی به شماره 09981110126 تماس بگیرید",
+            title:
+              "در ثبت اطلاعات مشکلی وجود دارد لطفا با شماره 09981110126 تماس بگیرید؛ با تشکر از شما",
             icon: "error",
             buttons: "متوجه شدم",
           });
+          console.log("e:", e);
         });
     },
   });
@@ -61,10 +63,10 @@ const DynamicForm = ({ questions, questionType }) => {
               question.label.length > 35 &&
               question.type === "text"
                 ? "flex-col !items-start !justify-start text-right"
-                : ""
+                : "items-center"
             } ${
               question.type === "text"
-                ? "justify-start max-md:justify-center my-1 md:mx-1 items-center"
+                ? "justify-start max-md:justify-center my-1 md:mx-1"
                 : ""
             } md:mx-1 w-full`}
           >
@@ -219,6 +221,7 @@ const DynamicForm = ({ questions, questionType }) => {
         type="submit"
         onClick={() => {
           formik.errors &&
+            formik.errors.length > 0 &&
             swal({
               title: "لطفا تمامی آیتم ها را به درستی وارد نمایید",
               icon: "error",

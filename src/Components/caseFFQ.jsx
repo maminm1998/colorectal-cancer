@@ -54,7 +54,7 @@ const questions = [
       .required("وارد کردن شماره تلفن همراه (موبایل) الزامی است")
       .matches(
         /^(09[0-9]{9})$/g,
-        "نکته: شماره 10 رقمی موبایل خود را به درستی وارد نمایید"
+        "نکته: شماره 11 رقمی موبایل خود را به درستی وارد نمایید"
       ),
     placeholder: "تلفن همراه (موبایل) خود را وارد نمایید",
   },
@@ -177,8 +177,8 @@ const questions = [
         label: "1 تا 2 بار در روز",
       },
       {
-        id: "2 تا 3 پیش دستی در روز",
-        label: "2 تا 3 پیش دستی در روز",
+        id: "2 تا 3 بار در روز",
+        label: "2 تا 3 بار در روز",
       },
     ],
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
@@ -1018,10 +1018,6 @@ const questions = [
         label: "5 تا 6 قوطی در هفته",
       },
       {
-        id: "یک قوطی در روز",
-        label: "یک قوطی در روز",
-      },
-      {
         id: "1 تا 2 قوطی در روز",
         label: "1 تا 2 قوطی در روز",
       },
@@ -1628,8 +1624,8 @@ const questions = [
         label: "یک قوطی کبریت در هفته",
       },
       {
-        id: "2 تا 4 قوطی کبریت در هفته",
-        label: "2 تا 4 قوطی کبریت در هفته",
+        id: "2 تا 3 قوطی کبریت در هفته",
+        label: "2 تا 3 قوطی کبریت در هفته",
       },
       {
         id: "5 تا 6 قوطی کبریت در هفته",
@@ -3044,9 +3040,9 @@ const questions = [
   },
   {
     img: "./Image/نان جو رژیمی .jpg",
-    subLabel: " (نان سبوس دار، نان جو و ..)",
-    id: "نان رژیمی",
-    label: "نان رژیمی",
+    subLabel: "",
+    id: "نان رژیمی (نان سبوس دار، نان جو و ..)",
+    label: "نان رژیمی (نان سبوس دار، نان جو و ..)",
     type: "radio",
     options: [
       {
@@ -4921,7 +4917,7 @@ const questions = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
 ];
-const questionType = "caseFFQ";
+const questionType = "caseffq";
 export default function CaseFFQ() {
   let isCompletedBefore = localStorage.getItem(questionType);
   return (
