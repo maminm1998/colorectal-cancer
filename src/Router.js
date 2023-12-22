@@ -4,6 +4,7 @@ import ControlHabit from "./Components/controlHabit";
 import CaseHabit from "./Components/caseHabit";
 import CaseFFQ from "./Components/caseFFQ";
 import ControlFFQ from "./Components/controlFFQ";
+import ExportExcel from "./Components/exportExcel";
 import HomePage from "./Components/homePage";
 
 const Routes = [
@@ -17,6 +18,7 @@ const Routes = [
       { path: "case-habit", element: <CaseHabit /> },
       { path: "case-ffq", element: <CaseFFQ /> },
       { path: "control-ffq", element: <ControlFFQ /> },
+      { path: "export", element: <ExportExcel /> },
     ],
   },
   {
@@ -29,6 +31,7 @@ const Routes = [
       { path: "case-habit", element: <CaseHabit /> },
       { path: "case-ffq", element: <CaseFFQ /> },
       { path: "control-ffq", element: <ControlFFQ /> },
+      { path: "export", element: <ExportExcel /> },
     ],
   },
 ];

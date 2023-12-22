@@ -1,10 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./../App.css";
+import Modal from "./../organism/Modal";
 import swal from "sweetalert";
-
+import { Navigate } from "react-router";
 const DynamicForm = ({ questions, questionType }) => {
+  const [passwordModalOpen, setPasswordModalOpen] = useState(false);
+  const [password, setPassword] = useState("");
+  const [formDisplay, setFormDisplay] = useState(false);
+
   const validationSchema = Yup.object().shape(
     questions.reduce((schema, question) => {
       schema[question.id] = question.validation;
@@ -28,12 +33,15 @@ const DynamicForm = ({ questions, questionType }) => {
       })
         .then((res) => {
           if (res.status === 201) {
-            localStorage.setItem(questions[0].questionType, true);
+            localStorage.setItem(questionType, true);
             swal({
               title: "اطلاعات با موفقیت ثبت شد.",
               icon: "success",
               buttons: "متوجه شدم",
             });
+            setTimeout(() => {
+              <Navigate to="/" />;
+            }, [1000]);
           }
         })
         .catch((e) => {
@@ -52,7 +60,57 @@ const DynamicForm = ({ questions, questionType }) => {
     const question = questions.find((q) => q.id === questionId);
     return question?.type === "radio" && formik.values[questionId] === "other";
   };
+  const handlePasswordSubmit = (e) => {
+    e.preventDefault();
+    if (
+      (questionType == "caseffq" && password === "1") ||
+      (questionType == "casedemographic" && password === "2") ||
+      (questionType == "casehabit" && password === "3") ||
+      (questionType == "controlffq" && password === "4") ||
+      (questionType == "controldemographic" && password === "5") ||
+      (questionType == "controlhabit" && password === "6")
+    ) {
+      setPasswordModalOpen(false);
+      setFormDisplay(true);
+    } else {
+      swal({
+        title: "رمز عبور نادرست می باشد!",
+        icon: "error",
+        buttons: "OK",
+      });
+    }
+  };
 
+  useEffect(() => {
+    // Open password modal when component mounts
+    setPasswordModalOpen(true);
+  }, []);
+
+  if (!formDisplay) {
+    return (
+      <div>
+        <Modal
+          isOpen={passwordModalOpen}
+          onClose={() => setPasswordModalOpen(false)}
+        >
+          <form onSubmit={handlePasswordSubmit}>
+            <input
+              type="password"
+              className="w-full border-2 p-2 rounded-lg"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button
+              type="submit"
+              className="bg-blue-500 w-full p-2 my-2 text-white rounded-lg"
+            >
+              ثبت رمز
+            </button>
+          </form>
+        </Modal>
+      </div>
+    );
+  }
   return (
     <form onSubmit={formik.handleSubmit} className="flex flex-col flex-wrap">
       {questions.map((question, index) => (
@@ -228,9 +286,12 @@ const DynamicForm = ({ questions, questionType }) => {
               buttons: "متوجه شدم",
             });
         }}
-        className="py-2 px-4 bg-blue-500 text-white font-semibold rounded shadow mt-4"
+        disabled={formik.isSubmitting}
+        className={`py-2 px-4 text-white font-semibold rounded shadow mt-4 ${
+          formik.isSubmitting === true ? "bg-blue-200" : "bg-blue-500"
+        }`}
       >
-        ثبت اطلاعات
+        {formik.isSubmitting ? "لطفا چند لحظه صبر کنید" : "ثبت اطلاعات"}
       </button>
     </form>
   );
