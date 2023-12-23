@@ -4,11 +4,13 @@ import * as Yup from "yup";
 import "./../App.css";
 import Modal from "./../organism/Modal";
 import swal from "sweetalert";
-import { Navigate } from "react-router";
+import { useNavigate } from "react-router";
 const DynamicForm = ({ questions, questionType }) => {
+
   const [passwordModalOpen, setPasswordModalOpen] = useState(false);
   const [password, setPassword] = useState("");
   const [formDisplay, setFormDisplay] = useState(false);
+  const navigate = useNavigate();
 
   const validationSchema = Yup.object().shape(
     questions.reduce((schema, question) => {
@@ -23,36 +25,41 @@ const DynamicForm = ({ questions, questionType }) => {
       return values;
     }, {}),
     validationSchema,
-    onSubmit: (values) => {
-      fetch(`https://ffqbackend.liara.run/${questionType}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      })
-        .then((res) => {
-          if (res.status === 201) {
-            localStorage.setItem(questionType, true);
-            swal({
-              title: "اطلاعات با موفقیت ثبت شد.",
-              icon: "success",
-              buttons: "متوجه شدم",
-            });
-            setTimeout(() => {
-              <Navigate to="/" />;
-            }, [1000]);
+    onSubmit: async (values) => {
+      // Use async/await to handle the fetch promise
+      try {
+        const response = await fetch(
+          `http://ffqbackend.liara.run/${questionType}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(values),
           }
-        })
-        .catch((e) => {
+        );
+
+        if (response.status === 201) {
+          localStorage.setItem(questionType, true);
           swal({
-            title:
-              "در ثبت اطلاعات مشکلی وجود دارد لطفا با شماره 09981110126 تماس بگیرید؛ با تشکر از شما",
-            icon: "error",
+            title: "اطلاعات با موفقیت ثبت شد.",
+            icon: "success",
             buttons: "متوجه شدم",
           });
-          console.log("e:", e);
+          setTimeout(() => {
+            navigate("/"); // Use navigate to go to the home page after a delay
+          }, 1000);
+        }
+      } catch (error) {
+        // Handle any fetch errors or rejections
+        swal({
+          title:
+            "در ثبت اطلاعات مشکلی وجود دارد لطفا با شماره 09981110126 تماس بگیرید؛ با تشکر از شما",
+          icon: "error",
+          buttons: "متوجه شدم",
         });
+        console.log("Error:", error);
+      }
     },
   });
 
@@ -60,15 +67,16 @@ const DynamicForm = ({ questions, questionType }) => {
     const question = questions.find((q) => q.id === questionId);
     return question?.type === "radio" && formik.values[questionId] === "other";
   };
+
   const handlePasswordSubmit = (e) => {
     e.preventDefault();
     if (
-      (questionType == "caseffq" && password === "1") ||
-      (questionType == "casedemographic" && password === "2") ||
-      (questionType == "casehabit" && password === "3") ||
-      (questionType == "controlffq" && password === "4") ||
-      (questionType == "controldemographic" && password === "5") ||
-      (questionType == "controlhabit" && password === "6")
+      (questionType === "caseffq" && password === "1") ||
+      (questionType === "casedemographic" && password === "2") ||
+      (questionType === "casehabit" && password === "3") ||
+      (questionType === "controlffq" && password === "4") ||
+      (questionType === "controldemographic" && password === "5") ||
+      (questionType === "controlhabit" && password === "6")
     ) {
       setPasswordModalOpen(false);
       setFormDisplay(true);
@@ -82,7 +90,6 @@ const DynamicForm = ({ questions, questionType }) => {
   };
 
   useEffect(() => {
-    // Open password modal when component mounts
     setPasswordModalOpen(true);
   }, []);
 

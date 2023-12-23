@@ -21,6 +21,7 @@ export default function ExportExcel() {
       if (response.ok) {
         const jsonData = await response.json();
         setFetchedData(jsonData);
+        downloadExcel();
       } else {
         console.log("Error fetching data:", response.status);
         // Handle error, e.g., show a message to the user
@@ -60,7 +61,7 @@ export default function ExportExcel() {
       const worksheet = XLSX.utils.json_to_sheet(fetchedData);
       const workbook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
-      XLSX.writeFile(workbook, "data.xlsx");
+      XLSX.writeFile(workbook, `data.xlsx`);
     }
   };
   const handlePasswordSubmit = (e) => {
@@ -114,7 +115,6 @@ export default function ExportExcel() {
         <button
           onClick={() => {
             handleButtonClick("caseDemographic");
-            downloadExcel();
           }}
           disabled={buttonsDisabled}
           className={`text-white bg-blue-500 w-full mx-2 text-center max-lg:my-2 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-500 focus:outline-none dark:focus:ring-blue-800 ${
@@ -126,7 +126,6 @@ export default function ExportExcel() {
         <button
           onClick={() => {
             handleButtonClick("controlDemographic");
-            downloadExcel();
           }}
           disabled={buttonsDisabled}
           className={`text-white bg-blue-500 w-full mx-2 text-center max-lg:my-2 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-500 focus:outline-none dark:focus:ring-blue-800 ${
@@ -138,7 +137,6 @@ export default function ExportExcel() {
         <button
           onClick={() => {
             handleButtonClick("caseffq");
-            downloadExcel();
           }}
           disabled={buttonsDisabled}
           className={`text-white bg-blue-500 w-full mx-2 text-center max-lg:my-2 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-500 focus:outline-none dark:focus:ring-blue-800 ${
@@ -150,7 +148,6 @@ export default function ExportExcel() {
         <button
           onClick={() => {
             handleButtonClick("controlffq");
-            downloadExcel();
           }}
           disabled={buttonsDisabled}
           className={`text-white bg-blue-500 w-full mx-2 text-center max-lg:my-2 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-500 focus:outline-none dark:focus:ring-blue-800 ${
@@ -162,7 +159,6 @@ export default function ExportExcel() {
         <button
           onClick={() => {
             handleButtonClick("casehabit");
-            downloadExcel();
           }}
           disabled={buttonsDisabled}
           className={`text-white bg-blue-500 w-full mx-2 text-center max-lg:my-2 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-500 focus:outline-none dark:focus:ring-blue-800 ${
@@ -174,7 +170,6 @@ export default function ExportExcel() {
         <button
           onClick={() => {
             handleButtonClick("controlhabit");
-            downloadExcel();
           }}
           disabled={buttonsDisabled}
           className={`text-white bg-blue-500 w-full mx-2 text-center max-lg:my-2 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-500 focus:outline-none dark:focus:ring-blue-800 ${

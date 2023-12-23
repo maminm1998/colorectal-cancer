@@ -4,8 +4,10 @@ import * as Yup from "yup";
 import "./../App.css";
 import Modal from "./../organism/Modal";
 import swal from "sweetalert";
-import { Navigate } from "react-router";
+import { useNavigate } from "react-router";
+
 const DynamicForm = ({ questions, questionType }) => {
+  const navigate = useNavigate();
   const [passwordModalOpen, setPasswordModalOpen] = useState(false);
   const [password, setPassword] = useState("");
   const [formDisplay, setFormDisplay] = useState(false);
@@ -23,36 +25,41 @@ const DynamicForm = ({ questions, questionType }) => {
       return values;
     }, {}),
     validationSchema,
-    onSubmit: (values) => {
-      fetch(`http://ffqbackend.liara.run/${questionType}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      })
-        .then((res) => {
-          if (res.status === 201) {
-            localStorage.setItem(questionType, true);
-            swal({
-              title: "اطلاعات با موفقیت ثبت شد.",
-              icon: "success",
-              buttons: "متوجه شدم",
-            });
-            setTimeout(() => {
-              <Navigate to="/" />;
-            }, [1000]);
+    onSubmit: async (values) => {
+      // Use async/await to handle the fetch promise
+      try {
+        const response = await fetch(
+          `http://ffqbackend.liara.run/${questionType}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(values),
           }
-        })
-        .catch((e) => {
+        );
+
+        if (response.status === 201) {
+          localStorage.setItem(questionType, true);
           swal({
-            title:
-              "در ثبت اطلاعات مشکلی وجود دارد لطفا با شماره 09981110126 تماس بگیرید؛ با تشکر از شما",
-            icon: "error",
+            title: "اطلاعات با موفقیت ثبت شد.",
+            icon: "success",
             buttons: "متوجه شدم",
           });
-          console.log("e:", e);
+          setTimeout(() => {
+            navigate("/"); // Use navigate to go to the home page after a delay
+          }, 1000);
+        }
+      } catch (error) {
+        // Handle any fetch errors or rejections
+        swal({
+          title:
+            "در ثبت اطلاعات مشکلی وجود دارد لطفا با شماره 09981110126 تماس بگیرید؛ با تشکر از شما",
+          icon: "error",
+          buttons: "متوجه شدم",
         });
+        console.log("Error:", error);
+      }
     },
   });
 
@@ -126,8 +133,9 @@ const DynamicForm = ({ questions, questionType }) => {
           {question.img && question.img.length > 0 ? (
             <img
               src={question.img}
+              loading="lazy"
               className="w-24 h-20 rounded-lg border-blue-500 border-4 ml-2"
-              alt="تصویر"
+              alt={`تصویر ${question.label}`}
             />
           ) : (
             <></>
