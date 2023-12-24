@@ -6,7 +6,6 @@ import Modal from "./../organism/Modal";
 import swal from "sweetalert";
 import { useNavigate } from "react-router";
 const DynamicForm = ({ questions, questionType }) => {
-
   const [passwordModalOpen, setPasswordModalOpen] = useState(false);
   const [password, setPassword] = useState("");
   const [formDisplay, setFormDisplay] = useState(false);
@@ -29,7 +28,7 @@ const DynamicForm = ({ questions, questionType }) => {
       // Use async/await to handle the fetch promise
       try {
         const response = await fetch(
-          `http://ffqbackend.liara.run/${questionType}`,
+          `https://ffqbackend.liara.run/${questionType}`,
           {
             method: "POST",
             headers: {
@@ -286,7 +285,6 @@ const DynamicForm = ({ questions, questionType }) => {
         type="submit"
         onClick={() => {
           formik.errors &&
-            formik.errors.length > 0 &&
             swal({
               title: "لطفا تمامی آیتم ها را به درستی وارد نمایید",
               icon: "error",

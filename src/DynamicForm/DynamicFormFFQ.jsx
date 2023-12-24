@@ -29,7 +29,7 @@ const DynamicForm = ({ questions, questionType }) => {
       // Use async/await to handle the fetch promise
       try {
         const response = await fetch(
-          `http://ffqbackend.liara.run/${questionType}`,
+          `https://ffqbackend.liara.run/${questionType}`,
           {
             method: "POST",
             headers: {
