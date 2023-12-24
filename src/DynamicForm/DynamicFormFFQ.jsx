@@ -70,12 +70,12 @@ const DynamicForm = ({ questions, questionType }) => {
   const handlePasswordSubmit = (e) => {
     e.preventDefault();
     if (
-      (questionType == "caseffq" && password === "1") ||
-      (questionType == "casedemographic" && password === "2") ||
-      (questionType == "casehabit" && password === "3") ||
-      (questionType == "controlffq" && password === "4") ||
-      (questionType == "controldemographic" && password === "5") ||
-      (questionType == "controlhabit" && password === "6")
+      (questionType === "caseffq" && password === "1") ||
+      (questionType === "casedemographic" && password === "2") ||
+      (questionType === "casehabit" && password === "3") ||
+      (questionType === "controlffq" && password === "4") ||
+      (questionType === "controldemographic" && password === "5") ||
+      (questionType === "controlhabit" && password === "6")
     ) {
       setPasswordModalOpen(false);
       setFormDisplay(true);
@@ -290,7 +290,6 @@ const DynamicForm = ({ questions, questionType }) => {
         type="submit"
         onClick={() => {
           formik.errors &&
-            formik.errors.length > 0 &&
             swal({
               title: "لطفا تمامی آیتم ها را به درستی وارد نمایید",
               icon: "error",
