@@ -1,22 +1,51 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./../App.css";
 import Modal from "./../organism/Modal";
 import swal from "sweetalert";
 import { useNavigate } from "react-router";
+import TimePicker from "react-time-picker";
+
 const DynamicForm = ({ questions, questionType }) => {
   const [passwordModalOpen, setPasswordModalOpen] = useState(false);
   const [password, setPassword] = useState("");
   const [formDisplay, setFormDisplay] = useState(false);
+  const [selectedOptions, setSelectedOptions] = useState({});
   const navigate = useNavigate();
+  const [shouldScrollToError, setShouldScrollToError] = useState(false);
+  const firstErrorFieldRef = useRef(null);
 
   const validationSchema = Yup.object().shape(
     questions.reduce((schema, question) => {
       schema[question.id] = question.validation;
+
+      // Add custom validation for "تلفن همراه جایگزین"
+      if (question.id === "تلفن همراه جایگزین") {
+        schema[question.id] = schema[question.id].test({
+          name: "notEqual",
+          message:
+            "شماره تلفن همراه جایگزین نمی تواند با تلفن همراه (موبایل) یکسان باشد؛ لطفا شماره دیگری وارد کنید.",
+          test: function (value) {
+            // Access the values of other fields using `this.parent`
+            const mobileNumber = this.parent["تلفن همراه (موبایل) :"];
+            return value != mobileNumber;
+          },
+        });
+      }
+
       return schema;
     }, {})
   );
+  const handleTimePickerChange = (questionId, value) => {
+    // Custom logic to update formik values
+    formik.setFieldValue(questionId, value);
+  };
+
+  const handleTimePickerBlur = (questionId) => {
+    // Prevent onBlur from resetting the value
+    formik.setFieldTouched(questionId, true);
+  };
 
   const formik = useFormik({
     initialValues: questions.reduce((values, question) => {
@@ -67,6 +96,39 @@ const DynamicForm = ({ questions, questionType }) => {
     return question?.type === "radio" && formik.values[questionId] === "other";
   };
 
+  const handleCheckboxChange = (questionId, optionId) => {
+    setSelectedOptions((prevSelectedOptions) => {
+      const selectedOptionsForQuestion = prevSelectedOptions[questionId] || [];
+
+      // If the "هیچکدام" option is selected, unselect all other options
+      const updatedOptions =
+        optionId === "هیچکدام"
+          ? selectedOptionsForQuestion.includes("هیچکدام")
+            ? []
+            : [optionId]
+          : selectedOptionsForQuestion.includes("هیچکدام")
+          ? [optionId]
+          : selectedOptionsForQuestion.includes(optionId)
+          ? selectedOptionsForQuestion.filter(
+              (selectedOption) => selectedOption !== optionId
+            )
+          : [...selectedOptionsForQuestion, optionId];
+
+      // Update Formik state
+      formik.handleChange({
+        target: {
+          name: questionId,
+          value: updatedOptions,
+        },
+      });
+
+      return {
+        ...prevSelectedOptions,
+        [questionId]: updatedOptions,
+      };
+    });
+  };
+
   const handlePasswordSubmit = (e) => {
     e.preventDefault();
     if (
@@ -75,7 +137,13 @@ const DynamicForm = ({ questions, questionType }) => {
       (questionType === "casehabit" && password === "3") ||
       (questionType === "controlffq" && password === "4") ||
       (questionType === "controldemographic" && password === "5") ||
-      (questionType === "controlhabit" && password === "6")
+      (questionType === "controlhabit" && password === "6") ||
+      (questionType === "abadancaseffq" && password === "1") ||
+      (questionType === "abadancasedemographic" && password === "2") ||
+      (questionType === "abadancasehabit" && password === "3") ||
+      (questionType === "abadancontrolffq" && password === "4") ||
+      (questionType === "abadancontroldemographic" && password === "5") ||
+      (questionType === "abadancontrolhabit" && password === "6")
     ) {
       setPasswordModalOpen(false);
       setFormDisplay(true);
@@ -91,6 +159,12 @@ const DynamicForm = ({ questions, questionType }) => {
   useEffect(() => {
     setPasswordModalOpen(true);
   }, []);
+  useEffect(() => {
+    if (shouldScrollToError && firstErrorFieldRef.current) {
+      firstErrorFieldRef.current.scrollIntoView({ behavior: "smooth" });
+      setShouldScrollToError(false); // Set shouldScrollToError to false after initial scroll
+    }
+  }, [formik.errors, formik.values, firstErrorFieldRef, shouldScrollToError]);
 
   if (!formDisplay) {
     return (
@@ -117,6 +191,7 @@ const DynamicForm = ({ questions, questionType }) => {
       </div>
     );
   }
+
   return (
     <form onSubmit={formik.handleSubmit} className="flex flex-col flex-wrap">
       {questions.map((question, index) => (
@@ -127,16 +202,36 @@ const DynamicForm = ({ questions, questionType }) => {
               question.label.length > 35 &&
               question.type === "text"
                 ? "flex-col !items-start !justify-start text-right"
-                : "items-center"
+                : ""
             } ${
               question.type === "text"
-                ? "justify-start max-md:justify-center my-1 md:mx-1"
+                ? "justify-start max-md:justify-center my-1 md:mx-1 items-center"
+                : ""
+            } ${
+              question.label &&
+              question.label.length > 50 &&
+              question.type === "number"
+                ? "flex-col !items-start !justify-start text-right"
+                : ""
+            } ${
+              question.type === "number"
+                ? "justify-start max-md:justify-center my-1 md:mx-1 items-start"
+                : ""
+            }
+            ${
+              question.label &&
+              question.label.length > 50 &&
+              question.type === "time"
+                ? "flex-col !items-start !justify-start text-right"
+                : ""
+            } ${
+              question.type === "time"
+                ? "justify-start max-md:justify-center my-1 md:mx-1 items-start"
                 : ""
             } md:mx-1 w-full`}
           >
-            {question.label ? (
-              <p
-                className={`md:mx-1
+            <p
+              className={`md:mx-1
               ${
                 question.label &&
                 question.label.length > 35 &&
@@ -144,36 +239,36 @@ const DynamicForm = ({ questions, questionType }) => {
                   ? "!w-[100] mt-4"
                   : ""
               } ${
-                  question.type === "text" &&
-                  question.label &&
-                  question.label.length < 35
-                    ? "!w-[10%] text-right max-md:text-right max-md:w-[30%]"
-                    : ""
-                }`}
-              >
-                {`${index + 1}.`} {question.label}
-                <span
-                  className={`text-gray-400 ${
-                    question.type === "text"
-                      ? "block"
-                      : question.type === "checkbox"
-                      ? "block"
-                      : ""
-                  }`}
-                >
-                  {question.subLabel}
-                </span>
-              </p>
-            ) : (
-              <></>
-            )}
-
+                question.type === "text" && question.label.length < 35
+                  ? "!w-[10%] text-right max-md:text-right max-md:w-[30%]"
+                  : ""
+              } ${
+                question.label &&
+                question.label.length > 35 &&
+                question.type === "number"
+                  ? "!w-[100] mt-4"
+                  : ""
+              } ${
+                question.type === "number" && question.label.length < 35
+                  ? "!w-[10%] text-right max-md:text-right max-md:w-[30%]"
+                  : ""
+              }`}
+            >
+              {question.label}
+              <p className="text-gray-400">{question.subLabel}</p>
+            </p>
             {question.type === "text" && (
               <div
                 className={`md:w-[50%]  ${
                   question.label &&
                   question.label.length > 35 &&
                   question.type === "text"
+                    ? "max-md:w-[100%] mt-2"
+                    : "max-md:w-[60%]"
+                } ${
+                  question.label &&
+                  question.label.length > 35 &&
+                  question.type === "number"
                     ? "max-md:w-[100%] mt-2"
                     : "max-md:w-[60%]"
                 }`}
@@ -184,6 +279,11 @@ const DynamicForm = ({ questions, questionType }) => {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values[question.id] || ""}
+                  ref={
+                    Object.keys(formik.errors)[0] === question.id
+                      ? firstErrorFieldRef
+                      : null
+                  }
                   placeholder={question.placeholder}
                   className={`w-full rounded-md p-2 max-sm:placeholder:!text-[13px] max-sm:placeholder:!font-extrabold border-gray-300 border-[1px] ${
                     question.label &&
@@ -192,6 +292,79 @@ const DynamicForm = ({ questions, questionType }) => {
                       ? ""
                       : ""
                   }`}
+                />
+                {formik.touched[question.id] && formik.errors[question.id] && (
+                  <div className="text-red-500 mt-1">
+                    {formik.errors[question.id]}
+                  </div>
+                )}
+              </div>
+            )}
+            {question.type === "number" && (
+              <div
+                className={`md:w-[50%]  ${
+                  question.label &&
+                  question.label.length > 35 &&
+                  question.type === "number"
+                    ? "max-md:w-[100%] mt-2"
+                    : "max-md:w-[60%]"
+                }`}
+              >
+                <input
+                  type="number"
+                  name={question.id}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values[question.id] || ""}
+                  ref={
+                    Object.keys(formik.errors)[0] === question.id
+                      ? firstErrorFieldRef
+                      : null
+                  }
+                  placeholder={question.placeholder}
+                  className={`w-full rounded-md p-2 max-sm:placeholder:!text-[13px] max-sm:placeholder:!font-extrabold border-gray-300 border-[1px] ${
+                    question.label &&
+                    question.label.length > 35 &&
+                    question.type === "number"
+                      ? ""
+                      : ""
+                  }`}
+                />
+                {formik.touched[question.id] && formik.errors[question.id] && (
+                  <div className="text-red-500 mt-1">
+                    {formik.errors[question.id]}
+                  </div>
+                )}
+              </div>
+            )}
+            {question.type === "time" && (
+              <div
+                className={`md:w-[50%] ${
+                  question.label &&
+                  question.label.length > 35 &&
+                  question.type === "time"
+                    ? "max-md:w-[100%] mt-2"
+                    : "max-md:w-[60%]"
+                }`}
+              >
+                <TimePicker
+                  name={question.id}
+                  onChange={(value) =>
+                    handleTimePickerChange(question.id, value)
+                  }
+                  onBlur={() => handleTimePickerBlur(question.id)}
+                  value={formik.values[question.id] || ""}
+                  ref={
+                    Object.keys(formik.errors)[0] === question.id
+                      ? firstErrorFieldRef
+                      : null
+                  }
+                  format="HH:mm"
+                  clearIcon={null}
+                  clockIcon={null}
+                  hourPlaceholder="ساعت را اینجا وارد کنید"
+                  minutePlaceholder="دقیقه را اینجا وارد کنید"
+                  className="w-full rounded-md p-2 max-sm:placeholder:!text-[13px] max-sm:placeholder:!font-extrabold" // Added the custom class 'time-picker-full-width'
                 />
                 {formik.touched[question.id] && formik.errors[question.id] && (
                   <div className="text-red-500 mt-1">
@@ -218,6 +391,11 @@ const DynamicForm = ({ questions, questionType }) => {
                     value={option.id}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
+                    ref={
+                      Object.keys(formik.errors)[0] === question.id
+                        ? firstErrorFieldRef
+                        : null
+                    }
                     checked={formik.values[question.id] === option.id}
                     className="mr-2  w-4 h-4 cursor-pointer checked:border-blue-500 checked:border-2"
                   />
@@ -232,6 +410,11 @@ const DynamicForm = ({ questions, questionType }) => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values[`${question.id}-other`] || ""}
+                    ref={
+                      Object.keys(formik.errors)[0] === question.id
+                        ? firstErrorFieldRef
+                        : null
+                    }
                     placeholder="Please specify..."
                     className="input-style"
                   />
@@ -261,11 +444,11 @@ const DynamicForm = ({ questions, questionType }) => {
                     type="checkbox"
                     name={question.id}
                     value={option.id}
-                    onChange={formik.handleChange}
+                    onChange={() =>
+                      handleCheckboxChange(question.id, option.id)
+                    }
                     onBlur={formik.handleBlur}
-                    checked={(formik.values[question.id] || []).includes(
-                      option.id
-                    )}
+                    checked={selectedOptions[question.id]?.includes(option.id)}
                     className="mr-3 ml-1 w-4 h-4 cursor-pointer"
                   />
                   <span className="text-sm">{option.label}</span>
@@ -282,14 +465,61 @@ const DynamicForm = ({ questions, questionType }) => {
       ))}
 
       <button
-        type="submit"
+        type="submit" // Change the type to "button" to prevent automatic form submission
         onClick={() => {
-          formik.errors &&
+          if (Object.keys(formik.errors).length > 0) {
+            setShouldScrollToError(true);
+            // Extract question labels with validation errors, excluding specific labels
+            const excludedLabels = ["Label1", "Label2"]; // Specify the labels to be excluded
+            const errorLabels = Object.keys(formik.errors)
+              .map((errorKey) => {
+                const question = questions.find(
+                  (question) => question.id === errorKey
+                );
+                return question && !excludedLabels.includes(question.label)
+                  ? question.label
+                  : "";
+              })
+              .filter((label) => label !== "");
+
+            // Construct the custom error message
+            const errorMessageHTML = errorLabels
+              .map(
+                (message) =>
+                  `<div style="font-size: 20px; color: black;">${message}</div>`
+              )
+              .join("");
+
+            // Display the custom error message in Swal with red title
             swal({
-              title: "لطفا تمامی آیتم ها را به درستی وارد نمایید",
+              title: "خطا در ثبت اطلاعات، لطفا موارد زیر به درستی وارد نمایید:",
+              content: {
+                element: "div",
+                attributes: {
+                  innerHTML: errorMessageHTML,
+                },
+              },
               icon: "error",
               buttons: "متوجه شدم",
+            }).then(() => {
+              const firstErrorField = Object.keys(formik.errors)[0];
+              if (
+                firstErrorField &&
+                formik.errors[firstErrorField] &&
+                formik.touched[firstErrorField]
+              ) {
+                const errorField = document.getElementsByName(firstErrorField);
+                if (errorField.length > 0) {
+                  errorField[0].scrollIntoView({
+                    behavior: "smooth",
+                    block: "center",
+                  });
+                }
+              }
             });
+          } else {
+            formik.handleSubmit(); // Manually trigger form submission if there are no errors
+          }
         }}
         disabled={formik.isSubmitting}
         className={`py-2 px-4 text-white font-semibold rounded shadow mt-4 ${

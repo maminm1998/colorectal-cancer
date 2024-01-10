@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./../App.css";
@@ -7,18 +7,47 @@ import swal from "sweetalert";
 import { useNavigate } from "react-router";
 
 const DynamicForm = ({ questions, questionType }) => {
-  const navigate = useNavigate();
   const [passwordModalOpen, setPasswordModalOpen] = useState(false);
   const [password, setPassword] = useState("");
   const [formDisplay, setFormDisplay] = useState(false);
+  const navigate = useNavigate();
+  const [shouldScrollToError, setShouldScrollToError] = useState(false);
+  const firstErrorFieldRef = useRef(null);
 
   const validationSchema = Yup.object().shape(
     questions.reduce((schema, question) => {
       schema[question.id] = question.validation;
+
+      // Add custom validation for "تلفن همراه جایگزین"
+      if (question.id === "تلفن همراه جایگزین") {
+        schema[question.id] = schema[question.id].test({
+          name: "notEqual",
+          message:
+            "شماره تلفن همراه جایگزین نمی تواند با تلفن همراه (موبایل) یکسان باشد؛ لطفا شماره دیگری وارد کنید.",
+          test: function (value) {
+            // Access the values of other fields using `this.parent`
+            const mobileNumber = this.parent["تلفن همراه (موبایل) :"];
+            return value != mobileNumber;
+          },
+        });
+      }
+
       return schema;
     }, {})
   );
-  useEffect(() => {}, []);
+
+  const handleImageClick = (imageUrl) => {
+    swal({
+      content: {
+        element: "div",
+        attributes: {
+          innerHTML: `<img src="${imageUrl}" style="max-width: 100%; height: auto;" />`,
+        },
+      },
+      buttons: "بستن تصویر",
+    });
+  };
+
   const formik = useFormik({
     initialValues: questions.reduce((values, question) => {
       values[question.id] = "";
@@ -75,7 +104,13 @@ const DynamicForm = ({ questions, questionType }) => {
       (questionType === "casehabit" && password === "3") ||
       (questionType === "controlffq" && password === "4") ||
       (questionType === "controldemographic" && password === "5") ||
-      (questionType === "controlhabit" && password === "6")
+      (questionType === "controlhabit" && password === "6") ||
+      (questionType === "abadancaseffq" && password === "1") ||
+      (questionType === "abadancasedemographic" && password === "2") ||
+      (questionType === "abadancasehabit" && password === "3") ||
+      (questionType === "abadancontrolffq" && password === "4") ||
+      (questionType === "abadancontroldemographic" && password === "5") ||
+      (questionType === "abadancontrolhabit" && password === "6")
     ) {
       setPasswordModalOpen(false);
       setFormDisplay(true);
@@ -92,6 +127,13 @@ const DynamicForm = ({ questions, questionType }) => {
     // Open password modal when component mounts
     setPasswordModalOpen(true);
   }, []);
+
+  useEffect(() => {
+    if (shouldScrollToError && firstErrorFieldRef.current) {
+      firstErrorFieldRef.current.scrollIntoView({ behavior: "smooth" });
+      setShouldScrollToError(false); // Set shouldScrollToError to false after initial scroll
+    }
+  }, [formik.errors, formik.values, firstErrorFieldRef, shouldScrollToError]);
 
   if (!formDisplay) {
     return (
@@ -134,8 +176,9 @@ const DynamicForm = ({ questions, questionType }) => {
             <img
               src={question.img}
               loading="lazy"
-              className="w-24 h-20 rounded-lg border-blue-500 border-4 ml-2"
+              className="w-24 h-20 rounded-lg cursor-pointer border-blue-500 border-4 ml-2"
               alt={`تصویر ${question.label}`}
+              onClick={() => handleImageClick(question.img)}
             />
           ) : (
             <></>
@@ -152,6 +195,16 @@ const DynamicForm = ({ questions, questionType }) => {
                 question.type === "text"
                   ? "justify-start max-md:justify-center my-1 md:mx-1 items-center"
                   : ""
+              } ${
+                question.label &&
+                question.label.length > 35 &&
+                question.type === "number"
+                  ? "flex-col !items-start !justify-start text-right"
+                  : ""
+              } ${
+                question.type === "number"
+                  ? "justify-start max-md:justify-center my-1 md:mx-1 items-center"
+                  : ""
               } md:mx-1 w-full`}
             >
               <p
@@ -164,6 +217,16 @@ const DynamicForm = ({ questions, questionType }) => {
                   : ""
               } ${
                   question.type === "text" && question.label.length < 35
+                    ? "!w-[10%] text-right max-md:text-right max-md:w-[30%]"
+                    : ""
+                } ${
+                  question.label &&
+                  question.label.length > 35 &&
+                  question.type === "number"
+                    ? "!w-[100] mt-4"
+                    : ""
+                } ${
+                  question.type === "number" && question.label.length < 35
                     ? "!w-[10%] text-right max-md:text-right max-md:w-[30%]"
                     : ""
                 }`}
@@ -179,6 +242,12 @@ const DynamicForm = ({ questions, questionType }) => {
                     question.type === "text"
                       ? "max-md:w-[100%] mt-2"
                       : "max-md:w-[60%]"
+                  } ${
+                    question.label &&
+                    question.label.length > 35 &&
+                    question.type === "number"
+                      ? "max-md:w-[100%] mt-2"
+                      : "max-md:w-[60%]"
                   }`}
                 >
                   <input
@@ -187,11 +256,54 @@ const DynamicForm = ({ questions, questionType }) => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values[question.id] || ""}
+                    ref={
+                      Object.keys(formik.errors)[0] === question.id
+                        ? firstErrorFieldRef
+                        : null
+                    }
                     placeholder={question.placeholder}
                     className={`w-full rounded-md p-2 max-sm:placeholder:!text-[13px] max-sm:placeholder:!font-extrabold border-gray-300 border-[1px] ${
                       question.label &&
                       question.label.length > 35 &&
                       question.type === "text"
+                        ? ""
+                        : ""
+                    }`}
+                  />
+                  {formik.touched[question.id] &&
+                    formik.errors[question.id] && (
+                      <div className="text-red-500 mt-1">
+                        {formik.errors[question.id]}
+                      </div>
+                    )}
+                </div>
+              )}
+              {question.type === "number" && (
+                <div
+                  className={`md:w-[50%]  ${
+                    question.label &&
+                    question.label.length > 35 &&
+                    question.type === "number"
+                      ? "max-md:w-[100%] mt-2"
+                      : "max-md:w-[60%]"
+                  }`}
+                >
+                  <input
+                    type="number"
+                    name={question.id}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values[question.id] || ""}
+                    ref={
+                      Object.keys(formik.errors)[0] === question.id
+                        ? firstErrorFieldRef
+                        : null
+                    }
+                    placeholder={question.placeholder}
+                    className={`w-full rounded-md p-2 max-sm:placeholder:!text-[13px] max-sm:placeholder:!font-extrabold border-gray-300 border-[1px] ${
+                      question.label &&
+                      question.label.length > 35 &&
+                      question.type === "number"
                         ? ""
                         : ""
                     }`}
@@ -222,6 +334,11 @@ const DynamicForm = ({ questions, questionType }) => {
                       value={option.id}
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
+                      ref={
+                        Object.keys(formik.errors)[0] === question.id
+                          ? firstErrorFieldRef
+                          : null
+                      }
                       checked={formik.values[question.id] === option.id}
                       className="mr-2  w-4 h-4 cursor-pointer checked:border-blue-500 checked:border-2"
                     />
@@ -236,6 +353,11 @@ const DynamicForm = ({ questions, questionType }) => {
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                       value={formik.values[`${question.id}-other`] || ""}
+                      ref={
+                        Object.keys(formik.errors)[0] === question.id
+                          ? firstErrorFieldRef
+                          : null
+                      }
                       placeholder="Please specify..."
                       className="input-style"
                     />
@@ -267,6 +389,11 @@ const DynamicForm = ({ questions, questionType }) => {
                       value={option.id}
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
+                      ref={
+                        Object.keys(formik.errors)[0] === question.id
+                          ? firstErrorFieldRef
+                          : null
+                      }
                       checked={(formik.values[question.id] || []).includes(
                         option.id
                       )}
@@ -287,14 +414,61 @@ const DynamicForm = ({ questions, questionType }) => {
       ))}
 
       <button
-        type="submit"
+        type="submit" // Change the type to "button" to prevent automatic form submission
         onClick={() => {
-          formik.errors &&
+          if (Object.keys(formik.errors).length > 0) {
+            setShouldScrollToError(true);
+            // Extract question labels with validation errors, excluding specific labels
+            const excludedLabels = ["Label1", "Label2"]; // Specify the labels to be excluded
+            const errorLabels = Object.keys(formik.errors)
+              .map((errorKey) => {
+                const question = questions.find(
+                  (question) => question.id === errorKey
+                );
+                return question && !excludedLabels.includes(question.label)
+                  ? question.label
+                  : "";
+              })
+              .filter((label) => label !== "");
+
+            // Construct the custom error message
+            const errorMessageHTML = errorLabels
+              .map(
+                (message) =>
+                  `<div style="font-size: 20px; color: black;">${message}</div>`
+              )
+              .join("");
+
+            // Display the custom error message in Swal with red title
             swal({
-              title: "لطفا تمامی آیتم ها را به درستی وارد نمایید",
+              title: "خطا در ثبت اطلاعات، لطفا موارد زیر به درستی وارد نمایید:",
+              content: {
+                element: "div",
+                attributes: {
+                  innerHTML: errorMessageHTML,
+                },
+              },
               icon: "error",
               buttons: "متوجه شدم",
+            }).then(() => {
+              const firstErrorField = Object.keys(formik.errors)[0];
+              if (
+                firstErrorField &&
+                formik.errors[firstErrorField] &&
+                formik.touched[firstErrorField]
+              ) {
+                const errorField = document.getElementsByName(firstErrorField);
+                if (errorField.length > 0) {
+                  errorField[0].scrollIntoView({
+                    behavior: "smooth",
+                    block: "center",
+                  });
+                }
+              }
             });
+          } else {
+            formik.handleSubmit(); // Manually trigger form submission if there are no errors
+          }
         }}
         disabled={formik.isSubmitting}
         className={`py-2 px-4 text-white font-semibold rounded shadow mt-4 ${

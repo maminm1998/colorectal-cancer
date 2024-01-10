@@ -1,11 +1,10 @@
 import React from "react";
-import DynamicForm from "../DynamicForm/DynamicForm";
-import { Habit } from "./question";
+import DynamicFormFFQ from "../../DynamicForm/DynamicFormFFQ";
+import { ISFAHANFFQ } from "../question";
 import swal from "sweetalert";
 
-const questionType = "controlhabit";
-
-export default function ControlHabit() {
+const questionType = "caseffq";
+export default function CaseFFQ() {
   let isCompletedBefore = localStorage.getItem(questionType);
   return (
     <>
@@ -18,9 +17,9 @@ export default function ControlHabit() {
       ) : (
         <div className="border-2 my-1 border-blue-500 rounded-lg w-[95%] m-auto">
           <div className="bg-blue-500 rounded-t-lg p-2 text-white font-bold text-xl">
-            پرسشنامه
+            پرسشنامه (برای بزرگنمایی تصاویر بر روی خود تصویر کلیک کنید)
           </div>
-          <DynamicForm questionType={questionType} questions={Habit} />
+          <DynamicFormFFQ questionType={questionType} questions={ISFAHANFFQ} />
         </div>
       )}
     </>

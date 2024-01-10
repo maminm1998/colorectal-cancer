@@ -1,11 +1,11 @@
 import React from "react";
-import DynamicForm from "../DynamicForm/DynamicForm";
-import {Habit} from "./question";
+import DynamicForm from "../../DynamicForm/DynamicForm";
+import { Habit } from "../question";
 import swal from "sweetalert";
 
-const questionType = "casehabit";
+const questionType = "controlhabit";
 
-export default function CaseHabit() {
+export default function ControlHabit() {
   let isCompletedBefore = localStorage.getItem(questionType);
   return (
     <>

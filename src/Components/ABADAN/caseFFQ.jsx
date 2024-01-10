@@ -1,9 +1,9 @@
 import React from "react";
-import DynamicFormFFQ from "../DynamicForm/DynamicFormFFQ";
-import { FFQ } from "./question";
+import DynamicFormFFQ from "../../DynamicForm/DynamicFormFFQ";
+import { ABADANFFQ } from "../abadanFFQ.js";
 import swal from "sweetalert";
 
-const questionType = "caseffq";
+const questionType = "abadancaseffq";
 export default function CaseFFQ() {
   let isCompletedBefore = localStorage.getItem(questionType);
   return (
@@ -17,9 +17,9 @@ export default function CaseFFQ() {
       ) : (
         <div className="border-2 my-1 border-blue-500 rounded-lg w-[95%] m-auto">
           <div className="bg-blue-500 rounded-t-lg p-2 text-white font-bold text-xl">
-            پرسشنامه
+            پرسشنامه (برای بزرگنمایی تصاویر بر روی خود تصویر کلیک کنید)
           </div>
-          <DynamicFormFFQ questionType={questionType} questions={FFQ} />
+          <DynamicFormFFQ questionType={questionType} questions={ABADANFFQ} />
         </div>
       )}
     </>

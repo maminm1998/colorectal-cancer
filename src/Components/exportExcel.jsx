@@ -121,7 +121,7 @@ export default function ExportExcel() {
             buttonsDisabled === true ? "cursor-not-allowed" : "cursor-pointer"
           }`}
         >
-          Case Demographic
+          Isfahan Case Demographic
         </button>
         <button
           onClick={() => {
@@ -132,7 +132,7 @@ export default function ExportExcel() {
             buttonsDisabled === true ? "cursor-not-allowed" : "cursor-pointer"
           }`}
         >
-          Control Demographic
+          Isfahan Control Demographic
         </button>
         <button
           onClick={() => {
@@ -143,7 +143,7 @@ export default function ExportExcel() {
             buttonsDisabled === true ? "cursor-not-allowed" : "cursor-pointer"
           }`}
         >
-          Case FFQ
+          Isfahan Case FFQ
         </button>
         <button
           onClick={() => {
@@ -154,7 +154,7 @@ export default function ExportExcel() {
             buttonsDisabled === true ? "cursor-not-allowed" : "cursor-pointer"
           }`}
         >
-          Control FFQ
+          Isfahan Control FFQ
         </button>
         <button
           onClick={() => {
@@ -165,7 +165,7 @@ export default function ExportExcel() {
             buttonsDisabled === true ? "cursor-not-allowed" : "cursor-pointer"
           }`}
         >
-          Case Habit
+          Isfahan Case Habit
         </button>
         <button
           onClick={() => {
@@ -176,13 +176,81 @@ export default function ExportExcel() {
             buttonsDisabled === true ? "cursor-not-allowed" : "cursor-pointer"
           }`}
         >
-          Control Habit
+          Isfahan Control Habit
+        </button>
+      </div>
+      <div className="m-5 flex items-center justify-around max-lg:flex-col">
+        <button
+          onClick={() => {
+            handleButtonClick("abadancaseDemographic");
+          }}
+          disabled={buttonsDisabled}
+          className={`text-white bg-orange-500 w-full mx-2 text-center max-lg:my-2 hover:bg-orange-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-500 focus:outline-none dark:focus:ring-blue-800 ${
+            buttonsDisabled === true ? "cursor-not-allowed" : "cursor-pointer"
+          }`}
+        >
+          Abadan Case Demographic
+        </button>
+        <button
+          onClick={() => {
+            handleButtonClick("abadancontrolDemographic");
+          }}
+          disabled={buttonsDisabled}
+          className={`text-white bg-orange-500 w-full mx-2 text-center max-lg:my-2 hover:bg-orange-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-500 focus:outline-none dark:focus:ring-blue-800 ${
+            buttonsDisabled === true ? "cursor-not-allowed" : "cursor-pointer"
+          }`}
+        >
+          Abadan Control Demographic
+        </button>
+        <button
+          onClick={() => {
+            handleButtonClick("abadancaseffq");
+          }}
+          disabled={buttonsDisabled}
+          className={`text-white bg-orange-500 w-full mx-2 text-center max-lg:my-2 hover:bg-orange-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-500 focus:outline-none dark:focus:ring-blue-800 ${
+            buttonsDisabled === true ? "cursor-not-allowed" : "cursor-pointer"
+          }`}
+        >
+          Abadan Case FFQ
+        </button>
+        <button
+          onClick={() => {
+            handleButtonClick("abadancontrolffq");
+          }}
+          disabled={buttonsDisabled}
+          className={`text-white bg-orange-500 w-full mx-2 text-center max-lg:my-2 hover:bg-orange-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-500 focus:outline-none dark:focus:ring-blue-800 ${
+            buttonsDisabled === true ? "cursor-not-allowed" : "cursor-pointer"
+          }`}
+        >
+          Abadan Control FFQ
+        </button>
+        <button
+          onClick={() => {
+            handleButtonClick("abadancasehabit");
+          }}
+          disabled={buttonsDisabled}
+          className={`text-white bg-orange-500 w-full mx-2 text-center max-lg:my-2 hover:bg-orange-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-500 focus:outline-none dark:focus:ring-blue-800 ${
+            buttonsDisabled === true ? "cursor-not-allowed" : "cursor-pointer"
+          }`}
+        >
+          Abadan Case Habit
+        </button>
+        <button
+          onClick={() => {
+            handleButtonClick("abadancontrolhabit");
+          }}
+          disabled={buttonsDisabled}
+          className={`text-white bg-orange-500 w-full mx-2 text-center max-lg:my-2 hover:bg-orange-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-500 focus:outline-none dark:focus:ring-blue-800 ${
+            buttonsDisabled === true ? "cursor-not-allowed" : "cursor-pointer"
+          }`}
+        >
+          Abadan Control Habit
         </button>
       </div>
       {fetchedData.length > 0 ? (
         <Table data={fetchedData} />
       ) : (
-        <div className="w-[95%] text-white rounded-lg m-auto text-center bg-orange-500 p-5">
+        <div className="w-[95%] text-white rounded-lg m-auto text-center bg-green-500 p-5">
           لطفا برای خروجی گرفتن انتخاب کنید
         </div>
       )}
