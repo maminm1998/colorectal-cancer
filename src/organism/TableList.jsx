@@ -6,49 +6,17 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import DeleteIcon from "@mui/icons-material/Delete";
-import swal from "sweetalert";
 
 const isObject = (value) => {
   return typeof value === "object" && value !== null;
 };
 
-export default function BasicTable({ data, questionType }) {
+export default function TableList({ data, questionType }) {
   const convertData = (customer) => {
-    const result = [];
-    for (let key in customer) {
-      if (customer.hasOwnProperty(key)) {
-        result.push({ q: key, a: customer[key] });
-      }
-    }
-    return result;
-  };
-  const handleDeleteClick = (id) => {
-    swal({
-      title: "آیا از حذف مطمئنید؟",
-      text: "پس از حذف، نمی توانید این اطلاعات را بازیابی کنید!",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    }).then((willDelete) => {
-      if (willDelete) {
-        // Perform the delete action here using the provided URL and the id
-        fetch(`https://ffqbackend.liara.run/${questionType}/${id}`, {
-          method: "DELETE",
-        })
-          .then((response) => {
-            if (response.ok) {
-              // Optionally, you can update the UI to indicate the row has been deleted
-              console.log("Data deleted successfully");
-            } else {
-              console.error("Failed to delete data");
-            }
-          })
-          .catch((error) => {
-            console.error("Error deleting data:", error);
-          });
-      }
-    });
+    return [
+      { q: "نام", a: customer["نام"] },
+      { q: "نام خانوادگی", a: customer["نام خانوادگی"] },
+    ];
   };
 
   return (
@@ -75,6 +43,7 @@ export default function BasicTable({ data, questionType }) {
                     {item.q}
                   </TableCell>
                 ))}
+                <TableCell></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -86,6 +55,7 @@ export default function BasicTable({ data, questionType }) {
                   {convertData(customer).map((item, i) => (
                     <TableCell
                       key={i}
+                      className={index % 2 ? "bg-blue-100" : ""}
                       style={{ whiteSpace: "nowrap", textAlign: "center" }}
                     >
                       {isObject(item.a)
@@ -93,11 +63,8 @@ export default function BasicTable({ data, questionType }) {
                         : item.a}
                     </TableCell>
                   ))}
-                  <TableCell>
-                    <DeleteIcon
-                      className="text-red-500 items-center justify-center cursor-pointer"
-                      onClick={() => handleDeleteClick(customer.id)}
-                    />
+                  <TableCell className={index % 2 ? "bg-blue-100" : ""}>
+                    {index + 1}
                   </TableCell>
                 </TableRow>
               ))}

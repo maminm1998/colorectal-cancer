@@ -11,6 +11,7 @@ export default function ExportExcel() {
   const [passwordModalOpen, setPasswordModalOpen] = useState(false);
   const [password, setPassword] = useState("");
   const [formDisplay, setFormDisplay] = useState(false);
+  const [questionType, setQuestionType] = useState(null);
 
   const fetchAndUpdateData = async (selectedData) => {
     setButtonsDisabled(true); // Disable all buttons
@@ -35,6 +36,7 @@ export default function ExportExcel() {
 
   const handleButtonClick = async (selectedData) => {
     await fetchAndUpdateData(selectedData);
+    setQuestionType(selectedData);
   };
 
   useEffect(() => {
@@ -58,10 +60,12 @@ export default function ExportExcel() {
   const downloadExcel = () => {
     if (fetchedData.length === 0) {
     } else {
-      const worksheet = XLSX.utils.json_to_sheet(fetchedData);
+      const currentDate = new Date().toLocaleDateString('en-US').replaceAll('/', '-');
+    const currentTime = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }).replace(/\s(\w+)/, " $1");
+    const formattedDateTime = `date_${currentDate}_time_${currentTime}`;const worksheet = XLSX.utils.json_to_sheet(fetchedData);
       const workbook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
-      XLSX.writeFile(workbook, `data.xlsx`);
+      XLSX.writeFile(workbook, `${questionType}_${formattedDateTime}.xlsx`);
     }
   };
   const handlePasswordSubmit = (e) => {
@@ -248,7 +252,12 @@ export default function ExportExcel() {
         </button>
       </div>
       {fetchedData.length > 0 ? (
-        <Table data={fetchedData} />
+        <>
+          <Table
+            data={fetchedData}
+            questionType={questionType ?? questionType}
+          />
+        </>
       ) : (
         <div className="w-[95%] text-white rounded-lg m-auto text-center bg-green-500 p-5">
           لطفا برای خروجی گرفتن انتخاب کنید

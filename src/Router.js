@@ -11,6 +11,7 @@ import AbadanCaseHabit from "./Components/ABADAN/caseHabit";
 import AbadanCaseFFQ from "./Components/ABADAN/caseFFQ";
 import AbadanControlFFQ from "./Components/ABADAN/controlFFQ";
 import ExportExcel from "./Components/exportExcel";
+import List from "./Components/list";
 import HomePage from "./Components/homePage";
 
 const Routes = [
@@ -36,6 +37,7 @@ const Routes = [
       { path: "case-ffq-abadan", element: <AbadanCaseFFQ /> },
       { path: "control-ffq-abadan", element: <AbadanControlFFQ /> },
       { path: "export", element: <ExportExcel /> },
+      { path: "list", element: <List /> },
     ],
   },
   {
@@ -60,6 +62,7 @@ const Routes = [
       { path: "case-ffq-abadan", element: <AbadanCaseFFQ /> },
       { path: "control-ffq-abadan", element: <AbadanControlFFQ /> },
       { path: "export", element: <ExportExcel /> },
+      { path: "list", element: <List /> },
     ],
   },
 ];

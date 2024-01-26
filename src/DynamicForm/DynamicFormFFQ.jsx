@@ -99,18 +99,18 @@ const DynamicForm = ({ questions, questionType }) => {
   const handlePasswordSubmit = (e) => {
     e.preventDefault();
     if (
-      (questionType === "caseffq" && password === "1") ||
-      (questionType === "casedemographic" && password === "2") ||
-      (questionType === "casehabit" && password === "3") ||
-      (questionType === "controlffq" && password === "4") ||
-      (questionType === "controldemographic" && password === "5") ||
-      (questionType === "controlhabit" && password === "6") ||
-      (questionType === "abadancaseffq" && password === "1") ||
-      (questionType === "abadancasedemographic" && password === "2") ||
-      (questionType === "abadancasehabit" && password === "3") ||
-      (questionType === "abadancontrolffq" && password === "4") ||
-      (questionType === "abadancontroldemographic" && password === "5") ||
-      (questionType === "abadancontrolhabit" && password === "6")
+      (questionType === "caseffq" && password === "63024") ||
+      (questionType === "casedemographic" && password === "88554") ||
+      (questionType === "casehabit" && password === "36528") ||
+      (questionType === "controlffq" && password === "22015") ||
+      (questionType === "controldemographic" && password === "99668") ||
+      (questionType === "controlhabit" && password === "48756") ||
+      (questionType === "abadancaseffq" && password === "22012") ||
+      (questionType === "abadancasedemographic" && password === "10025") ||
+      (questionType === "abadancasehabit" && password === "39685") ||
+      (questionType === "abadancontrolffq" && password === "77785") ||
+      (questionType === "abadancontroldemographic" && password === "21458") ||
+      (questionType === "abadancontrolhabit" && password === "64250")
     ) {
       setPasswordModalOpen(false);
       setFormDisplay(true);
