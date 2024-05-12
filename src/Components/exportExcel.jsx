@@ -60,9 +60,14 @@ export default function ExportExcel() {
   const downloadExcel = () => {
     if (fetchedData.length === 0) {
     } else {
-      const currentDate = new Date().toLocaleDateString('en-US').replaceAll('/', '-');
-    const currentTime = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }).replace(/\s(\w+)/, " $1");
-    const formattedDateTime = `date_${currentDate}_time_${currentTime}`;const worksheet = XLSX.utils.json_to_sheet(fetchedData);
+      const currentDate = new Date()
+        .toLocaleDateString("en-US")
+        .replaceAll("/", "-");
+      const currentTime = new Date()
+        .toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })
+        .replace(/\s(\w+)/, " $1");
+      const formattedDateTime = `date_${currentDate}_time_${currentTime}`;
+      const worksheet = XLSX.utils.json_to_sheet(fetchedData);
       const workbook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
       XLSX.writeFile(workbook, `${questionType}_${formattedDateTime}.xlsx`);
@@ -181,6 +186,30 @@ export default function ExportExcel() {
           }`}
         >
           Isfahan Control Habit
+        </button>
+      </div>
+      <div className="m-5 flex items-center justify-around max-lg:flex-col">
+        <button
+          onClick={() => {
+            handleButtonClick("newCaseffq");
+          }}
+          disabled={buttonsDisabled}
+          className={`text-white bg-rose-500 w-full mx-2 text-center max-lg:my-2 hover:bg-rose-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-500 focus:outline-none dark:focus:ring-blue-800 ${
+            buttonsDisabled === true ? "cursor-not-allowed" : "cursor-pointer"
+          }`}
+        >
+          New Isfahan Case FFQ
+        </button>
+        <button
+          onClick={() => {
+            handleButtonClick("newControlffq");
+          }}
+          disabled={buttonsDisabled}
+          className={`text-white bg-rose-500 w-full mx-2 text-center max-lg:my-2 hover:bg-rose-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-500 focus:outline-none dark:focus:ring-blue-800 ${
+            buttonsDisabled === true ? "cursor-not-allowed" : "cursor-pointer"
+          }`}
+        >
+          New Isfahan Control FFQ
         </button>
       </div>
       <div className="m-5 flex items-center justify-around max-lg:flex-col">

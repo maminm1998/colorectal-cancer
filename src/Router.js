@@ -13,6 +13,8 @@ import AbadanControlFFQ from "./Components/ABADAN/controlFFQ";
 import ExportExcel from "./Components/exportExcel";
 import List from "./Components/list";
 import HomePage from "./Components/homePage";
+import NewCaseFFQ from "./Components/ISFAHAN/newCaseFFQ";
+import NewControlFFQ from "./Components/ISFAHAN/newControlFFQ";
 
 const Routes = [
   {
@@ -26,6 +28,8 @@ const Routes = [
       { path: "case-habit", element: <CaseHabit /> },
       { path: "case-ffq", element: <CaseFFQ /> },
       { path: "control-ffq", element: <ControlFFQ /> },
+      { path: "new-case-ffq", element: <NewCaseFFQ /> },
+      { path: "new-control-ffq", element: <NewControlFFQ /> },
       //abadab
       { path: "case-demographic-abadan", element: <AbadanCaseDemographic /> },
       {

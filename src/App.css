@@ -4,7 +4,7 @@
 
 * {
   direction: rtl;
-  font-family: 'Blotus';
+  font-family: 'BTitr';
   font-size: 20px;
   
 }
@@ -12,6 +12,11 @@
 @font-face {
   font-family: 'Blotus';
   src: local('Blotus'), url('./fonts/B\ Lotus_0.ttf') format('truetype');
+  font-weight: bold;
+}
+@font-face {
+  font-family: 'BTitr';
+  src: local('BTitr'), url('./fonts/B\ Titr\ Bold_0.ttf') format('truetype');
   font-weight: bold;
 }
 .swal-title{
