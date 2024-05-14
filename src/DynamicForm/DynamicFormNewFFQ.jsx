@@ -100,7 +100,9 @@ const DynamicFormNewFFQ = ({ questions, questionType }) => {
     e.preventDefault();
     if (
       (questionType === "newcaseffq" && password === "10010") ||
-      (questionType === "newcontrolffq" && password === "10011")
+      (questionType === "newcontrolffq" && password === "10011") ||
+      (questionType === "newabadancaseffq" && password === "10012") ||
+      (questionType === "newabadancontrolffq" && password === "10013")
     ) {
       setPasswordModalOpen(false);
       setFormDisplay(true);

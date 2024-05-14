@@ -15,6 +15,9 @@ import List from "./Components/list";
 import HomePage from "./Components/homePage";
 import NewCaseFFQ from "./Components/ISFAHAN/newCaseFFQ";
 import NewControlFFQ from "./Components/ISFAHAN/newControlFFQ";
+import NewAbadanCaseFFQ from "./Components/ABADAN/newAbadanCaseFFQ";
+import NewAbadanControlFFQ from "./Components/ABADAN/newAbadanControlFFQ";
+import NotFound from "./Components/NotFound";
 
 const Routes = [
   {
@@ -42,6 +45,9 @@ const Routes = [
       { path: "control-ffq-abadan", element: <AbadanControlFFQ /> },
       { path: "export", element: <ExportExcel /> },
       { path: "list", element: <List /> },
+      { path: "new-abadan-case-ffq", element: <NewAbadanCaseFFQ /> },
+      { path: "new-abadan-control-ffq", element: <NewAbadanControlFFQ /> },
+      { path: "*", element: <NotFound /> },
     ],
   },
   {
@@ -55,6 +61,8 @@ const Routes = [
       { path: "case-habit", element: <CaseHabit /> },
       { path: "case-ffq", element: <CaseFFQ /> },
       { path: "control-ffq", element: <ControlFFQ /> },
+      { path: "new-case-ffq", element: <NewCaseFFQ /> },
+      { path: "new-control-ffq", element: <NewControlFFQ /> },
       //abadab
       { path: "case-demographic-abadan", element: <AbadanCaseDemographic /> },
       {
@@ -65,8 +73,13 @@ const Routes = [
       { path: "case-habit-abadan", element: <AbadanCaseHabit /> },
       { path: "case-ffq-abadan", element: <AbadanCaseFFQ /> },
       { path: "control-ffq-abadan", element: <AbadanControlFFQ /> },
+      { path: "new-abadan-case-ffq", element: <NewAbadanCaseFFQ /> },
+      { path: "new-abadan-control-ffq", element: <NewAbadanControlFFQ /> },
+
+      //Export
       { path: "export", element: <ExportExcel /> },
       { path: "list", element: <List /> },
+      { path: "*", element: <NotFound /> },
     ],
   },
 ];

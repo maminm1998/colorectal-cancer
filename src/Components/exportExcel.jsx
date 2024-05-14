@@ -279,6 +279,30 @@ export default function ExportExcel() {
         >
           Abadan Control Habit
         </button>
+      </div>{" "}
+      <div className="m-5 flex items-center justify-around max-lg:flex-col">
+        <button
+          onClick={() => {
+            handleButtonClick("newabadancaseffq");
+          }}
+          disabled={buttonsDisabled}
+          className={`text-white bg-rose-500 w-full mx-2 text-center max-lg:my-2 hover:bg-rose-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-500 focus:outline-none dark:focus:ring-blue-800 ${
+            buttonsDisabled === true ? "cursor-not-allowed" : "cursor-pointer"
+          }`}
+        >
+          New Abadan Case FFQ
+        </button>
+        <button
+          onClick={() => {
+            handleButtonClick("newabadancontrolffq");
+          }}
+          disabled={buttonsDisabled}
+          className={`text-white bg-rose-500 w-full mx-2 text-center max-lg:my-2 hover:bg-rose-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-500 focus:outline-none dark:focus:ring-blue-800 ${
+            buttonsDisabled === true ? "cursor-not-allowed" : "cursor-pointer"
+          }`}
+        >
+          New Abadan Control FFQ
+        </button>
       </div>
       {fetchedData.length > 0 ? (
         <>
