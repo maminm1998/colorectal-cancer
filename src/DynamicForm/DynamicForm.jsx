@@ -6,11 +6,14 @@ import Modal from "./../organism/Modal";
 import swal from "sweetalert";
 import { useNavigate } from "react-router";
 import TimePicker from "react-time-picker";
+import jalaliMoment from "jalali-moment"; // Import jalali-moment library
 
 const DynamicForm = ({ questions, questionType }) => {
   const [passwordModalOpen, setPasswordModalOpen] = useState(false);
   const [password, setPassword] = useState("");
-  const [formDisplay, setFormDisplay] = useState(false);
+  const [formDisplay, setFormDisplay] = useState(
+    localStorage.getItem(`${questionType}admin`) === "true" ? true : false
+  );
   const [selectedOptions, setSelectedOptions] = useState({});
   const navigate = useNavigate();
   const [shouldScrollToError, setShouldScrollToError] = useState(false);
@@ -55,6 +58,9 @@ const DynamicForm = ({ questions, questionType }) => {
     validationSchema,
     onSubmit: async (values) => {
       // Use async/await to handle the fetch promise
+      const currentDate = jalaliMoment().format("jYYYY/jMM/jDD HH:mm:ss");
+      values.submissionDateTime = currentDate;
+
       try {
         const response = await fetch(
           `https://ffqbackend.liara.run/${questionType}`,
@@ -75,7 +81,7 @@ const DynamicForm = ({ questions, questionType }) => {
             buttons: "متوجه شدم",
           });
           setTimeout(() => {
-            navigate("/"); // Use navigate to go to the home page after a delay
+            navigate("/thanks"); // Use navigate to go to the home page after a delay
           }, 1000);
         }
       } catch (error) {
@@ -132,21 +138,36 @@ const DynamicForm = ({ questions, questionType }) => {
   const handlePasswordSubmit = (e) => {
     e.preventDefault();
     if (
-      (questionType === "caseffq" && password === "63024") ||
+      (questionType === "caseffq" && password === "????") ||
       (questionType === "casedemographic" && password === "88554") ||
       (questionType === "casehabit" && password === "36528") ||
-      (questionType === "controlffq" && password === "22015") ||
+      (questionType === "controlffq" && password === "????") ||
       (questionType === "controldemographic" && password === "99668") ||
       (questionType === "controlhabit" && password === "48756") ||
-      (questionType === "abadancaseffq" && password === "22012") ||
+      (questionType === "abadancaseffq" && password === "????") ||
       (questionType === "abadancasedemographic" && password === "10025") ||
       (questionType === "abadancasehabit" && password === "39685") ||
-      (questionType === "abadancontrolffq" && password === "77785") ||
+      (questionType === "abadancontrolffq" && password === "????") ||
       (questionType === "abadancontroldemographic" && password === "21458") ||
-      (questionType === "abadancontrolhabit" && password === "64250")
+      (questionType === "abadancontrolhabit" && password === "64250") ||
+      (questionType === "diabeticfootulcerdemographic" &&
+        password === "10089") ||
+      (questionType === "diabeticfootulcerinterview" && password === "10089") ||
+      (questionType === "diabeticfootulcerffq" && password === "10089") ||
+      (questionType === "ffqvalidationhabit" && password === "10066") ||
+      (questionType === "ffqvalidationdemographic" && password === "10066")
     ) {
       setPasswordModalOpen(false);
       setFormDisplay(true);
+    } else if (
+      (questionType === "diabeticfootulcerffq" ||
+        questionType === "diabeticfootulcerdemographic" ||
+        questionType === "diabeticfootulcerinterview") &&
+      password === "889975"
+    ) {
+      setPasswordModalOpen(false);
+      setFormDisplay(true);
+      localStorage.setItem(`${questionType}admin`, true);
     } else {
       swal({
         title: "رمز عبور نادرست می باشد!",
@@ -193,42 +214,60 @@ const DynamicForm = ({ questions, questionType }) => {
   }
 
   return (
-    <form onSubmit={formik.handleSubmit} className="flex flex-col flex-wrap">
+    <form
+      onSubmit={formik.handleSubmit}
+      className="flex items-center flex-col flex-wrap"
+    >
       {questions.map((question, index) => (
-        <div key={question.id} className={`w-[100%] md:mx-2 max-md:px-2 my-4`}>
+        <div
+          key={question.id}
+          className={`w-[95%] my-2 ${
+            question.type === "radio" || question.type === "checkbox"
+              ? "border-2 rounded-t-2xl border-blue-300"
+              : ""
+          }`}
+        >
           <div
             className={`flex ${
               question.label &&
               question.label.length > 35 &&
               question.type === "text"
-                ? "flex-col !items-start !justify-start text-right"
+                ? "flex-col !items-center !justify-center text-center w-full"
                 : ""
             } ${
               question.type === "text"
-                ? "justify-start max-md:justify-center my-1 md:mx-1 items-center"
+                ? "flex-col !items-center !justify-center text-center w-full"
                 : ""
             } ${
               question.label &&
               question.label.length > 50 &&
               question.type === "number"
-                ? "flex-col !items-start !justify-start text-right"
+                ? "flex-col !items-center !justify-center text-center w-full"
                 : ""
             } ${
               question.type === "number"
-                ? "justify-start max-md:justify-center my-1 md:mx-1 items-start"
+                ? "flex-col !items-center !justify-center text-center w-full"
                 : ""
             }
             ${
               question.label &&
               question.label.length > 50 &&
               question.type === "time"
-                ? "flex-col !items-start !justify-start text-right"
+                ? "flex-col justify-center border-2 border-blue-500 bg-blue-200 p-5 text-center rounded-2xl"
                 : ""
             } ${
               question.type === "time"
-                ? "justify-start max-md:justify-center my-1 md:mx-1 items-start"
+                ? "flex-col justify-center border-2 border-blue-500 p-5 text-center rounded-2xl"
                 : ""
-            } md:mx-1 w-full`}
+            } w-full ${
+              question.type === "radio"
+                ? "flex-col justify-center bg-blue-500 p-5 text-center rounded-t-2xl text-white"
+                : ""
+            } ${
+              question.type === "checkbox"
+                ? "flex-col justify-center bg-blue-500 p-5 text-center rounded-t-2xl text-white"
+                : ""
+            }`}
           >
             <p
               className={`md:mx-1
@@ -240,7 +279,7 @@ const DynamicForm = ({ questions, questionType }) => {
                   : ""
               } ${
                 question.type === "text" && question.label.length < 35
-                  ? "!w-[10%] text-right max-md:text-right max-md:w-[30%]"
+                  ? "!w-full text-right mb-2"
                   : ""
               } ${
                 question.label &&
@@ -250,27 +289,36 @@ const DynamicForm = ({ questions, questionType }) => {
                   : ""
               } ${
                 question.type === "number" && question.label.length < 35
-                  ? "!w-[10%] text-right max-md:text-right max-md:w-[30%]"
+                  ? "!w-full text-right mb-2"
                   : ""
               }`}
             >
               {question.label}
-              <p className="text-gray-400">{question.subLabel}</p>
             </p>
+            <div
+              className={`${
+                question.type === "text" || question.type === "time"
+                  ? "!text-red-500 mb-1"
+                  : "!text-white"
+              }`}
+            >
+              <p className="text-xs">{question.subLabel}</p>
+            </div>
+
             {question.type === "text" && (
               <div
-                className={`md:w-[50%]  ${
+                className={`w-[100%] ${
                   question.label &&
                   question.label.length > 35 &&
                   question.type === "text"
                     ? "max-md:w-[100%] mt-2"
-                    : "max-md:w-[60%]"
+                    : ""
                 } ${
                   question.label &&
                   question.label.length > 35 &&
                   question.type === "number"
                     ? "max-md:w-[100%] mt-2"
-                    : "max-md:w-[60%]"
+                    : ""
                 }`}
               >
                 <input
@@ -302,12 +350,18 @@ const DynamicForm = ({ questions, questionType }) => {
             )}
             {question.type === "number" && (
               <div
-                className={`md:w-[50%]  ${
+                className={`w-[100%] ${
+                  question.label &&
+                  question.label.length > 35 &&
+                  question.type === "text"
+                    ? "max-md:w-[100%] mt-2"
+                    : ""
+                } ${
                   question.label &&
                   question.label.length > 35 &&
                   question.type === "number"
                     ? "max-md:w-[100%] mt-2"
-                    : "max-md:w-[60%]"
+                    : ""
                 }`}
               >
                 <input
@@ -339,7 +393,7 @@ const DynamicForm = ({ questions, questionType }) => {
             )}
             {question.type === "time" && (
               <div
-                className={`md:w-[50%] ${
+                className={`w-[100%] ${
                   question.label &&
                   question.label.length > 35 &&
                   question.type === "time"
@@ -377,14 +431,19 @@ const DynamicForm = ({ questions, questionType }) => {
           {question.type === "radio" && (
             <div
               role="group"
-              className={`flex  ${
-                question.options && question.options.length < 4
-                  ? "max-lg:!flex-row"
-                  : ""
-              } max-lg:flex-col mt-2`}
+              className={`flex !px-1 ${
+                question.options && question.options.length < 4 ? "" : ""
+              } flex-col mt-2`}
             >
               {question.options.map((option) => (
-                <label key={option.id} className="flex items-center mr-4">
+                <label
+                  key={option.id}
+                  className={`flex items-center cursor-pointer justify-center border-2 p-2 my-1 rounded-lg ${
+                    formik.values[question.id] === option.id
+                      ? "border-blue-500 border-2 bg-blue-500 text-white"
+                      : ""
+                  }`}
+                >
                   <input
                     type="radio"
                     name={question.id}
@@ -397,9 +456,11 @@ const DynamicForm = ({ questions, questionType }) => {
                         : null
                     }
                     checked={formik.values[question.id] === option.id}
-                    className="mr-2  w-4 h-4 cursor-pointer checked:border-blue-500 checked:border-2"
+                    className="mr-2 w-0 h-0 cursor-pointer checked:border-blue-500 checked:border-2"
                   />
-                  <span className="text-sm mr-2">{option.label}</span>
+                  <span className="text-sm mr-2 text-center">
+                    {option.label}
+                  </span>
                 </label>
               ))}
               {shouldShowOtherInput(question.id) && (
@@ -434,11 +495,24 @@ const DynamicForm = ({ questions, questionType }) => {
             </div>
           )}
           {question.type === "checkbox" && (
-            <div role="group" className="flex flex-wrap flex-row">
+            <div
+              role="group"
+              className="flex items-center justify-center flex-wrap flex-row"
+            >
               {question.options.map((option) => (
                 <label
                   key={option.id}
-                  className="flex w-[40%] max-md:w-[100%] items-center mr-4"
+                  className={`mx-1 cursor-pointer my-1 border-2 p-2 rounded-lg ${
+                    option.label.length > 23 || option.label === "سایر"
+                      ? "w-[92%]"
+                      : "w-[45%]"
+                  } ${
+                    option.label === "هیچکدام" ? "text-red-500 !w-[92%]" : ""
+                  } ${
+                    selectedOptions[question.id]?.includes(option.id)
+                      ? "border-blue-500 border-2 bg-blue-500 text-white"
+                      : ""
+                  } flex flex-col items-center`}
                 >
                   <input
                     type="checkbox"
@@ -449,9 +523,9 @@ const DynamicForm = ({ questions, questionType }) => {
                     }
                     onBlur={formik.handleBlur}
                     checked={selectedOptions[question.id]?.includes(option.id)}
-                    className="mr-3 ml-1 w-4 h-4 cursor-pointer"
+                    className="mr-0 w-4 h-0 cursor-pointer checked:border-blue-500  checked:border-2"
                   />
-                  <span className="text-sm">{option.label}</span>
+                  <span className="text-sm mr-2">{option.label}</span>
                 </label>
               ))}
               {formik.touched[question.id] && formik.errors[question.id] && (
@@ -522,7 +596,7 @@ const DynamicForm = ({ questions, questionType }) => {
           }
         }}
         disabled={formik.isSubmitting}
-        className={`py-2 px-4 text-white font-semibold rounded shadow mt-4 ${
+        className={`py-2 px-4 w-full text-white font-semibold rounded shadow mt-4 ${
           formik.isSubmitting === true ? "bg-blue-200" : "bg-blue-500"
         }`}
       >

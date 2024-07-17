@@ -1,6 +1,6 @@
 import React from "react";
 import DynamicForm from "../../DynamicForm/DynamicForm";
-import { Habit } from "../question";
+import { HABIT } from "../question";
 import swal from "sweetalert";
 
 const questionType = "controlhabit";
@@ -20,7 +20,7 @@ export default function ControlHabit() {
           <div className="bg-blue-500 rounded-t-lg p-2 text-white font-bold text-xl">
             پرسشنامه
           </div>
-          <DynamicForm questionType={questionType} questions={Habit} />
+          <DynamicForm questionType={questionType} questions={HABIT} />
         </div>
       )}
     </>

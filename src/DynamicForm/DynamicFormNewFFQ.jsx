@@ -5,14 +5,18 @@ import "./../App.css";
 import Modal from "./../organism/Modal";
 import swal from "sweetalert";
 import { useNavigate } from "react-router";
+import jalaliMoment from "jalali-moment"; // Import jalali-moment library
 
 const DynamicFormNewFFQ = ({ questions, questionType }) => {
   const [passwordModalOpen, setPasswordModalOpen] = useState(false);
   const [password, setPassword] = useState("");
-  const [formDisplay, setFormDisplay] = useState(false);
+  const [formDisplay, setFormDisplay] = useState(
+    localStorage.getItem(`${questionType}admin`) === "true" ? true : false
+  );
   const navigate = useNavigate();
   const [shouldScrollToError, setShouldScrollToError] = useState(false);
   const firstErrorFieldRef = useRef(null);
+  const [selectedOptions, setSelectedOptions] = useState({});
 
   const validationSchema = Yup.object().shape(
     questions.reduce((schema, question) => {
@@ -37,6 +41,11 @@ const DynamicFormNewFFQ = ({ questions, questionType }) => {
   );
 
   const handleImageClick = (imageUrl) => {
+    const isLargeScreen = window.innerWidth >= 1024; // بررسی اندازه صفحه نمایش
+    const modalStyles = isLargeScreen
+      ? { width: "95%", maxWidth: "800px" }
+      : { width: "95%" };
+
     swal({
       content: {
         element: "div",
@@ -46,6 +55,13 @@ const DynamicFormNewFFQ = ({ questions, questionType }) => {
       },
       buttons: "بستن تصویر",
     });
+
+    setTimeout(() => {
+      const modalElement = document.querySelector(".swal-modal");
+      if (modalElement) {
+        Object.assign(modalElement.style, modalStyles);
+      }
+    }, 0);
   };
 
   const formik = useFormik({
@@ -56,6 +72,9 @@ const DynamicFormNewFFQ = ({ questions, questionType }) => {
     validationSchema,
     onSubmit: async (values) => {
       // Use async/await to handle the fetch promise
+      const currentDate = jalaliMoment().format("jYYYY/jMM/jDD HH:mm:ss");
+      values.submissionDateTime = currentDate;
+
       try {
         const response = await fetch(
           `https://ffqbackend.liara.run/${questionType}`,
@@ -76,7 +95,7 @@ const DynamicFormNewFFQ = ({ questions, questionType }) => {
             buttons: "متوجه شدم",
           });
           setTimeout(() => {
-            navigate("/"); // Use navigate to go to the home page after a delay
+            navigate("/thanks"); // Use navigate to go to the home page after a delay
           }, 1000);
         }
       } catch (error) {
@@ -91,7 +110,37 @@ const DynamicFormNewFFQ = ({ questions, questionType }) => {
       }
     },
   });
+  const handleCheckboxChange = (questionId, optionId) => {
+    setSelectedOptions((prevSelectedOptions) => {
+      const selectedOptionsForQuestion = prevSelectedOptions[questionId] || [];
 
+      const updatedOptions =
+        optionId === "هیچکدام"
+          ? selectedOptionsForQuestion.includes("هیچکدام")
+            ? []
+            : [optionId]
+          : selectedOptionsForQuestion.includes("هیچکدام")
+          ? [optionId]
+          : selectedOptionsForQuestion.includes(optionId)
+          ? selectedOptionsForQuestion.filter(
+              (selectedOption) => selectedOption !== optionId
+            )
+          : [...selectedOptionsForQuestion, optionId];
+
+      // Update Formik state
+      formik.handleChange({
+        target: {
+          name: questionId,
+          value: updatedOptions,
+        },
+      });
+
+      return {
+        ...prevSelectedOptions,
+        [questionId]: updatedOptions,
+      };
+    });
+  };
   const shouldShowOtherInput = (questionId) => {
     const question = questions.find((q) => q.id === questionId);
     return question?.type === "radio" && formik.values[questionId] === "other";
@@ -102,10 +151,21 @@ const DynamicFormNewFFQ = ({ questions, questionType }) => {
       (questionType === "newcaseffq" && password === "10010") ||
       (questionType === "newcontrolffq" && password === "10011") ||
       (questionType === "newabadancaseffq" && password === "10012") ||
-      (questionType === "newabadancontrolffq" && password === "10013")
+      (questionType === "newabadancontrolffq" && password === "10013") ||
+      (questionType === "diabeticfootulcerffq" && password === "10089") ||
+      (questionType === "ffqvalidation" && password === "10066") ||
+      (questionType === "diabeticfootulcerdemographic" && password === "10089")
     ) {
       setPasswordModalOpen(false);
       setFormDisplay(true);
+    } else if (
+      (questionType === "diabeticfootulcerffq" ||
+        questionType === "diabeticfootulcerdemographic") &&
+      password === "889975"
+    ) {
+      setPasswordModalOpen(false);
+      setFormDisplay(true);
+      localStorage.setItem(`${questionType}admin`, true);
     } else {
       swal({
         title: "رمز عبور نادرست می باشد!",
@@ -158,9 +218,9 @@ const DynamicFormNewFFQ = ({ questions, questionType }) => {
       {questions.map((question, index) => (
         <div
           key={question.id}
-          className={`w-[100%] md:mx-2 max-md:px-2 my-4 ${
+          className={`w-[100%] lg:mx-2 max-lg:px-2 my-4 ${
             question.img && question.img.length > 0
-              ? "md:flex max-md:block lg:items-center max-lg:items-start "
+              ? "lg:flex max-lg:block max-lg:items-start "
               : ""
           }`}
         >
@@ -169,15 +229,14 @@ const DynamicFormNewFFQ = ({ questions, questionType }) => {
               <img
                 src={question.img}
                 loading="lazy"
-                className="md:w-24 md:h-20 max-md:w-full rounded-lg cursor-pointer border-blue-500 border-4 ml-2"
+                className="lg:!w-96 lg:!h-96 max-lg:w-full rounded-lg cursor-pointer border-blue-500 border-4 ml-2"
                 alt={`تصویر ${question.label}`}
                 onClick={() => handleImageClick(question.img)}
               />
               {question.type === "radio" && (
-                <div className="absolute w-full bottom-2 left-0 text-center">
+                <div className="absolute w-full lg:bottom-3 max-lg:bottom-2 left-0 text-center">
                   <p className="bg-black bg-opacity-30 opacity-100 text-xl text-white p-2">
                     {question.label}
-
                     <p>{question.subLabel}</p>
                   </p>
                 </div>
@@ -186,7 +245,7 @@ const DynamicFormNewFFQ = ({ questions, questionType }) => {
           )}
           <div>
             <div
-              className={`flex max-md:p-2 max-md:rounded-lg ${
+              className={`flex max-lg:p-2 max-lg:rounded-lg ${
                 question.label &&
                 question.label.length > 35 &&
                 question.type === "text"
@@ -194,7 +253,7 @@ const DynamicFormNewFFQ = ({ questions, questionType }) => {
                   : ""
               } ${
                 question.type === "text"
-                  ? "justify-start max-md:justify-center my-1 md:mx-1 items-center"
+                  ? "justify-start max-lg:justify-center my-1 lg:mx-1 items-center"
                   : ""
               } ${
                 question.label &&
@@ -204,18 +263,18 @@ const DynamicFormNewFFQ = ({ questions, questionType }) => {
                   : ""
               } ${
                 question.type === "number"
-                  ? "justify-start max-md:justify-center my-1 md:mx-1 items-center"
+                  ? "justify-start max-lg:justify-center my-1 lg:mx-1 items-center"
                   : ""
-              } md:mx-1 w-full 
+              } lg:mx-1 w-full 
               
               ${
                 question.label && question.serving && question.type === "radio"
-                  ? "max-md:bg-blue-500 max-md:my-2"
+                  ? "lg:w-[97%] lg:rounded-lg bg-blue-500 max-lg:my-2"
                   : ""
               }`}
             >
               <p
-                className={`md:mx-1
+                className={`lg:mx-1
               ${
                 question.label &&
                 question.label.length > 35 &&
@@ -224,7 +283,7 @@ const DynamicFormNewFFQ = ({ questions, questionType }) => {
                   : ""
               } ${
                   question.type === "text" && question.label.length < 35
-                    ? "!w-[10%] text-right max-md:text-right max-md:w-[30%]"
+                    ? "!w-[10%] text-right max-lg:text-right max-lg:w-[30%]"
                     : ""
                 } ${
                   question.label &&
@@ -234,12 +293,12 @@ const DynamicFormNewFFQ = ({ questions, questionType }) => {
                     : ""
                 } ${
                   question.type === "number" && question.label.length < 35
-                    ? "!w-[10%] text-right max-md:text-right max-md:w-[30%]"
+                    ? "!w-[10%] text-right max-lg:text-right max-lg:w-[30%]"
                     : ""
                 }
                 ${
                   question.type === "radio"
-                    ? "max-md:w-full max-md:text-center max-md:font-extrabold max-md:text-white "
+                    ? "w-full text-center font-extrabold text-white lg:p-3 lg:text-lg"
                     : ""
                 }`}
               >
@@ -250,18 +309,18 @@ const DynamicFormNewFFQ = ({ questions, questionType }) => {
               </p>
               {question.type === "text" && (
                 <div
-                  className={`md:w-[50%]  ${
+                  className={`lg:w-[50%]  ${
                     question.label &&
                     question.label.length > 35 &&
                     question.type === "text"
-                      ? "max-md:w-[100%] mt-2"
-                      : "max-md:w-[60%]"
+                      ? "max-lg:w-[100%] mt-2"
+                      : "max-lg:w-[60%]"
                   } ${
                     question.label &&
                     question.label.length > 35 &&
                     question.type === "number"
-                      ? "max-md:w-[100%] mt-2"
-                      : "max-md:w-[60%]"
+                      ? "max-lg:w-[100%] mt-2"
+                      : "max-lg:w-[60%]"
                   }`}
                 >
                   <input
@@ -294,12 +353,12 @@ const DynamicFormNewFFQ = ({ questions, questionType }) => {
               )}
               {question.type === "number" && (
                 <div
-                  className={`md:w-[50%]  ${
+                  className={`${
                     question.label &&
                     question.label.length > 35 &&
                     question.type === "number"
-                      ? "max-md:w-[100%] mt-2"
-                      : "max-md:w-[60%]"
+                      ? "max-lg:w-[100%] mt-2"
+                      : "max-lg:w-[60%]"
                   }`}
                 >
                   <input
@@ -334,20 +393,18 @@ const DynamicFormNewFFQ = ({ questions, questionType }) => {
             {question.type === "radio" && (
               <div
                 role="group"
-                className={`flex ${
-                  question.options && question.options.length < 4
-                    ? "max-lg:!flex-row"
-                    : ""
-                } max-lg:flex-col mt-2`}
+                className={`flex flex-col lg:flex-row lg:flex-wrap mt-2`}
               >
-                {question.options.map((option) => (
+                {question.options.map((option, idx) => (
                   <label
                     key={option.id}
-                    className={`flex items-center max-md:border-2 max-md:p-2 max-md:my-1 max-md:rounded-lg ${
+                    className={`flex items-center !cursor-pointer border-2 p-2 my-1 rounded-lg ${
                       formik.values[question.id] === option.id
                         ? "border-blue-500 border-4"
                         : ""
-                    }`}
+                    } ${
+                      idx % 2 === 0 ? "lg:mr-2" : ""
+                    } lg:w-[48%] lg:mr-2 max-lg:w-full`}
                   >
                     <input
                       type="radio"
@@ -361,7 +418,7 @@ const DynamicFormNewFFQ = ({ questions, questionType }) => {
                           : null
                       }
                       checked={formik.values[question.id] === option.id}
-                      className="mr-2  w-4 h-4 cursor-pointer checked:border-blue-500 checked:border-2 "
+                      className="mr-2 w-4 h-4 cursor-pointer checked:border-blue-500 checked:border-2"
                     />
                     <span className="text-sm mr-2">{option.label}</span>
                   </label>
@@ -398,29 +455,39 @@ const DynamicFormNewFFQ = ({ questions, questionType }) => {
               </div>
             )}
             {question.type === "checkbox" && (
-              <div role="group" className="flex flex-wrap flex-row">
+              <div
+                role="group"
+                className="flex items-center justify-center flex-wrap flex-row"
+              >
                 {question.options.map((option) => (
                   <label
                     key={option.id}
-                    className="flex w-[40%] max-md:w-[100%] items-center mr-4"
+                    className={`mx-1 cursor-pointer my-1 border-2 p-2 rounded-lg ${
+                      option.label.length > 23 || option.label === "سایر"
+                        ? "w-[92%]"
+                        : "w-[45%]"
+                    } ${
+                      option.label === "هیچکدام" ? "text-red-500 !w-[92%]" : ""
+                    } ${
+                      selectedOptions[question.id]?.includes(option.id)
+                        ? "border-blue-500 border-2 bg-blue-500 text-white"
+                        : ""
+                    } flex flex-col items-center`}
                   >
                     <input
                       type="checkbox"
                       name={question.id}
                       value={option.id}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      ref={
-                        Object.keys(formik.errors)[0] === question.id
-                          ? firstErrorFieldRef
-                          : null
+                      onChange={() =>
+                        handleCheckboxChange(question.id, option.id)
                       }
-                      checked={(formik.values[question.id] || []).includes(
+                      onBlur={formik.handleBlur}
+                      checked={selectedOptions[question.id]?.includes(
                         option.id
                       )}
-                      className="mr-3 ml-1 w-4 h-4 cursor-pointer"
+                      className="mr-0 w-4 h-0 cursor-pointer checked:border-blue-500  checked:border-2"
                     />
-                    <span className="text-sm">{option.label}</span>
+                    <span className="text-sm mr-2">{option.label}</span>
                   </label>
                 ))}
                 {formik.touched[question.id] && formik.errors[question.id] && (

@@ -18,6 +18,13 @@ import NewControlFFQ from "./Components/ISFAHAN/newControlFFQ";
 import NewAbadanCaseFFQ from "./Components/ABADAN/newAbadanCaseFFQ";
 import NewAbadanControlFFQ from "./Components/ABADAN/newAbadanControlFFQ";
 import NotFound from "./Components/NotFound";
+import DiabeticFootUlcerFFQ from "./Components/DiabeticFootUlcer/DiabeticFootUlcerFFQ";
+import DiabeticFootUlcerDemographic from "./Components/DiabeticFootUlcer/DiabeticFootUlcerDemographic";
+import DiabeticFootUlcerInterview from "./Components/DiabeticFootUlcer/DiabeticFootUlcerInterview";
+import Thanks from "./Components/Thanks";
+import FFQValidationDemographic from "./Components/ffqValidation/FFQValidationDemographic";
+import FFQValidationHabit from "./Components/ffqValidation/FFQValidationHabit";
+import FFQValidation from "./Components/ffqValidation/FFQValidation";
 
 const Routes = [
   {
@@ -48,6 +55,31 @@ const Routes = [
       { path: "new-abadan-case-ffq", element: <NewAbadanCaseFFQ /> },
       { path: "new-abadan-control-ffq", element: <NewAbadanControlFFQ /> },
       { path: "*", element: <NotFound /> },
+      { path: "thanks", element: <Thanks /> },
+      // isfahan ffq validation
+      {
+        path: "ffq-validation-demographic",
+        element: <FFQValidationDemographic />,
+      },
+      {
+        path: "ffq-validation-habit",
+        element: <FFQValidationHabit />,
+      },
+      {
+        path: "ffq-validation",
+        element: <FFQValidation />,
+      },
+
+      //diabtic foot ulcer
+      { path: "diabetic-foot-ulcer-ffq", element: <DiabeticFootUlcerFFQ /> },
+      {
+        path: "diabetic-foot-ulcer-demographic",
+        element: <DiabeticFootUlcerDemographic />,
+      },
+      {
+        path: "diabetic-foot-ulcer-interview",
+        element: <DiabeticFootUlcerInterview />,
+      },
     ],
   },
   {
@@ -75,11 +107,34 @@ const Routes = [
       { path: "control-ffq-abadan", element: <AbadanControlFFQ /> },
       { path: "new-abadan-case-ffq", element: <NewAbadanCaseFFQ /> },
       { path: "new-abadan-control-ffq", element: <NewAbadanControlFFQ /> },
-
+      //diabtic foot ulcer
+      { path: "diabetic-foot-ulcer-ffq", element: <DiabeticFootUlcerFFQ /> },
+      {
+        path: "diabetic-foot-ulcer-demographic",
+        element: <DiabeticFootUlcerDemographic />,
+      },
+      {
+        path: "diabetic-foot-ulcer-interview",
+        element: <DiabeticFootUlcerInterview />,
+      },
+      // isfahan ffq validation
+      {
+        path: "ffq-validation-demographic",
+        element: <FFQValidationDemographic />,
+      },
+      {
+        path: "ffq-validation-habit",
+        element: <FFQValidationHabit />,
+      },
+      {
+        path: "ffq-validation",
+        element: <FFQValidation />,
+      },
       //Export
       { path: "export", element: <ExportExcel /> },
       { path: "list", element: <List /> },
       { path: "*", element: <NotFound /> },
+      { path: "thanks", element: <Thanks /> },
     ],
   },
 ];

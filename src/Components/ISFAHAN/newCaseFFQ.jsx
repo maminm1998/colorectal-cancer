@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import DynamicFormNewFFQ from "../../DynamicForm/DynamicFormNewFFQ";
-import { NEWFFQ } from "../newFFQ";
+import { ISFAHANNEWFFQ } from "../question";
 import swal from "sweetalert";
 const questionType = "newcaseffq";
 
@@ -27,7 +27,10 @@ export default function NewCaseFFQ() {
       <div className="bg-blue-500 rounded-t-lg p-2 text-white font-bold text-xl">
         پرسشنامه (برای بزرگنمایی تصاویر بر روی خود تصویر کلیک کنید)
       </div>
-      <DynamicFormNewFFQ questionType={questionType} questions={NEWFFQ} />
+      <DynamicFormNewFFQ
+        questionType={questionType}
+        questions={ISFAHANNEWFFQ ?? ISFAHANNEWFFQ}
+      />
     </div>
   );
 }

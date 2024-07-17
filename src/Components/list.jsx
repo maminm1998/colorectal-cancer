@@ -13,6 +13,8 @@ export default function List() {
   const [questionType, setQuestionType] = useState(null);
   const [isfahan, setIsfahan] = useState(false);
   const [abadan, setAbadan] = useState(false);
+  const [diabeticFootUlcer, setDiabeticFootUlcer] = useState(false);
+  const [FFQValidation, setFFQValidation] = useState(false);
 
   const fetchAndUpdateData = async (selectedData) => {
     setButtonsDisabled(true); // Disable all buttons
@@ -67,6 +69,14 @@ export default function List() {
       setPasswordModalOpen(false);
       setFormDisplay(true);
       setAbadan(true);
+    } else if (password === "889975") {
+      setPasswordModalOpen(false);
+      setFormDisplay(true);
+      setDiabeticFootUlcer(true);
+    } else if (password === "100688") {
+      setPasswordModalOpen(false);
+      setFormDisplay(true);
+      setFFQValidation(true);
     } else {
       swal({
         title: "رمز عبور نادرست می باشد!",
@@ -290,6 +300,76 @@ export default function List() {
             New Abadan Control FFQ
           </button>
         </div>
+        <div className={`${diabeticFootUlcer === true ? "visible" : "hidden"}`}>
+          <button
+            onClick={() => {
+              handleButtonClick("diabeticfootulcerdemographic");
+            }}
+            disabled={buttonsDisabled}
+            className={`text-white bg-orange-500 w-full mx-2 text-center max-lg:my-2 hover:bg-orange-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 my-1 dark:bg-blue-600 dark:hover:bg-blue-500 focus:outline-none dark:focus:ring-blue-800 ${
+              buttonsDisabled === true ? "cursor-not-allowed" : "cursor-pointer"
+            }`}
+          >
+            Diabetic Foot Ulcer Demographic
+          </button>
+          <button
+            onClick={() => {
+              handleButtonClick("diabeticfootulcerffq");
+            }}
+            disabled={buttonsDisabled}
+            className={`text-white bg-orange-500 w-full mx-2 text-center max-lg:my-2 hover:bg-orange-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 my-1 dark:bg-blue-600 dark:hover:bg-blue-500 focus:outline-none dark:focus:ring-blue-800 ${
+              buttonsDisabled === true ? "cursor-not-allowed" : "cursor-pointer"
+            }`}
+          >
+            Diabetic Foot Ulcer FFQ
+          </button>
+          <button
+            onClick={() => {
+              handleButtonClick("diabeticfootulcerinterview");
+            }}
+            disabled={buttonsDisabled}
+            className={`text-white bg-orange-500 w-full mx-2 text-center max-lg:my-2 hover:bg-orange-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 my-1 dark:bg-blue-600 dark:hover:bg-blue-500 focus:outline-none dark:focus:ring-blue-800 ${
+              buttonsDisabled === true ? "cursor-not-allowed" : "cursor-pointer"
+            }`}
+          >
+            Diabetic Foot Ulcer Interview
+          </button>
+        </div>
+        <div className={`${FFQValidation === true ? "visible" : "hidden"}`}>
+          <button
+            onClick={() => {
+              handleButtonClick("ffqvalidationdemographic");
+            }}
+            disabled={buttonsDisabled}
+            className={`text-white bg-orange-500 w-full mx-2 text-center max-lg:my-2 hover:bg-orange-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 my-1 dark:bg-blue-600 dark:hover:bg-blue-500 focus:outline-none dark:focus:ring-blue-800 ${
+              buttonsDisabled === true ? "cursor-not-allowed" : "cursor-pointer"
+            }`}
+          >
+            FFQ Validation Demographic
+          </button>
+          <button
+            onClick={() => {
+              handleButtonClick("ffqvalidation");
+            }}
+            disabled={buttonsDisabled}
+            className={`text-white bg-orange-500 w-full mx-2 text-center max-lg:my-2 hover:bg-orange-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 my-1 dark:bg-blue-600 dark:hover:bg-blue-500 focus:outline-none dark:focus:ring-blue-800 ${
+              buttonsDisabled === true ? "cursor-not-allowed" : "cursor-pointer"
+            }`}
+          >
+            FFQ Validation
+          </button>
+          <button
+            onClick={() => {
+              handleButtonClick("ffqvalidationhabit");
+            }}
+            disabled={buttonsDisabled}
+            className={`text-white bg-orange-500 w-full mx-2 text-center max-lg:my-2 hover:bg-orange-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 my-1 dark:bg-blue-600 dark:hover:bg-blue-500 focus:outline-none dark:focus:ring-blue-800 ${
+              buttonsDisabled === true ? "cursor-not-allowed" : "cursor-pointer"
+            }`}
+          >
+            FFQ Validation Habit
+          </button>
+        </div>
       </div>
       {fetchedData.length > 0 ? (
         <>
@@ -300,7 +380,7 @@ export default function List() {
         </>
       ) : (
         <div className="w-[95%] text-white rounded-lg m-auto text-center bg-green-500 p-5">
-          لطفا برای خروجی گرفتن انتخاب کنید
+          لطفا برای مشاهده لیست بر روی لینک های بالا انتخاب کنید.
         </div>
       )}
     </div>

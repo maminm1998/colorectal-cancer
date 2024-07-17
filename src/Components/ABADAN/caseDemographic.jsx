@@ -35,7 +35,7 @@ const questions = [
     img: "",
     subLabel: "",
     id: "کد ملی :",
-    label: "کد ملی :",
+    label: "کد ملی",
     type: "text",
     validation: Yup.string("لطفا کد ملی خود را به درستی وارد کنید")
       .required("وارد کردن کد ملی الزامی است")
@@ -46,7 +46,7 @@ const questions = [
   {
     subLabel: "",
     id: "تلفن همراه (موبایل) :",
-    label: "تلفن همراه (موبایل) :",
+    label: "تلفن همراه (موبایل)",
     type: "text",
     validation: Yup.string(
       " شماره 11 رقمی موبایل خود را همراه با صفر ابتدایی وارد نمایید"
@@ -64,7 +64,7 @@ const questions = [
     img: "",
     subLabel: " (همراه با کد استان)",
     id: "شماره تماس (منزل) :",
-    label: "شماره تماس (منزل) :",
+    label: "شماره تماس (منزل)",
     type: "text",
     validation: Yup.string()
       .required("وارد کردن شماره تماس (منزل) الزامی است")

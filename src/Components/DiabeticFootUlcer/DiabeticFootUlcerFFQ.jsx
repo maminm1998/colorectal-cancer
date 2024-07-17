@@ -1,16 +1,15 @@
 import React, { useEffect } from "react";
 import DynamicFormNewFFQ from "../../DynamicForm/DynamicFormNewFFQ";
-import { ISFAHANNEWFFQ } from "../question";
+import { DIABETICFOOTULCERFFQ } from "../DiabeticFootUlcerFFQ";
 import swal from "sweetalert";
-const questionType = "newcontrolffq";
+const questionType = "diabeticfootulcerffq";
 
-export default function NewControlFFQ() {
+export default function DiabeticFootUlcerFFQ() {
   let isCompletedBefore = localStorage.getItem(questionType);
-
   // Use useEffect to show the swal message when the component mounts
 
   useEffect(() => {
-    if (isCompletedBefore) {
+    if (isCompletedBefore && !localStorage.getItem(`${questionType}admin`)) {
       swal({
         title: "شما قبلا این پرسشنامه را پر کرده اید",
         icon: "error",
@@ -19,7 +18,7 @@ export default function NewControlFFQ() {
     }
   }, [isCompletedBefore]);
 
-  if (isCompletedBefore) {
+  if (isCompletedBefore && !localStorage.getItem(`${questionType}admin`)) {
     return null; // Return null if the form has been completed before
   }
 
@@ -30,7 +29,7 @@ export default function NewControlFFQ() {
       </div>
       <DynamicFormNewFFQ
         questionType={questionType}
-        questions={ISFAHANNEWFFQ}
+        questions={DIABETICFOOTULCERFFQ}
       />
     </div>
   );

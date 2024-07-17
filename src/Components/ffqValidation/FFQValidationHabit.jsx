@@ -1,16 +1,17 @@
 import React, { useEffect } from "react";
-import DynamicFormNewFFQ from "../../DynamicForm/DynamicFormNewFFQ";
-import { ISFAHANNEWFFQ } from "../question";
 import swal from "sweetalert";
-const questionType = "newcontrolffq";
+import DynamicForm from "../../DynamicForm/DynamicForm";
+import * as Yup from "yup";
+import { FFQVALIDATIONHABIT } from "./../question";
 
-export default function NewControlFFQ() {
+const questionType = "ffqvalidationhabit";
+
+export default function FFQValidationHabit() {
   let isCompletedBefore = localStorage.getItem(questionType);
-
   // Use useEffect to show the swal message when the component mounts
 
   useEffect(() => {
-    if (isCompletedBefore) {
+    if (isCompletedBefore && !localStorage.getItem(`${questionType}admin`)) {
       swal({
         title: "شما قبلا این پرسشنامه را پر کرده اید",
         icon: "error",
@@ -19,7 +20,7 @@ export default function NewControlFFQ() {
     }
   }, [isCompletedBefore]);
 
-  if (isCompletedBefore) {
+  if (isCompletedBefore && !localStorage.getItem(`${questionType}admin`)) {
     return null; // Return null if the form has been completed before
   }
 
@@ -28,10 +29,7 @@ export default function NewControlFFQ() {
       <div className="bg-blue-500 rounded-t-lg p-2 text-white font-bold text-xl">
         پرسشنامه (برای بزرگنمایی تصاویر بر روی خود تصویر کلیک کنید)
       </div>
-      <DynamicFormNewFFQ
-        questionType={questionType}
-        questions={ISFAHANNEWFFQ}
-      />
+      <DynamicForm questionType={questionType} questions={FFQVALIDATIONHABIT ?? FFQVALIDATIONHABIT} />
     </div>
   );
 }
