@@ -2,11 +2,11 @@ import React from "react";
 
 function NotFound() {
   return (
-    <div className="w-full max-h-full">
+    <div className="flex items-center justify-center w-full min-h-screen">
       <img
         src="./Image/صفحه پیدا نشد.jpg"
         alt=""
-        className="w-9/12 m-auto translate-y-full h-full"
+        className="w-[70%] m-auto h-full"
       />
     </div>
   );

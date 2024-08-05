@@ -2927,8 +2927,9 @@ export const ISFAHANFFQ = [
   {
     img: "./Image/بیسکوئیت.jpg",
     subLabel: "یک عدد معادل یک بیسکوییت ساقه طلایی می باشد",
-    id: "بیسکوییت",
-    label: "بیسکوییت",
+    id: "انواع بیسکوئیت",
+    label:
+      "انواع بیسکوئیت (ساده، سبوسدار، ویفر، کراکر، کرامدار و ساق طلایی و...)",
     type: "radio",
     options: [
       {
@@ -5252,7 +5253,7 @@ export const ISFAHANNEWFFQ = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
-    serving: "یک بشقاب",
+    serving: "یک بشقاب غذاخوری",
     img: "./Image/ماکارونی.jpg",
     subLabel: "",
     id: "ماکارونی، لازانیا، نودل و پاستا",
@@ -8318,7 +8319,7 @@ export const ISFAHANNEWFFQ = [
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
   },
   {
-    serving: "یک عدد",
+    serving: "یک عدد متوسط",
     img: "./Image/هلو یا شلیل.jpg",
     subLabel: "میزان مصرف خود را در فصل عرضه میوه گزارش کنید .",
     id: "هلو یا شلیل",
@@ -8634,11 +8635,7 @@ export const ISFAHANNEWFFQ = [
       },
       {
         id: "10",
-        label: "11-15 بار در روز",
-      },
-      {
-        id: "11",
-        label: "16 بار و بیشتر در روز",
+        label: "11بار و بیشتر",
       },
     ],
     validation: Yup.string().required("لطفا میزان مصرف خود را مشخص نمایید"),
@@ -10083,8 +10080,9 @@ export const ISFAHANNEWFFQ = [
     serving: "یک عدد معادل یک بیسکوییت ساقه طلایی",
     img: "./Image/بیسکوئیت.jpg",
     subLabel: "",
-    id: "بیسکوئیت",
-    label: "بیسکوئیت",
+    id: "انواع بیسکوئیت",
+    label:
+      "انواع بیسکوئیت (ساده، سبوسدار، ویفر، کراکر، کرامدار و ساق طلایی و...)",
     type: "radio",
     options: [
       {
@@ -12487,8 +12485,7 @@ export const HABIT = [
       { id: "6", label: "شیشه ای" },
     ],
     validation: Yup.array()
-      .max(3, "حداکثر مجاز به انتخاب 3 ظرف هستید")
-      .required("لطفا به سوال جواب دهید"),
+    .required("لطفا به سوال جواب دهید"),
   },
 ];
 
@@ -13432,10 +13429,6 @@ export const FFQVALIDATIONDEMOGRAPHICQUESTION = [
       },
       {
         id: "4",
-        label: "20 تا 30 دقیقه",
-      },
-      {
-        id: "4",
         label: "بیشتر از 30 دقیقه",
       },
     ],
@@ -13854,7 +13847,7 @@ export const FFQVALIDATIONDEMOGRAPHICQUESTION = [
   {
     subLabel: "",
     id: "QOL3",
-    label: "آیا شما انرزی کافی برای زندگی روزمره دارید؟",
+    label: "آیا شما انرژی کافی برای زندگی روزمره دارید؟",
     type: "radio",
     options: [
       { id: "1", label: "خیلی ناراضی" },
@@ -14187,7 +14180,7 @@ export const FFQVALIDATIONDEMOGRAPHICQUESTION = [
     subLabel: "",
     id: "DASS21-9",
     label:
-      "گرانم مبادا در بعضی موقعیت ها دچار ترس شوم یا به کار احمقانه ای دست بزنم. ",
+      "نگرانم مبادا در بعضی موقعیت ها دچار ترس شوم یا به کار احمقانه ای دست بزنم. ",
     type: "radio",
     options: [
       { id: "1", label: "اصلا" },
@@ -14859,9 +14852,7 @@ export const FFQVALIDATIONDEMOGRAPHICQUESTION = [
     label:
       "در مقیاس 1 تا 8، که در آن 1 به معنای عدم محدودیت در غذا خوردن و 8 به معنای محدودیت کامل است، چه عددی را به خود می دهید؟",
     type: "number",
-    validation: Yup.number(
-      "لطفا با کیبورد انگلیسی و به درستی وارد کنید"
-    )
+    validation: Yup.number("لطفا با کیبورد انگلیسی و به درستی وارد کنید")
       .required("پاسخ به این سوال اجباری می باشد")
       .integer("لطفا بدون اعشار و به صورت عدد صحیح وارد نمایید")
       .min(1, "عدد وارد شده باید بین 1 تا 8 باشد")
@@ -15875,7 +15866,6 @@ export const FFQVALIDATIONHABIT = [
       { id: "6", label: "شیشه ای" },
     ],
     validation: Yup.array()
-      .max(3, "حداکثر مجاز به انتخاب 3 ظرف هستید")
       .required("لطفا به سوال جواب دهید"),
   },
 ];

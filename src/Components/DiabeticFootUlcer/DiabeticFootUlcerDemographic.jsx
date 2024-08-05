@@ -2000,7 +2000,6 @@ const questions = [
 const questionType = "diabeticfootulcerdemographic";
 export default function DiabeticFootUlcerDemographic() {
   let isCompletedBefore = localStorage.getItem(questionType);
-  // Use useEffect to show the swal message when the component mounts
 
   useEffect(() => {
     if (isCompletedBefore && !localStorage.getItem(`${questionType}admin`)) {

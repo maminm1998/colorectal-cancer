@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./../App.css";
+import axios from "axios";
+
 import Modal from "./../organism/Modal";
 import swal from "sweetalert";
 import { useNavigate } from "react-router";
@@ -17,12 +19,13 @@ const DynamicFormNewFFQ = ({ questions, questionType }) => {
   const [shouldScrollToError, setShouldScrollToError] = useState(false);
   const firstErrorFieldRef = useRef(null);
   const [selectedOptions, setSelectedOptions] = useState({});
+  const [ip, setIP] = useState("");
+  const [startTime, setStartTime] = useState(Date.now()); // زمان شروع
 
   const validationSchema = Yup.object().shape(
     questions.reduce((schema, question) => {
       schema[question.id] = question.validation;
 
-      // Add custom validation for "تلفن همراه جایگزین"
       if (question.id === "تلفن همراه جایگزین") {
         schema[question.id] = schema[question.id].test({
           name: "notEqual",
@@ -71,9 +74,15 @@ const DynamicFormNewFFQ = ({ questions, questionType }) => {
     }, {}),
     validationSchema,
     onSubmit: async (values) => {
+      // محاسبه زمان حضور
+      const currentTime = Date.now();
+      const timeSpent = currentTime - startTime; // زمان حضور به میلی ثانیه
+      values.timeSpent = formatTime(timeSpent); // افزودن زمان فرمت شده به داده‌ها
+
       // Use async/await to handle the fetch promise
       const currentDate = jalaliMoment().format("jYYYY/jMM/jDD HH:mm:ss");
       values.submissionDateTime = currentDate;
+      values.ip = ip;
 
       try {
         const response = await fetch(
@@ -149,7 +158,7 @@ const DynamicFormNewFFQ = ({ questions, questionType }) => {
     e.preventDefault();
     if (
       (questionType === "newcaseffq" && password === "10010") ||
-      (questionType === "newcontrolffq" && password === "10011") ||
+      (questionType === "newcontrolffq" && password === "10010") ||
       (questionType === "newabadancaseffq" && password === "10012") ||
       (questionType === "newabadancontrolffq" && password === "10013") ||
       (questionType === "diabeticfootulcerffq" && password === "10089") ||
@@ -166,6 +175,13 @@ const DynamicFormNewFFQ = ({ questions, questionType }) => {
       setPasswordModalOpen(false);
       setFormDisplay(true);
       localStorage.setItem(`${questionType}admin`, true);
+    } else if (
+      (questionType === "newcaseffq" || questionType === "newcontrolffq") &&
+      password === "10510"
+    ) {
+      setPasswordModalOpen(false);
+      setFormDisplay(true);
+      localStorage.setItem(`${questionType}admin`, true);
     } else {
       swal({
         title: "رمز عبور نادرست می باشد!",
@@ -174,6 +190,23 @@ const DynamicFormNewFFQ = ({ questions, questionType }) => {
       });
     }
   };
+  useEffect(() => {
+    if (formDisplay) {
+      setStartTime(Date.now()); // ثبت زمان شروع
+    }
+  }, [formDisplay]);
+  useEffect(() => {
+    const fetchIP = async () => {
+      try {
+        const response = await axios.get("https://api.ipify.org?format=json");
+        setIP(response.data.ip);
+      } catch (error) {
+        console.error("Error fetching the public IP address:", error);
+      }
+    };
+
+    fetchIP();
+  }, []);
 
   useEffect(() => {
     // Open password modal when component mounts
@@ -186,6 +219,18 @@ const DynamicFormNewFFQ = ({ questions, questionType }) => {
       setShouldScrollToError(false); // Set shouldScrollToError to false after initial scroll
     }
   }, [formik.errors, formik.values, firstErrorFieldRef, shouldScrollToError]);
+
+  const formatTime = (milliseconds) => {
+    const totalSeconds = Math.floor(milliseconds / 1000);
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(
+      2,
+      "0"
+    )}:${String(seconds).padStart(2, "0")}`;
+  };
 
   if (!formDisplay) {
     return (

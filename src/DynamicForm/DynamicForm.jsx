@@ -2,11 +2,13 @@ import React, { useEffect, useState, useRef } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./../App.css";
-import Modal from "./../organism/Modal";
-import swal from "sweetalert";
+import axios from "axios";
 import { useNavigate } from "react-router";
+import swal from "sweetalert";
 import TimePicker from "react-time-picker";
 import jalaliMoment from "jalali-moment"; // Import jalali-moment library
+
+import Modal from "./../organism/Modal";
 
 const DynamicForm = ({ questions, questionType }) => {
   const [passwordModalOpen, setPasswordModalOpen] = useState(false);
@@ -18,6 +20,8 @@ const DynamicForm = ({ questions, questionType }) => {
   const navigate = useNavigate();
   const [shouldScrollToError, setShouldScrollToError] = useState(false);
   const firstErrorFieldRef = useRef(null);
+  const [ip, setIP] = useState("");
+  const [startTime, setStartTime] = useState(Date.now()); // زمان شروع
 
   const validationSchema = Yup.object().shape(
     questions.reduce((schema, question) => {
@@ -50,6 +54,19 @@ const DynamicForm = ({ questions, questionType }) => {
     formik.setFieldTouched(questionId, true);
   };
 
+  useEffect(() => {
+    const fetchIP = async () => {
+      try {
+        const response = await axios.get("https://api.ipify.org?format=json");
+        setIP(response.data.ip);
+      } catch (error) {
+        console.error("Error fetching the public IP address:", error);
+      }
+    };
+
+    fetchIP();
+  }, []);
+
   const formik = useFormik({
     initialValues: questions.reduce((values, question) => {
       values[question.id] = "";
@@ -57,9 +74,15 @@ const DynamicForm = ({ questions, questionType }) => {
     }, {}),
     validationSchema,
     onSubmit: async (values) => {
+      // محاسبه زمان حضور
+      const currentTime = Date.now();
+      const timeSpent = currentTime - startTime; // زمان حضور به میلی ثانیه
+      values.timeSpent = formatTime(timeSpent); // افزودن زمان فرمت شده به داده‌ها
+
       // Use async/await to handle the fetch promise
       const currentDate = jalaliMoment().format("jYYYY/jMM/jDD HH:mm:ss");
       values.submissionDateTime = currentDate;
+      values.ip = ip;
 
       try {
         const response = await fetch(
@@ -139,11 +162,11 @@ const DynamicForm = ({ questions, questionType }) => {
     e.preventDefault();
     if (
       (questionType === "caseffq" && password === "????") ||
-      (questionType === "casedemographic" && password === "88554") ||
-      (questionType === "casehabit" && password === "36528") ||
+      (questionType === "casedemographic" && password === "10010") ||
+      (questionType === "casehabit" && password === "10010") ||
       (questionType === "controlffq" && password === "????") ||
-      (questionType === "controldemographic" && password === "99668") ||
-      (questionType === "controlhabit" && password === "48756") ||
+      (questionType === "controldemographic" && password === "10010") ||
+      (questionType === "controlhabit" && password === "10010") ||
       (questionType === "abadancaseffq" && password === "????") ||
       (questionType === "abadancasedemographic" && password === "10025") ||
       (questionType === "abadancasehabit" && password === "39685") ||
@@ -168,6 +191,16 @@ const DynamicForm = ({ questions, questionType }) => {
       setPasswordModalOpen(false);
       setFormDisplay(true);
       localStorage.setItem(`${questionType}admin`, true);
+    } else if (
+      (questionType === "casedemographic" ||
+        questionType === "casehabit" ||
+        questionType === "controldemographic" ||
+        questionType === "controlhabit") &&
+      password === "10510"
+    ) {
+      setPasswordModalOpen(false);
+      setFormDisplay(true);
+      localStorage.setItem(`${questionType}admin`, true);
     } else {
       swal({
         title: "رمز عبور نادرست می باشد!",
@@ -176,16 +209,34 @@ const DynamicForm = ({ questions, questionType }) => {
       });
     }
   };
+  useEffect(() => {
+    if (formDisplay) {
+      setStartTime(Date.now()); // ثبت زمان شروع
 
+    }
+  }, [formDisplay]);
   useEffect(() => {
     setPasswordModalOpen(true);
   }, []);
+
   useEffect(() => {
     if (shouldScrollToError && firstErrorFieldRef.current) {
       firstErrorFieldRef.current.scrollIntoView({ behavior: "smooth" });
       setShouldScrollToError(false); // Set shouldScrollToError to false after initial scroll
     }
   }, [formik.errors, formik.values, firstErrorFieldRef, shouldScrollToError]);
+
+  const formatTime = (milliseconds) => {
+    const totalSeconds = Math.floor(milliseconds / 1000);
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(
+      2,
+      "0"
+    )}:${String(seconds).padStart(2, "0")}`;
+  };
 
   if (!formDisplay) {
     return (

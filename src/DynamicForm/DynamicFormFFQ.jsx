@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./../App.css";
+
 import Modal from "./../organism/Modal";
 import swal from "sweetalert";
 import { useNavigate } from "react-router";
@@ -13,6 +14,7 @@ const DynamicForm = ({ questions, questionType }) => {
   const navigate = useNavigate();
   const [shouldScrollToError, setShouldScrollToError] = useState(false);
   const firstErrorFieldRef = useRef(null);
+
 
   const validationSchema = Yup.object().shape(
     questions.reduce((schema, question) => {
@@ -122,6 +124,7 @@ const DynamicForm = ({ questions, questionType }) => {
       });
     }
   };
+
 
   useEffect(() => {
     // Open password modal when component mounts
