@@ -80,7 +80,6 @@ export const ABADANFFQ = [
     label: "تلفن همراه جایگزین",
     type: "text",
     validation: Yup.string()
-      .required("وارد کردن تلفن همراه جایگزین الزامی است")
       .min(11, "تعداد ارقام تلفن همراه باید 11 عدد باشد")
       .max(12, "تعداد ارقام تلفن همراه باید 11 عدد باشد")
       .matches(

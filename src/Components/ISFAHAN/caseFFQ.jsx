@@ -19,7 +19,7 @@ export default function CaseFFQ() {
           <div className="bg-blue-500 rounded-t-lg p-2 text-white font-bold text-xl">
             پرسشنامه (برای بزرگنمایی تصاویر بر روی خود تصویر کلیک کنید)
           </div>
-          <DynamicFormFFQ questionType={questionType} questions={ISFAHANFFQ} />
+          <DynamicFormFFQ passwordRequired={true} questionType={questionType} questions={ISFAHANFFQ} />
         </div>
       )}
     </>

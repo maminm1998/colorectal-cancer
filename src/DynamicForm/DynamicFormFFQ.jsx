@@ -7,14 +7,13 @@ import Modal from "./../organism/Modal";
 import swal from "sweetalert";
 import { useNavigate } from "react-router";
 
-const DynamicForm = ({ questions, questionType }) => {
+const DynamicForm = ({ questions, questionType, passwordRequired }) => {
   const [passwordModalOpen, setPasswordModalOpen] = useState(false);
   const [password, setPassword] = useState("");
   const [formDisplay, setFormDisplay] = useState(false);
   const navigate = useNavigate();
   const [shouldScrollToError, setShouldScrollToError] = useState(false);
   const firstErrorFieldRef = useRef(null);
-
 
   const validationSchema = Yup.object().shape(
     questions.reduce((schema, question) => {
@@ -125,10 +124,13 @@ const DynamicForm = ({ questions, questionType }) => {
     }
   };
 
-
   useEffect(() => {
-    // Open password modal when component mounts
-    setPasswordModalOpen(true);
+    if (passwordRequired) {
+      setPasswordModalOpen(true);
+    } else {
+      setPasswordModalOpen(false);
+      setFormDisplay(true);
+    }
   }, []);
 
   useEffect(() => {

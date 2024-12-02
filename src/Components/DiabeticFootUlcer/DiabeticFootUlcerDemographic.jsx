@@ -2020,7 +2020,7 @@ export default function DiabeticFootUlcerDemographic() {
       <div className="bg-blue-500 rounded-t-lg p-2 text-white font-bold text-xl">
         پرسشنامه (برای بزرگنمایی تصاویر بر روی خود تصویر کلیک کنید)
       </div>
-      <DynamicForm questionType={questionType} questions={questions} />
+      <DynamicForm passwordRequired={true} questionType={questionType} questions={questions} />
     </div>
   );
 }

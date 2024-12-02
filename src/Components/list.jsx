@@ -78,7 +78,7 @@ export default function List() {
       setFormDisplay(true);
       setDiabeticFootUlcer(true);
       setEditable(true);
-    } else if (password === "100688") {
+    } else if (password === "10068") {
       setPasswordModalOpen(false);
       setFormDisplay(true);
       setFFQValidation(true);

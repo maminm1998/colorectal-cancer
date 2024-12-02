@@ -82,7 +82,6 @@ const questions = [
     label: "تلفن همراه جایگزین",
     type: "text",
     validation: Yup.string()
-      .required("وارد کردن تلفن همراه جایگزین الزامی است")
       .min(11, "تعداد ارقام تلفن همراه باید 11 عدد باشد")
       .max(12, "تعداد ارقام تلفن همراه باید 11 عدد باشد")
       .matches(
@@ -630,7 +629,7 @@ const questions = [
     subLabel: "",
     id: "در طول 10 سال گذشته، کدامیک از اتفاقات تلخ زیر را تجربه کرده اید؟",
     label: "در طول 10 سال گذشته، کدامیک از اتفاقات تلخ زیر را تجربه کرده اید؟",
-    type: "radio",
+    type: "checkbox",
     options: [
       {
         id: "1",
@@ -649,11 +648,11 @@ const questions = [
         label: "ترس یا غم های بزرگ دیگری داشتم",
       },
       {
-        id: "5",
+        id: "هیچکدام",
         label: "هیچکدام",
       },
     ],
-    validation: Yup.string().required("لطفا به سوال پاسخ دهید"),
+    validation: Yup.array().required("لطفا به سوال پاسخ دهید"),
   },
   {
     subLabel: "",
@@ -1177,27 +1176,27 @@ const questions = [
 const questionType = "controldemographic";
 
 export default function ControlDemographic() {
-  let isCompletedBefore = localStorage.getItem(questionType);
-  useEffect(() => {
-    if (isCompletedBefore && !localStorage.getItem(`${questionType}admin`)) {
-      swal({
-        title: "شما قبلا این پرسشنامه را پر کرده اید",
-        icon: "error",
-        buttons: "متوجه شدم",
-      });
-    }
-  }, [isCompletedBefore]);
+  // let isCompletedBefore = localStorage.getItem(questionType);
+  // useEffect(() => {
+  //   if (isCompletedBefore && !localStorage.getItem(`${questionType}admin`)) {
+  //     swal({
+  //       title: "شما قبلا این پرسشنامه را پر کرده اید",
+  //       icon: "error",
+  //       buttons: "متوجه شدم",
+  //     });
+  //   }
+  // }, [isCompletedBefore]);
 
-  if (isCompletedBefore && !localStorage.getItem(`${questionType}admin`)) {
-    return null; // Return null if the form has been completed before
-  }
+  // if (isCompletedBefore && !localStorage.getItem(`${questionType}admin`)) {
+  //   return null; // Return null if the form has been completed before
+  // }
 
   return (
     <div className="border-2 my-1 border-blue-500 rounded-lg w-[95%] m-auto">
       <div className="bg-blue-500 rounded-t-lg p-2 text-white font-bold text-xl">
         پرسشنامه
       </div>
-      <DynamicForm questionType={questionType} questions={questions} />
+      <DynamicForm passwordRequired={false} questionType={questionType} questions={questions} />
     </div>
   );
 }

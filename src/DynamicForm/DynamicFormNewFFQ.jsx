@@ -9,7 +9,7 @@ import swal from "sweetalert";
 import { useNavigate } from "react-router";
 import jalaliMoment from "jalali-moment"; // Import jalali-moment library
 
-const DynamicFormNewFFQ = ({ questions, questionType }) => {
+const DynamicFormNewFFQ = ({ questions, questionType, passwordRequired }) => {
   const [passwordModalOpen, setPasswordModalOpen] = useState(false);
   const [password, setPassword] = useState("");
   const [formDisplay, setFormDisplay] = useState(
@@ -182,6 +182,10 @@ const DynamicFormNewFFQ = ({ questions, questionType }) => {
       setPasswordModalOpen(false);
       setFormDisplay(true);
       localStorage.setItem(`${questionType}admin`, true);
+    } else if (questionType === "ffqvalidation" && password === "10068") {
+      setPasswordModalOpen(false);
+      setFormDisplay(true);
+      localStorage.setItem(`${questionType}admin`, true);
     } else {
       swal({
         title: "رمز عبور نادرست می باشد!",
@@ -209,8 +213,12 @@ const DynamicFormNewFFQ = ({ questions, questionType }) => {
   }, []);
 
   useEffect(() => {
-    // Open password modal when component mounts
-    setPasswordModalOpen(true);
+    if (passwordRequired) {
+      setPasswordModalOpen(true);
+    } else {
+      setPasswordModalOpen(false);
+      setFormDisplay(true);
+    }
   }, []);
 
   useEffect(() => {

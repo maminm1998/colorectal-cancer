@@ -10,7 +10,7 @@ export default function NewAbadanControlFFQ() {
       <div className="bg-blue-500 rounded-t-lg p-2 text-white font-bold text-xl">
         پرسشنامه (برای بزرگنمایی تصاویر بر روی خود تصویر کلیک کنید)
       </div>
-      <DynamicFormNewFFQ questionType={questionType} questions={NEWABADANFFQ} />
+      <DynamicFormNewFFQ passwordRequired={true} questionType={questionType} questions={NEWABADANFFQ} />
     </div>
   );
 }

@@ -5,22 +5,22 @@ import swal from "sweetalert";
 const questionType = "newcaseffq";
 
 export default function NewCaseFFQ() {
-  let isCompletedBefore = localStorage.getItem(questionType);
-  // Use useEffect to show the swal message when the component mounts
+  // let isCompletedBefore = localStorage.getItem(questionType);
+  // // Use useEffect to show the swal message when the component mounts
 
-  useEffect(() => {
-    if (isCompletedBefore) {
-      swal({
-        title: "شما قبلا این پرسشنامه را پر کرده اید",
-        icon: "error",
-        buttons: "متوجه شدم",
-      });
-    }
-  }, [isCompletedBefore]);
+  // useEffect(() => {
+  //   if (isCompletedBefore) {
+  //     swal({
+  //       title: "شما قبلا این پرسشنامه را پر کرده اید",
+  //       icon: "error",
+  //       buttons: "متوجه شدم",
+  //     });
+  //   }
+  // }, [isCompletedBefore]);
 
-  if (isCompletedBefore) {
-    return null; // Return null if the form has been completed before
-  }
+  // if (isCompletedBefore) {
+  //   return null; // Return null if the form has been completed before
+  // }
 
   return (
     <div className="border-2 my-1 border-blue-500 rounded-lg w-[95%] m-auto">
@@ -30,6 +30,7 @@ export default function NewCaseFFQ() {
       <DynamicFormNewFFQ
         questionType={questionType}
         questions={ISFAHANNEWFFQ ?? ISFAHANNEWFFQ}
+        passwordRequired={false}
       />
     </div>
   );

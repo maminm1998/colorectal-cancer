@@ -30,6 +30,7 @@ export default function DiabeticFootUlcerFFQ() {
       <DynamicFormNewFFQ
         questionType={questionType}
         questions={DIABETICFOOTULCERFFQ}
+        passwordRequired={true}
       />
     </div>
   );

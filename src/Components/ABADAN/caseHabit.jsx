@@ -12,7 +12,7 @@ export default function CaseHabit() {
         <div className="bg-blue-500 rounded-t-lg p-2 text-white font-bold text-xl">
           پرسشنامه
         </div>
-        <DynamicForm questionType={questionType} questions={HABIT} />
+        <DynamicForm passwordRequired={true} questionType={questionType} questions={HABIT} />
       </div>
     </>
   );

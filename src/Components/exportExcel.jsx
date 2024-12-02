@@ -57,22 +57,59 @@ export default function ExportExcel() {
     }
   }, [fetchedData, buttonsDisabled]);
 
+  const formatDataForExcel = (data) => {
+    const isObject = (value) => typeof value === "object" && value !== null;
+
+    return data.map((item) => {
+      const formattedItem = {};
+      for (const key in item) {
+        if (item.hasOwnProperty(key)) {
+          if (isObject(item[key])) {
+            // بررسی وجود کلید value و استخراج مقدار
+            if ("value" in item[key]) {
+              formattedItem[key] = item[key].value;
+            } else {
+              // در صورت نبودن value، مقادیر Object به رشته تبدیل شود
+              formattedItem[key] = Object.values(item[key]).join(" ");
+            }
+          } else {
+            // مقادیر ساده مستقیماً انتقال داده شوند
+            formattedItem[key] = item[key];
+          }
+        }
+      }
+      return formattedItem;
+    });
+  };
+
   const downloadExcel = () => {
     if (fetchedData.length === 0) {
-    } else {
-      const currentDate = new Date()
-        .toLocaleDateString("en-US")
-        .replaceAll("/", "-");
-      const currentTime = new Date()
-        .toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })
-        .replace(/\s(\w+)/, " $1");
-      const formattedDateTime = `date_${currentDate}_time_${currentTime}`;
-      const worksheet = XLSX.utils.json_to_sheet(fetchedData);
-      const workbook = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
-      XLSX.writeFile(workbook, `${questionType}_${formattedDateTime}.xlsx`);
+      return;
     }
+
+    const currentDate = new Date()
+      .toLocaleDateString("en-US")
+      .replaceAll("/", "-");
+    const currentTime = new Date()
+      .toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })
+      .replace(/\s(\w+)/, " $1");
+    const formattedDateTime = `date_${currentDate}_time_${currentTime}`;
+
+    // فرمت کردن داده‌ها برای اکسل
+    const formattedData = formatDataForExcel(fetchedData);
+
+    // بررسی داده‌های فرمت‌شده در کنسول (اختیاری)
+    console.log("Formatted Data for Excel:", formattedData);
+
+    // ایجاد شیت اکسل با داده‌های فرمت‌شده
+    const worksheet = XLSX.utils.json_to_sheet(formattedData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+
+    // ذخیره فایل اکسل
+    XLSX.writeFile(workbook, `${questionType}_${formattedDateTime}.xlsx`);
   };
+
   const handlePasswordSubmit = (e) => {
     e.preventDefault();
     if (password === "12225") {

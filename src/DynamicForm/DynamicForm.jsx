@@ -10,7 +10,7 @@ import jalaliMoment from "jalali-moment"; // Import jalali-moment library
 
 import Modal from "./../organism/Modal";
 
-const DynamicForm = ({ questions, questionType }) => {
+const DynamicForm = ({ questions, questionType, passwordRequired }) => {
   const [passwordModalOpen, setPasswordModalOpen] = useState(false);
   const [password, setPassword] = useState("");
   const [formDisplay, setFormDisplay] = useState(
@@ -201,6 +201,14 @@ const DynamicForm = ({ questions, questionType }) => {
       setPasswordModalOpen(false);
       setFormDisplay(true);
       localStorage.setItem(`${questionType}admin`, true);
+    } else if (
+      (questionType === "ffqvalidationhabit" ||
+        questionType === "ffqvalidationdemographic") &&
+      password === "10068"
+    ) {
+      setPasswordModalOpen(false);
+      setFormDisplay(true);
+      localStorage.setItem(`${questionType}admin`, true);
     } else {
       swal({
         title: "رمز عبور نادرست می باشد!",
@@ -212,11 +220,16 @@ const DynamicForm = ({ questions, questionType }) => {
   useEffect(() => {
     if (formDisplay) {
       setStartTime(Date.now()); // ثبت زمان شروع
-
     }
   }, [formDisplay]);
+  
   useEffect(() => {
-    setPasswordModalOpen(true);
+    if (passwordRequired) {
+      setPasswordModalOpen(true);
+    } else {
+      setPasswordModalOpen(false);
+      setFormDisplay(true);
+    }
   }, []);
 
   useEffect(() => {
@@ -584,6 +597,11 @@ const DynamicForm = ({ questions, questionType }) => {
                   {formik.errors[question.id]}
                 </div>
               )}
+            </div>
+          )}
+          {question.type === "description" && (
+            <div className="border-2 text-white bg-blue-500 p-4 text-center rounded-xl">
+              {question.description}
             </div>
           )}
         </div>

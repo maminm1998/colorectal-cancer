@@ -80,7 +80,6 @@ export const ISFAHANFFQ = [
     label: "تلفن همراه جایگزین",
     type: "text",
     validation: Yup.string()
-      .required("وارد کردن تلفن همراه جایگزین الزامی است")
       .min(11, "تعداد ارقام تلفن همراه باید 11 عدد باشد")
       .max(12, "تعداد ارقام تلفن همراه باید 11 عدد باشد")
       .matches(
@@ -5147,7 +5146,6 @@ export const ISFAHANNEWFFQ = [
     label: "تلفن همراه جایگزین",
     type: "text",
     validation: Yup.string()
-      .required("وارد کردن تلفن همراه جایگزین الزامی است")
       .min(11, "تعداد ارقام تلفن همراه باید 11 عدد باشد")
       .max(12, "تعداد ارقام تلفن همراه باید 11 عدد باشد")
       .matches(
@@ -7615,8 +7613,8 @@ export const ISFAHANNEWFFQ = [
     serving: "یک لیوان ذرت یا یک عدد بلال",
     img: "./Image/بلال یا ذرت.jpg",
     subLabel: "",
-    id: "ذرت یا بلال",
-    label: "ذرت یا بلال",
+    id: "ذرت، پفیلا یا بلال ",
+    label: "ذرت، پفیلا یا بلال ",
     type: "radio",
     options: [
       {
@@ -9020,7 +9018,7 @@ export const ISFAHANNEWFFQ = [
   {
     serving: "یک مشت معادل 5عدد",
     img: "./Image/توت خشک.jpg",
-    subLabel: "",
+    subLabel: "(توت خشک، برگ هلو، برگ زردآلو وآلبالو خشک)",
     id: "میوه های خشک",
     label: "میوه های خشک",
     type: "radio",
@@ -11460,6 +11458,14 @@ export const ISFAHANNEWFFQ = [
     ],
     validation: Yup.array(),
   },
+  {
+    subLabel: "",
+    id: "سایر دمنوش ها:",
+    label: "سایر دمنوش ها:",
+    type: "text",
+    validation: Yup.string("لطفا نام دمنوش را به درستی وارد کنید"),
+    placeholder: "لطفا نام سایر دمنوش  ها اینجا وارد شود",
+  },
 ];
 
 export const HABIT = [
@@ -11542,7 +11548,6 @@ export const HABIT = [
     label: "تلفن همراه جایگزین",
     type: "text",
     validation: Yup.string()
-      .required("وارد کردن تلفن همراه جایگزین الزامی است")
       .min(11, "تعداد ارقام تلفن همراه باید 11 عدد باشد")
       .max(12, "تعداد ارقام تلفن همراه باید 11 عدد باشد")
       .matches(
@@ -12484,8 +12489,7 @@ export const HABIT = [
       { id: "5", label: "پلاستیکی" },
       { id: "6", label: "شیشه ای" },
     ],
-    validation: Yup.array()
-    .required("لطفا به سوال جواب دهید"),
+    validation: Yup.array().required("لطفا به سوال جواب دهید"),
   },
 ];
 
@@ -12569,7 +12573,6 @@ export const FFQVALIDATIONDEMOGRAPHICQUESTION = [
     label: "تلفن همراه جایگزین",
     type: "text",
     validation: Yup.string()
-      .required("وارد کردن تلفن همراه جایگزین الزامی است")
       .min(11, "تعداد ارقام تلفن همراه باید 11 عدد باشد")
       .max(12, "تعداد ارقام تلفن همراه باید 11 عدد باشد")
       .matches(
@@ -13006,7 +13009,7 @@ export const FFQVALIDATIONDEMOGRAPHICQUESTION = [
     ),
   },
   {
-    subLabel: " (حداقل 1 و حداکثر 3 گزینه میتوانید انتخاب کنید)",
+    subLabel: "(حداقل یک گزینه باید انتخاب شود)",
     id: "در طول زندگی خود به کدامیک از بیماری های زیر مبتلا شده اید؟",
     label: "در طول زندگی خود به کدامیک از بیماری های زیر مبتلا شده اید؟",
     type: "checkbox",
@@ -13038,7 +13041,6 @@ export const FFQVALIDATIONDEMOGRAPHICQUESTION = [
     ],
     validation: Yup.array()
       .min(1, "حداقل باید 1 شهر انتخاب شود")
-      .max(3, "حداکثر مجاز به انتخاب 3 شهر هستید")
       .required("پاسخ به این سوال اجباری می باشد"),
   },
   {
@@ -13206,6 +13208,14 @@ export const FFQVALIDATIONDEMOGRAPHICQUESTION = [
   },
   {
     subLabel: "",
+    id: "سایر مکمل ها، ویتامین یا مواد معدنی",
+    label: "سایر مکمل ها، ویتامین یا مواد معدنی",
+    type: "text",
+    validation: Yup.string("لطفا نام مکمل را به درستی وارد کنید"),
+    placeholder: "نام سایر مکمل را اینجا وارد نمایید ",
+  },
+  {
+    subLabel: "",
     id: "در طول سال گذشته کدامیک از دارو های زیر را به طور معمول مصرف کرده اید؟ ",
     label:
       "در طول سال گذشته کدامیک از دارو های زیر را به طور معمول مصرف کرده اید؟ ",
@@ -13231,6 +13241,10 @@ export const FFQVALIDATIONDEMOGRAPHICQUESTION = [
         id: "11",
         label: "سایر",
       },
+      {
+        id: "هیچکدام",
+        label: "هیچ دارویی در یک سال پیش مصرف نکردم.",
+      },
     ],
     validation: Yup.array()
       .required("لطفا سابقه مصرف دارویی خود را مشخص نمایید ")
@@ -13238,9 +13252,17 @@ export const FFQVALIDATIONDEMOGRAPHICQUESTION = [
   },
   {
     subLabel: "",
+    id: "سایر داروها:",
+    label: "سایر داروها:",
+    type: "text",
+    validation: Yup.string("لطفا نام دارو را به درستی وارد کنید"),
+    placeholder: "نام سایر داروها را اینجا وارد نمایید ",
+  },
+  {
+    subLabel: "",
     id: "در طول 10 سال گذشته، کدامیک از اتفاقات تلخ زیر را تجربه کرده اید؟",
     label: "در طول 10 سال گذشته، کدامیک از اتفاقات تلخ زیر را تجربه کرده اید؟",
-    type: "radio",
+    type: "checkbox",
     options: [
       {
         id: "1",
@@ -13259,11 +13281,11 @@ export const FFQVALIDATIONDEMOGRAPHICQUESTION = [
         label: "ترس یا غم های بزرگ دیگری داشتم",
       },
       {
-        id: "5",
+        id: "هیچکدام",
         label: "هیچکدام",
       },
     ],
-    validation: Yup.string().required("لطفا به سوال پاسخ دهید"),
+    validation: Yup.array().required("لطفا به سوال پاسخ دهید"),
   },
   {
     subLabel: "",
@@ -13455,7 +13477,7 @@ export const FFQVALIDATIONDEMOGRAPHICQUESTION = [
         label: "2 تا 3 بار در هفته",
       },
       {
-        id: "4",
+        id: "5",
         label: "بیش از 3 بار در هفته یا روزانه",
       },
     ],
@@ -13793,6 +13815,11 @@ export const FFQVALIDATIONDEMOGRAPHICQUESTION = [
     placeholder: "مثلا: 1",
   },
   {
+    type: "description",
+    description:
+      "در زیر، تعداد 8 سوال برای ارزیابی کیفیت زندگی شما وجود دارد. با توجه به هر سوال، بهترین گزینه ای که نشان دهنده وضعیت شما باشد را انتخاب کنید.",
+  },
+  {
     subLabel: "",
     id: "QOL1",
     label: "کیفیت زندگی خود ر ا چگونه ارزیابی میکنید؟",
@@ -13873,7 +13900,7 @@ export const FFQVALIDATIONDEMOGRAPHICQUESTION = [
   {
     subLabel: "",
     id: "QOL4",
-    label: "چقدر از توانایی انجام کار های روزمره تان راضی هستید؟",
+    label: "چقدر از توانایی انجام کارهای روزمره خود راضی هستید؟",
     type: "radio",
     options: [
       { id: "1", label: "خیلی ناراضی" },
@@ -14001,6 +14028,11 @@ export const FFQVALIDATIONDEMOGRAPHICQUESTION = [
     validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
   },
   {
+    description:
+      "در زیر، جملاتی برای ارزیابی وضعیت استرس شما طراحی شده است. لطفا هر یک از جملات را با دقت بخوانید و سپس بهترین گزینه ای که نشان دهنده وضعیت شما باشد را انتخاب کنید.",
+    type: "description",
+  },
+  {
     subLabel: "",
     id: "DASS21-1",
     label: "برای من مشکل است که آرام بگیرم (آرام و قرار ندارم).",
@@ -14113,7 +14145,7 @@ export const FFQVALIDATIONDEMOGRAPHICQUESTION = [
   {
     subLabel: "",
     id: "DASS21-6",
-    label: "به موقعیت ها بیش از حد واکنش نشان میدهم.",
+    label: "به موقعیت های پراسترس یا شاد بیش از حد واکنش نشان میدهم.",
     type: "radio",
     options: [
       { id: "1", label: "اصلا" },
@@ -14464,401 +14496,6 @@ export const FFQVALIDATIONDEMOGRAPHICQUESTION = [
     ],
     validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
   },
-  {
-    subLabel: "",
-    id: "TFEQ-1",
-    label:
-      "وقتی بوی غذای لذیذی  را حس میکنم ، حتی اگر گرسنه نباشم اجتناب از خوردن غذا برایم دشوار است.",
-    type: "radio",
-    options: [
-      { id: "1", label: "کاملا غلط" },
-      {
-        id: "2",
-        label: "تقریبا غلط",
-      },
-      {
-        id: "3",
-        label: "تقریبا درست",
-      },
-      {
-        id: "4",
-        label: "کاملا درست",
-      },
-    ],
-    validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
-  },
-  {
-    subLabel: "",
-    id: "TFEQ-2",
-    label: "من عمدا از مصرف وعده های غذایی کوچک برای کنترل وزن استفاده میکنم.",
-    type: "radio",
-    options: [
-      { id: "1", label: "کاملا غلط" },
-      {
-        id: "2",
-        label: "تقریبا غلط",
-      },
-      {
-        id: "3",
-        label: "تقریبا درست",
-      },
-      {
-        id: "4",
-        label: "کاملا درست",
-      },
-    ],
-    validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
-  },
-  {
-    subLabel: "",
-    id: "TFEQ-3",
-    label: " وقتی مضطرب و نگران هستم، میخواهم غذا بخورم.",
-    type: "radio",
-    options: [
-      { id: "1", label: "کاملا غلط" },
-      {
-        id: "2",
-        label: "تقریبا غلط",
-      },
-      {
-        id: "3",
-        label: "تقریبا درست",
-      },
-      {
-        id: "4",
-        label: "کاملا درست",
-      },
-    ],
-    validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
-  },
-  {
-    subLabel: "",
-    id: "TFEQ-4",
-    label:
-      "وقتی شروع به غذاخوردن میکنم، نمی توانم به راحتی از غذا خوردن دست بکشم.",
-    type: "radio",
-    options: [
-      { id: "1", label: "کاملا غلط" },
-      {
-        id: "2",
-        label: "تقریبا غلط",
-      },
-      {
-        id: "3",
-        label: "تقریبا درست",
-      },
-      {
-        id: "4",
-        label: "کاملا درست",
-      },
-    ],
-    validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
-  },
-  {
-    subLabel: "",
-    id: "TFEQ-5",
-    label:
-      "دیدن فردی که در حال غذا خوردن است باعث میشود، من هم احساس گرسنگی کنم. ",
-    type: "radio",
-    options: [
-      { id: "1", label: "کاملا غلط" },
-      {
-        id: "2",
-        label: "تقریبا غلط",
-      },
-      {
-        id: "3",
-        label: "تقریبا درست",
-      },
-      {
-        id: "4",
-        label: "کاملا درست",
-      },
-    ],
-    validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
-  },
-  {
-    subLabel: "",
-    id: "TFEQ-6",
-    label: "وقتی احساس ناراحتی می کنم، اغلب پرخوری می کنم.",
-    type: "radio",
-    options: [
-      { id: "1", label: "کاملا غلط" },
-      {
-        id: "2",
-        label: "تقریبا غلط",
-      },
-      {
-        id: "3",
-        label: "تقریبا درست",
-      },
-      {
-        id: "4",
-        label: "کاملا درست",
-      },
-    ],
-    validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
-  },
-  {
-    subLabel: "",
-    id: "TFEQ-7",
-    label:
-      "وقتی یک غذای لذیذ می بینم، آنقدر احساس گرسنگی میکنم که باید فورا غذا بخورم.",
-    type: "radio",
-    options: [
-      { id: "1", label: "کاملا غلط" },
-      {
-        id: "2",
-        label: "تقریبا غلط",
-      },
-      {
-        id: "3",
-        label: "تقریبا درست",
-      },
-      {
-        id: "4",
-        label: "کاملا درست",
-      },
-    ],
-    validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
-  },
-  {
-    subLabel: "",
-    id: "TFEQ-8",
-    label:
-      "آنقدر گرسنه می شوم که فکر می کنم معده من گودالی است که اصلا پر نمی شود",
-    type: "radio",
-    options: [
-      { id: "1", label: "کاملا غلط" },
-      {
-        id: "2",
-        label: "تقریبا غلط",
-      },
-      {
-        id: "3",
-        label: "تقریبا درست",
-      },
-      {
-        id: "4",
-        label: "کاملا درست",
-      },
-    ],
-    validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
-  },
-  {
-    subLabel: "",
-    id: "TFEQ-9",
-    label:
-      "من همیشه احساس گرسنگی میکنم و قبل از اینکه غذای بشقابم تمام شود دست کشیدن از غذاخوردن برایم دشوار است.",
-    type: "radio",
-    options: [
-      { id: "1", label: "کاملا غلط" },
-      {
-        id: "2",
-        label: "تقریبا غلط",
-      },
-      {
-        id: "3",
-        label: "تقریبا درست",
-      },
-      {
-        id: "4",
-        label: "کاملا درست",
-      },
-    ],
-    validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
-  },
-  {
-    subLabel: "",
-    id: "TFEQ-10",
-    label: "وقتی احساس تنهایی می کنم با خوردن غذا به خودم آرامش می دهم.",
-    type: "radio",
-    options: [
-      { id: "1", label: "کاملا غلط" },
-      {
-        id: "2",
-        label: "تقریبا غلط",
-      },
-      {
-        id: "3",
-        label: "تقریبا درست",
-      },
-      {
-        id: "4",
-        label: "کاملا درست",
-      },
-    ],
-    validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
-  },
-  {
-    subLabel: "",
-    id: "TFEQ-11",
-    label:
-      "من آگاهانه از غذا خوردن  بیش از حد در وعده های غذایی پرهیز میکنم تا اضافه وزن پیدا نکنم. ",
-    type: "radio",
-    options: [
-      { id: "1", label: "کاملا غلط" },
-      {
-        id: "2",
-        label: "تقریبا غلط",
-      },
-      {
-        id: "3",
-        label: "تقریبا درست",
-      },
-      {
-        id: "4",
-        label: "کاملا درست",
-      },
-    ],
-    validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
-  },
-  {
-    subLabel: "",
-    id: "TFEQ-12",
-    label:
-      "من از خوردن بعضی غذا ها اجتناب میکنم، چون باعث اضافه وزن من میشوند.",
-    type: "radio",
-    options: [
-      { id: "1", label: "کاملا غلط" },
-      {
-        id: "2",
-        label: "تقریبا غلط",
-      },
-      {
-        id: "3",
-        label: "تقریبا درست",
-      },
-      {
-        id: "4",
-        label: "کاملا درست",
-      },
-    ],
-    validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
-  },
-  {
-    subLabel: "",
-    id: "TFEQ-13",
-    label: "من همیشه به قدری گرسنه هستم که میتوانم در هر زمانی غذا بخورم.",
-    type: "radio",
-    options: [
-      { id: "1", label: "کاملا غلط" },
-      {
-        id: "2",
-        label: "تقریبا غلط",
-      },
-      {
-        id: "3",
-        label: "تقریبا درست",
-      },
-      {
-        id: "4",
-        label: "کاملا درست",
-      },
-    ],
-    validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
-  },
-  {
-    subLabel: "",
-    id: "TFEQ-14",
-    label: "هر چند وقت یک بار احساس گرسنگی می کنید؟",
-    type: "radio",
-    options: [
-      { id: "1", label: "هرگز" },
-      {
-        id: "2",
-        label: "کم",
-      },
-      {
-        id: "3",
-        label: "متوسط",
-      },
-      {
-        id: "4",
-        label: "زیاد",
-      },
-    ],
-    validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
-  },
-  {
-    subLabel: "",
-    id: "TFEQ-15",
-    label: "هر چند وقت یکبار از تهیه غذاهای وسوسه انگیز اجتناب می کنید؟",
-    type: "radio",
-    options: [
-      { id: "1", label: "هرگز" },
-      {
-        id: "2",
-        label: "کم",
-      },
-      {
-        id: "3",
-        label: "متوسط",
-      },
-      {
-        id: "4",
-        label: "زیاد",
-      },
-    ],
-    validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
-  },
-  {
-    subLabel: "",
-    id: "TFEQ-16",
-    label: "آیا ممکن است آگاهانه کمتر از مقداری که میخواهید غذا  بخورید؟",
-    type: "radio",
-    options: [
-      { id: "1", label: "هرگز" },
-      {
-        id: "2",
-        label: "کم",
-      },
-      {
-        id: "3",
-        label: "متوسط",
-      },
-      {
-        id: "4",
-        label: "زیاد",
-      },
-    ],
-    validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
-  },
-  {
-    subLabel: "",
-    id: "TFEQ-17",
-    label: "آیا با وجود اینکه گرسنه نیستید به پرخوری ادامه می دهید؟",
-    type: "radio",
-    options: [
-      { id: "1", label: "هرگز" },
-      {
-        id: "2",
-        label: "کم",
-      },
-      {
-        id: "3",
-        label: "متوسط",
-      },
-      {
-        id: "4",
-        label: "زیاد",
-      },
-    ],
-    validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
-  },
-  {
-    subLabel: "",
-    id: "TFEQ-18",
-    label:
-      "در مقیاس 1 تا 8، که در آن 1 به معنای عدم محدودیت در غذا خوردن و 8 به معنای محدودیت کامل است، چه عددی را به خود می دهید؟",
-    type: "number",
-    validation: Yup.number("لطفا با کیبورد انگلیسی و به درستی وارد کنید")
-      .required("پاسخ به این سوال اجباری می باشد")
-      .integer("لطفا بدون اعشار و به صورت عدد صحیح وارد نمایید")
-      .min(1, "عدد وارد شده باید بین 1 تا 8 باشد")
-      .max(8, "عدد وارد شده باید بین 1 تا 8 باشد"),
-    placeholder: "عدد مورد نظر را اینجا وارد نمایید",
-  },
 ];
 
 export const FFQVALIDATIONHABIT = [
@@ -14941,7 +14578,6 @@ export const FFQVALIDATIONHABIT = [
     label: "تلفن همراه جایگزین",
     type: "text",
     validation: Yup.string()
-      .required("وارد کردن تلفن همراه جایگزین الزامی است")
       .min(11, "تعداد ارقام تلفن همراه باید 11 عدد باشد")
       .max(12, "تعداد ارقام تلفن همراه باید 11 عدد باشد")
       .matches(
@@ -15865,7 +15501,405 @@ export const FFQVALIDATIONHABIT = [
       { id: "5", label: "پلاستیکی" },
       { id: "6", label: "شیشه ای" },
     ],
-    validation: Yup.array()
-      .required("لطفا به سوال جواب دهید"),
+    validation: Yup.array().required("لطفا به سوال جواب دهید"),
+  },
+  {
+    type: "description",
+    description:
+      "در زیر، جملاتی برای ارزیابی وضعیت اشتها و رفتارهای غذایی شما طراحی شده است. لطفا هر یک از جملات را با دقت بخوانید و سپس بهترین گزینه ای که نشان دهنده وضعیت شما باشد را انتخاب کنید.",
+  },
+  {
+    subLabel: "",
+    id: "TFEQ-1",
+    label:
+      "وقتی بوی غذای لذیذی  را حس میکنم ، حتی اگر گرسنه نباشم اجتناب از خوردن غذا برایم دشوار است.",
+    type: "radio",
+    options: [
+      { id: "1", label: "کاملا غلط" },
+      {
+        id: "2",
+        label: "تقریبا غلط",
+      },
+      {
+        id: "3",
+        label: "تقریبا درست",
+      },
+      {
+        id: "4",
+        label: "کاملا درست",
+      },
+    ],
+    validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
+  },
+  {
+    subLabel: "",
+    id: "TFEQ-2",
+    label: "من عمدا از مصرف وعده های غذایی کوچک برای کنترل وزن استفاده میکنم.",
+    type: "radio",
+    options: [
+      { id: "1", label: "کاملا غلط" },
+      {
+        id: "2",
+        label: "تقریبا غلط",
+      },
+      {
+        id: "3",
+        label: "تقریبا درست",
+      },
+      {
+        id: "4",
+        label: "کاملا درست",
+      },
+    ],
+    validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
+  },
+  {
+    subLabel: "",
+    id: "TFEQ-3",
+    label: " وقتی مضطرب و نگران هستم، میخواهم غذا بخورم.",
+    type: "radio",
+    options: [
+      { id: "1", label: "کاملا غلط" },
+      {
+        id: "2",
+        label: "تقریبا غلط",
+      },
+      {
+        id: "3",
+        label: "تقریبا درست",
+      },
+      {
+        id: "4",
+        label: "کاملا درست",
+      },
+    ],
+    validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
+  },
+  {
+    subLabel: "",
+    id: "TFEQ-4",
+    label:
+      "وقتی شروع به غذاخوردن میکنم، نمی توانم به راحتی از غذا خوردن دست بکشم.",
+    type: "radio",
+    options: [
+      { id: "1", label: "کاملا غلط" },
+      {
+        id: "2",
+        label: "تقریبا غلط",
+      },
+      {
+        id: "3",
+        label: "تقریبا درست",
+      },
+      {
+        id: "4",
+        label: "کاملا درست",
+      },
+    ],
+    validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
+  },
+  {
+    subLabel: "",
+    id: "TFEQ-5",
+    label:
+      "دیدن فردی که در حال غذا خوردن است باعث میشود، من هم احساس گرسنگی کنم. ",
+    type: "radio",
+    options: [
+      { id: "1", label: "کاملا غلط" },
+      {
+        id: "2",
+        label: "تقریبا غلط",
+      },
+      {
+        id: "3",
+        label: "تقریبا درست",
+      },
+      {
+        id: "4",
+        label: "کاملا درست",
+      },
+    ],
+    validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
+  },
+  {
+    subLabel: "",
+    id: "TFEQ-6",
+    label: "وقتی احساس ناراحتی می کنم، اغلب پرخوری می کنم.",
+    type: "radio",
+    options: [
+      { id: "1", label: "کاملا غلط" },
+      {
+        id: "2",
+        label: "تقریبا غلط",
+      },
+      {
+        id: "3",
+        label: "تقریبا درست",
+      },
+      {
+        id: "4",
+        label: "کاملا درست",
+      },
+    ],
+    validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
+  },
+  {
+    subLabel: "",
+    id: "TFEQ-7",
+    label:
+      "وقتی یک غذای لذیذ می بینم، آنقدر احساس گرسنگی میکنم که باید فورا غذا بخورم.",
+    type: "radio",
+    options: [
+      { id: "1", label: "کاملا غلط" },
+      {
+        id: "2",
+        label: "تقریبا غلط",
+      },
+      {
+        id: "3",
+        label: "تقریبا درست",
+      },
+      {
+        id: "4",
+        label: "کاملا درست",
+      },
+    ],
+    validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
+  },
+  {
+    subLabel: "",
+    id: "TFEQ-8",
+    label:
+      "آنقدر گرسنه می شوم که فکر می کنم معده من گودالی است که اصلا پر نمی شود",
+    type: "radio",
+    options: [
+      { id: "1", label: "کاملا غلط" },
+      {
+        id: "2",
+        label: "تقریبا غلط",
+      },
+      {
+        id: "3",
+        label: "تقریبا درست",
+      },
+      {
+        id: "4",
+        label: "کاملا درست",
+      },
+    ],
+    validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
+  },
+  {
+    subLabel: "",
+    id: "TFEQ-9",
+    label:
+      "من همیشه احساس گرسنگی میکنم و تا تمام شدن کامل غذای بشقابم به غذاخوردن ادامه می دهم (حتی اگر سیر شده باشم)",
+    type: "radio",
+    options: [
+      { id: "1", label: "کاملا غلط" },
+      {
+        id: "2",
+        label: "تقریبا غلط",
+      },
+      {
+        id: "3",
+        label: "تقریبا درست",
+      },
+      {
+        id: "4",
+        label: "کاملا درست",
+      },
+    ],
+    validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
+  },
+  {
+    subLabel: "",
+    id: "TFEQ-10",
+    label: "وقتی احساس تنهایی می کنم با خوردن غذا به خودم آرامش می دهم.",
+    type: "radio",
+    options: [
+      { id: "1", label: "کاملا غلط" },
+      {
+        id: "2",
+        label: "تقریبا غلط",
+      },
+      {
+        id: "3",
+        label: "تقریبا درست",
+      },
+      {
+        id: "4",
+        label: "کاملا درست",
+      },
+    ],
+    validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
+  },
+  {
+    subLabel: "",
+    id: "TFEQ-11",
+    label:
+      "من آگاهانه از غذا خوردن  بیش از حد در وعده های غذایی پرهیز میکنم تا اضافه وزن پیدا نکنم. ",
+    type: "radio",
+    options: [
+      { id: "1", label: "کاملا غلط" },
+      {
+        id: "2",
+        label: "تقریبا غلط",
+      },
+      {
+        id: "3",
+        label: "تقریبا درست",
+      },
+      {
+        id: "4",
+        label: "کاملا درست",
+      },
+    ],
+    validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
+  },
+  {
+    subLabel: "",
+    id: "TFEQ-12",
+    label:
+      "من از خوردن بعضی غذا ها اجتناب میکنم، چون باعث اضافه وزن من میشوند.",
+    type: "radio",
+    options: [
+      { id: "1", label: "کاملا غلط" },
+      {
+        id: "2",
+        label: "تقریبا غلط",
+      },
+      {
+        id: "3",
+        label: "تقریبا درست",
+      },
+      {
+        id: "4",
+        label: "کاملا درست",
+      },
+    ],
+    validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
+  },
+  {
+    subLabel: "",
+    id: "TFEQ-13",
+    label: "من همیشه به قدری گرسنه هستم که میتوانم در هر زمانی غذا بخورم.",
+    type: "radio",
+    options: [
+      { id: "1", label: "کاملا غلط" },
+      {
+        id: "2",
+        label: "تقریبا غلط",
+      },
+      {
+        id: "3",
+        label: "تقریبا درست",
+      },
+      {
+        id: "4",
+        label: "کاملا درست",
+      },
+    ],
+    validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
+  },
+  {
+    subLabel: "",
+    id: "TFEQ-14",
+    label: "هر چند وقت یکبار با وجود احساس سیری شروع به غذاخوردن می کنید؟",
+    type: "radio",
+    options: [
+      { id: "1", label: "هرگز" },
+      {
+        id: "2",
+        label: "گاهی اوقات",
+      },
+      {
+        id: "3",
+        label: "اغلب اوقات",
+      },
+      {
+        id: "4",
+        label: "همیشه",
+      },
+    ],
+    validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
+  },
+  {
+    subLabel: "",
+    id: "TFEQ-15",
+    label: "هر چند وقت یکبار از تهیه غذاهای وسوسه انگیز اجتناب می کنید؟",
+    type: "radio",
+    options: [
+      { id: "1", label: "هرگز" },
+      {
+        id: "2",
+        label: "گاهی اوقات",
+      },
+      {
+        id: "3",
+        label: "اغلب اوقات",
+      },
+      {
+        id: "4",
+        label: "همیشه",
+      },
+    ],
+    validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
+  },
+  {
+    subLabel: "",
+    id: "TFEQ-16",
+    label: "آیا ممکن است آگاهانه کمتر از مقداری که میخواهید غذا  بخورید؟",
+    type: "radio",
+    options: [
+      { id: "1", label: "هرگز" },
+      {
+        id: "2",
+        label: "گاهی اوقات",
+      },
+      {
+        id: "3",
+        label: "اغلب اوقات",
+      },
+      {
+        id: "4",
+        label: "همیشه",
+      },
+    ],
+    validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
+  },
+  {
+    subLabel: "",
+    id: "TFEQ-17",
+    label: "آیا با وجود اینکه گرسنه نیستید به پرخوری ادامه می دهید؟",
+    type: "radio",
+    options: [
+      { id: "1", label: "هرگز" },
+      {
+        id: "2",
+        label: "گاهی اوقات",
+      },
+      {
+        id: "3",
+        label: "اغلب اوقات",
+      },
+      {
+        id: "4",
+        label: "همیشه",
+      },
+    ],
+    validation: Yup.string().required("پاسخ به این سوال اجباری می باشد"),
+  },
+  {
+    subLabel: "",
+    id: "TFEQ-18",
+    label:
+      "در مقیاس 1 تا 8، که در آن 1 به معنای عدم محدودیت در غذا خوردن و 8 به معنای محدودیت کامل است، چه عددی را به خود می دهید؟",
+    type: "number",
+    validation: Yup.number("لطفا با کیبورد انگلیسی و به درستی وارد کنید")
+      .integer("لطفا بدون اعشار و به صورت عدد صحیح وارد نمایید")
+      .min(1, "عدد وارد شده باید بین 1 تا 8 باشد")
+      .max(8, "عدد وارد شده باید بین 1 تا 8 باشد"),
+    placeholder: "عدد مورد نظر را اینجا وارد نمایید",
   },
 ];

@@ -95,7 +95,23 @@ export default function TableList({ data, editable, editURL }) {
                     textAlign: "center",
                   }}
                 >
-                  تاریخ و زمان ثبت اطلاعات
+                  تلفن همراه (موبایل)
+                </TableCell>
+                <TableCell
+                  style={{
+                    whiteSpace: "nowrap",
+                    textAlign: "center",
+                  }}
+                >
+                  شماره تماس (منزل)
+                </TableCell>
+                <TableCell
+                  style={{
+                    whiteSpace: "nowrap",
+                    textAlign: "center",
+                  }}
+                >
+                  تلفن همراه جایگزین
                 </TableCell>
                 <TableCell
                   style={{
@@ -136,6 +152,24 @@ export default function TableList({ data, editable, editURL }) {
                     style={{ whiteSpace: "nowrap", textAlign: "center" }}
                   >
                     {customer["نام خانوادگی"]}
+                  </TableCell>
+                  <TableCell
+                    className={index % 2 ? "bg-blue-100" : ""}
+                    style={{ whiteSpace: "nowrap", textAlign: "center" }}
+                  >
+                    {customer["تلفن همراه (موبایل) :"]}
+                  </TableCell>
+                  <TableCell
+                    className={index % 2 ? "bg-blue-100" : ""}
+                    style={{ whiteSpace: "nowrap", textAlign: "center" }}
+                  >
+                    {customer["شماره تماس (منزل) :"]}
+                  </TableCell>
+                  <TableCell
+                    className={index % 2 ? "bg-blue-100" : ""}
+                    style={{ whiteSpace: "nowrap", textAlign: "center" }}
+                  >
+                    {customer["تلفن همراه جایگزین"]}
                   </TableCell>
                   <TableCell
                     className={index % 2 ? "bg-blue-100" : ""}
