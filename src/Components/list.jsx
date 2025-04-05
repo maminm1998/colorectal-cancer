@@ -15,12 +15,13 @@ export default function List() {
   const [abadan, setAbadan] = useState(false);
   const [diabeticFootUlcer, setDiabeticFootUlcer] = useState(false);
   const [FFQValidation, setFFQValidation] = useState(false);
+  const [lorestan, setLorestan] = useState(false);
   const [editable, setEditable] = useState(false);
   const [editURL, setEditURL] = useState(null);
   const fetchAndUpdateData = async (selectedData) => {
     setButtonsDisabled(true); // Disable all buttons
     setEditURL(selectedData);
-    
+
     try {
       const response = await fetch(
         `https://ffqbackend.liara.run/${selectedData}`
@@ -28,7 +29,7 @@ export default function List() {
       if (response.ok) {
         const jsonData = await response.json();
         setFetchedData(jsonData);
-        console.log(fetchedData)
+        console.log(fetchedData);
       } else {
         console.log("Error fetching data:", response.status);
         // Handle error, e.g., show a message to the user
@@ -82,6 +83,10 @@ export default function List() {
       setPasswordModalOpen(false);
       setFormDisplay(true);
       setFFQValidation(true);
+    } else if (password === "1403") {
+      setPasswordModalOpen(false);
+      setFormDisplay(true);
+      setLorestan(true);
     } else {
       swal({
         title: "رمز عبور نادرست می باشد!",
@@ -351,6 +356,19 @@ export default function List() {
             }`}
           >
             FFQ Validation Habit
+          </button>
+        </div>
+        <div className={`${lorestan === true ? "visible" : "hidden"}`}>
+          <button
+            onClick={() => {
+              handleButtonClick("lorestanffq");
+            }}
+            disabled={buttonsDisabled}
+            className={`text-white bg-orange-500 w-full mx-2 text-center max-lg:my-2 hover:bg-orange-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 my-1 dark:bg-blue-600 dark:hover:bg-blue-500 focus:outline-none dark:focus:ring-blue-800 ${
+              buttonsDisabled === true ? "cursor-not-allowed" : "cursor-pointer"
+            }`}
+          >
+            FFQ
           </button>
         </div>
       </div>

@@ -25,7 +25,7 @@ import Thanks from "./Components/Thanks";
 import FFQValidationDemographic from "./Components/ffqValidation/FFQValidationDemographic";
 import FFQValidationHabit from "./Components/ffqValidation/FFQValidationHabit";
 import FFQValidation from "./Components/ffqValidation/FFQValidation";
-
+import LorestanFFQ from "./Components/LORESTAN/FFQ";
 const Routes = [
   {
     path: "/*",
@@ -80,6 +80,11 @@ const Routes = [
         path: "diabetic-foot-ulcer-interview",
         element: <DiabeticFootUlcerInterview />,
       },
+      //lorestan
+      {
+        path: "lorestanffq",
+        element: <LorestanFFQ />,
+      },
     ],
   },
   {
@@ -129,6 +134,11 @@ const Routes = [
       {
         path: "ffq-validation",
         element: <FFQValidation />,
+      },
+      //lorestan
+      {
+        path: "lorestanffq",
+        element: <LorestanFFQ />,
       },
       //Export
       { path: "export", element: <ExportExcel /> },

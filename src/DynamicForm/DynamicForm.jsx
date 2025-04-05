@@ -9,6 +9,7 @@ import TimePicker from "react-time-picker";
 import jalaliMoment from "jalali-moment"; // Import jalali-moment library
 
 import Modal from "./../organism/Modal";
+import ScrollProgressCircle from "../Components/ScrollProgressCircle";
 
 const DynamicForm = ({ questions, questionType, passwordRequired }) => {
   const [passwordModalOpen, setPasswordModalOpen] = useState(false);
@@ -222,7 +223,7 @@ const DynamicForm = ({ questions, questionType, passwordRequired }) => {
       setStartTime(Date.now()); // ثبت زمان شروع
     }
   }, [formDisplay]);
-  
+
   useEffect(() => {
     if (passwordRequired) {
       setPasswordModalOpen(true);
@@ -606,7 +607,7 @@ const DynamicForm = ({ questions, questionType, passwordRequired }) => {
           )}
         </div>
       ))}
-
+      <ScrollProgressCircle />
       <button
         type="submit" // Change the type to "button" to prevent automatic form submission
         onClick={() => {

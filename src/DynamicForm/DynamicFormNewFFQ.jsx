@@ -1,14 +1,14 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import "./../App.css";
 import axios from "axios";
-
 import Modal from "./../organism/Modal";
 import swal from "sweetalert";
 import { useNavigate } from "react-router";
-import jalaliMoment from "jalali-moment"; // Import jalali-moment library
+import jalaliMoment from "jalali-moment";
 
+import "./../App.css";
+import ScrollProgressCircle from "./../Components/ScrollProgressCircle";
 const DynamicFormNewFFQ = ({ questions, questionType, passwordRequired }) => {
   const [passwordModalOpen, setPasswordModalOpen] = useState(false);
   const [password, setPassword] = useState("");
@@ -507,6 +507,13 @@ const DynamicFormNewFFQ = ({ questions, questionType, passwordRequired }) => {
                 )}
               </div>
             )}
+            <div className="w-full flex items-center justify-center">
+              {question.type === "description" && (
+                <div className="border-2 text-white w-[95%] bg-blue-500 p-4 text-center rounded-xl">
+                  {question.description}
+                </div>
+              )}
+            </div>
             {question.type === "checkbox" && (
               <div
                 role="group"
@@ -553,7 +560,7 @@ const DynamicFormNewFFQ = ({ questions, questionType, passwordRequired }) => {
           </div>
         </div>
       ))}
-
+      <ScrollProgressCircle />
       <button
         type="submit" // Change the type to "button" to prevent automatic form submission
         onClick={() => {

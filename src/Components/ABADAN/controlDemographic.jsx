@@ -1150,7 +1150,7 @@ export default function ControlDemographic() {
         <div className="bg-blue-500 rounded-t-lg p-2 text-white font-bold text-xl">
           پرسشنامه
         </div>
-        <DynamicForm passwordRequired={true} questionType={questionType} questions={questions} />
+        <DynamicForm passwordRequired={false} questionType={questionType} questions={questions} />
       </div>
     </>
   );
